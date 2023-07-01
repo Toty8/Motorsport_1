@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Motorsport1.Web.props" />
+</Project>

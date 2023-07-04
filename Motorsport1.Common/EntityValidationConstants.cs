@@ -16,13 +16,13 @@ namespace Motorsport1.Common
             public const int TitleMaxLength = 150;
 
             public const int InformationMinLength = 150;
-            public const int InformationMaxLength = 2500;
+            public const int InformationMaxLength = 100000;
 
             public const int ImageUrlMaxLength = 2048;
 
             public const string LikesDefaulValue = "0";
 
-            public const string SeenByDefaulValue = "0";
+            public const string ReadCountDefaulValue = "0";
         }
 
         public static class Comment

@@ -7,7 +7,7 @@ namespace Motorsport1.Web
 
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -60,7 +60,7 @@ namespace Motorsport1.Web
             app.MapDefaultControllerRoute();
             app.MapRazorPages();
 
-            app.Run();
+            await app.RunAsync();
         }
     }
 }

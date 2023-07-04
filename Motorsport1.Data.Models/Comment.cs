@@ -13,6 +13,9 @@
         [MaxLength(ContentMaxLength)]
         public string Content { get; set; } = null!;
 
+        [Required]
+        public DateTime PublishedDateTime { get; set; }
+
         public int ArticleId { get; set; }
 
         public Article Article { get; set; } = null!;

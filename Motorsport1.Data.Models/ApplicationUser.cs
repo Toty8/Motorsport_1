@@ -6,6 +6,7 @@
     {
         public ApplicationUser()
         {
+            this.Id = Guid.NewGuid();
             this.Articles = new HashSet<Article>();
         }
 

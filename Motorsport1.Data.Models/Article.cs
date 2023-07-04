@@ -29,8 +29,11 @@
         [DefaultValue(LikesDefaulValue)]
         public int Likes { get; set; }
 
-        [DefaultValue(SeenByDefaulValue)]
-        public int SeenBy { get; set; }
+        [DefaultValue(ReadCountDefaulValue)]
+        public int ReadCount { get; set; }
+
+        [Required]
+        public DateTime PublishedDateTime { get; set; }
 
         public int CategoryId { get; set; }
 

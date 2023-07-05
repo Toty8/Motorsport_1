@@ -1,0 +1,15 @@
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Data.Models\bin\Debug\net6.0\Motorsport1.Data.Models.deps.json
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Data.Models\bin\Debug\net6.0\Motorsport1.Data.Models.dll
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Data.Models\bin\Debug\net6.0\Motorsport1.Data.Models.pdb
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Data.Models\bin\Debug\net6.0\Motorsport1.Common.dll
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Data.Models\bin\Debug\net6.0\Motorsport1.Common.pdb
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Data.Models\obj\Debug\net6.0\Motorsport1.Data.Models.csproj.AssemblyReference.cache
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Data.Models\obj\Debug\net6.0\Motorsport1.Data.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Data.Models\obj\Debug\net6.0\Motorsport1.Data.Models.AssemblyInfoInputs.cache
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Data.Models\obj\Debug\net6.0\Motorsport1.Data.Models.AssemblyInfo.cs
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Data.Models\obj\Debug\net6.0\Motorsport1.Data.Models.csproj.CoreCompileInputs.cache
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Data.Models\obj\Debug\net6.0\Motorsport1.Data.Models.csproj.CopyComplete
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Data.Models\obj\Debug\net6.0\Motorsport1.Data.Models.dll
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Data.Models\obj\Debug\net6.0\refint\Motorsport1.Data.Models.dll
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Data.Models\obj\Debug\net6.0\Motorsport1.Data.Models.pdb
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Data.Models\obj\Debug\net6.0\ref\Motorsport1.Data.Models.dll

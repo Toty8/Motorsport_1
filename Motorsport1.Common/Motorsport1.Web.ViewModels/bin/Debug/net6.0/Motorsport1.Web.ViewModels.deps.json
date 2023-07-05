@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "Motorsport1.Web.ViewModels/1.0.0": {
+        "dependencies": {
+          "Motorsport1.Common": "1.0.0"
+        },
+        "runtime": {
+          "Motorsport1.Web.ViewModels.dll": {}
+        }
+      },
+      "Motorsport1.Common/1.0.0": {
+        "runtime": {
+          "Motorsport1.Common.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Motorsport1.Web.ViewModels/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Motorsport1.Common/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

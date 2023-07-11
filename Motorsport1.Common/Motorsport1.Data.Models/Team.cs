@@ -19,15 +19,20 @@
         public string Name { get; set; } = null!;
 
         [Required]
-        public bool IsActive { get; set; }
+        [MaxLength(ImageUrlMaxLength)]
+        public string ImageUrl { get; set; } = null!;
 
         public decimal Price { get; set; }
+
+        public int Championships { get; set; }
 
         public double Points { get; set; }
 
         public int Wins { get; set; }
 
         public int Podiums { get; set; }
+
+        public int PolePositions { get; set; }
 
         public double TotalPoints { get; set; }
 

@@ -11,6 +11,9 @@ namespace Motorsport1.Data.Configurations
             builder.Property(a => a.PublishedDateTime)
                 .HasDefaultValue(DateTime.UtcNow);
 
+            builder.Property(a => a.IsActive)
+                .HasDefaultValue(true);
+
             builder
                 .HasOne(a => a.Category)
                 .WithMany(c => c.Articles)

@@ -19,16 +19,32 @@ namespace Motorsport1.Common
             public const int InformationMaxLength = 100000;
 
             public const int ImageUrlMaxLength = 2048;
-
-            public const string LikesDefaulValue = "0";
-
-            public const string ReadCountDefaulValue = "0";
         }
 
         public static class Comment
         {
             public const int ContentMinLength = 1;
             public const int ContentMaxLength = 200;
+        }
+
+        public static class Driver
+        {
+            public const int NameMinLength = 3;
+            public const int NameMaxLength = 100;
+
+            public const string PriceMaxValue = "100";
+
+            public const string NumberMaxValue = "99";
+            public const string NumberMinValue = "1";
+            public const string NumberRetiredValue = "17";
+        }
+
+        public static class Team
+        {
+            public const int NameMinLength = 3;
+            public const int NameMaxLength = 100;
+
+            public const string PriceMaxValue = "100";
         }
     }
 }

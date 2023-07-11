@@ -1,6 +1,5 @@
 ﻿namespace Motorsport1.Data.Models
 {
-    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using static Common.EntityValidationConstants.Article;
 
@@ -26,11 +25,12 @@
         [MaxLength(ImageUrlMaxLength)]
         public string ImageUrl { get; set; } = null!;
 
-        [DefaultValue(LikesDefaulValue)]
         public int Likes { get; set; }
 
-        [DefaultValue(ReadCountDefaulValue)]
         public int ReadCount { get; set; }
+
+        [Required]
+        public bool IsActive { get; set; }
 
         [Required]
         public DateTime PublishedDateTime { get; set; }

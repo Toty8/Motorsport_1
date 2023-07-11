@@ -17,6 +17,7 @@ namespace Mototsport1.Services.Data
         public async Task<IEnumerable<IndexViewModel>> GetLastFiveArticles()
         {
             var articles = await dbContext.Articles
+                .Where(a => a.IsActive == true)
                 .OrderByDescending(a => a.PublishedDateTime)
                 .Take(5)
                 .Select(a => new IndexViewModel

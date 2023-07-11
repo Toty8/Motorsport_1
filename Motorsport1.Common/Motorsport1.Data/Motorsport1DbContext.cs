@@ -20,6 +20,10 @@
 
         public DbSet<Article> Articles { get; set; } = null!;
 
+        public DbSet<Team> Teams { get; set; } = null!;
+
+        public DbSet<Driver> Drivers { get; set; } = null!;
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             Assembly configAssembly = Assembly.GetAssembly(typeof(Motorsport1DbContext)) ??

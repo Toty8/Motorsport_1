@@ -8,6 +8,9 @@ namespace Motorsport1.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Comment> builder)
         {
+            builder.Property(a => a.PublishedDateTime)
+                .HasDefaultValue(DateTime.UtcNow);
+
             builder
                 .HasOne(c => c.Article)
                 .WithMany(a => a.Comments)
@@ -27,7 +30,6 @@ namespace Motorsport1.Data.Configurations
             {
                 Id = 1,
                 Content = "Albon really deserve a better car!",
-                PublishedDateTime = DateTime.UtcNow,
                 ArticleId = 1,
             };
 
@@ -37,7 +39,6 @@ namespace Motorsport1.Data.Configurations
             {
                 Id = 2,
                 Content = "It was a great race!",
-                PublishedDateTime = DateTime.UtcNow,
                 ArticleId = 2,
             };
 
@@ -47,7 +48,6 @@ namespace Motorsport1.Data.Configurations
             {
                 Id = 3,
                 Content = "Ferrari is back in the game!",
-                PublishedDateTime = DateTime.UtcNow,
                 ArticleId = 2,
             };
 

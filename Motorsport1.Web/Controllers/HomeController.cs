@@ -2,21 +2,27 @@
 {
     using System.Diagnostics;
 
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-
+    using Mototsport1.Services.Data.Interfaces;
     using ViewModels.Home;
 
 
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
+        private readonly IArticleService articleService;
 
-        public HomeController()
+        public HomeController(IArticleService articleService)
         {
+            this.articleService = articleService;
         }
 
-        public IActionResult Index()
+        [AllowAnonymous]
+        public async Task<IActionResult> Index()
         {
-            return View();
+            IEnumerable<IndexViewModel> viewModel = await articleService.GetLastFiveArticles();
+             
+            return View(viewModel);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

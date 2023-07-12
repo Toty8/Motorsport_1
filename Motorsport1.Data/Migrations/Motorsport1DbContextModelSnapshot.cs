@@ -170,6 +170,9 @@ namespace Motorsport1.Data.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("DriverId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -203,6 +206,9 @@ namespace Motorsport1.Data.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("TeamId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
@@ -212,6 +218,8 @@ namespace Motorsport1.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DriverId");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -219,6 +227,8 @@ namespace Motorsport1.Data.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.HasIndex("TeamId");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -244,11 +254,18 @@ namespace Motorsport1.Data.Migrations
                         .HasMaxLength(100000)
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
                     b.Property<int>("Likes")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("PublishedDateTime")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 7, 11, 17, 30, 49, 927, DateTimeKind.Utc).AddTicks(1285));
 
                     b.Property<Guid>("PublisherId")
                         .HasColumnType("uniqueidentifier");
@@ -267,7 +284,7 @@ namespace Motorsport1.Data.Migrations
 
                     b.HasIndex("PublisherId");
 
-                    b.ToTable("Articles");
+                    b.ToTable("Articles", (string)null);
 
                     b.HasData(
                         new
@@ -276,8 +293,9 @@ namespace Motorsport1.Data.Migrations
                             CategoryId = 2,
                             ImageUrl = "https://media.formula1.com/image/upload/f_auto/q_auto/v1688394388/fom-website/2023/Austria/albon-austria-2023-2.png.transform/9col/image.png",
                             Information = "Alex Albon believes the chance was there for Williams to score more points during the Austrian Grand Prix Sprint weekend but, while disappointed to ultimately miss out on a reward, he drew optimism from the team’s level of performance.\r\n\r\nAlbon and Williams arrived at the Red Bull Ring after the Thai-British driver’s fine run to seventh in Canada, giving the Grove outfit their second points finish of the season and lifting them above AlphaTauri at the foot of the F1 standings.\r\n\r\nWith the FW45’s straight-line strengths also suited to the Spielberg venue, Albon was in the top-10 mix throughout the weekend, battling to score points in both the Sprint and full Grand Prix.",
+                            IsActive = false,
                             Likes = 0,
-                            PublishedDateTime = new DateTime(2023, 7, 4, 10, 25, 40, 264, DateTimeKind.Utc).AddTicks(6410),
+                            PublishedDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PublisherId = new Guid("56b03886-bcb8-4775-ba5f-ade84e6b7a4f"),
                             ReadCount = 0,
                             Title = "‘We should have come away with points’ – Albon feels Williams missed an opportunity in Austria as he pinpoints ‘next chance’ to score"
@@ -288,8 +306,9 @@ namespace Motorsport1.Data.Migrations
                             CategoryId = 3,
                             ImageUrl = "https://www.topgear.com/sites/default/files/news-listicle/image/2023/07/0-Austrian-GP.jpg",
                             Information = "Max Verstappen secured his fifth race win in a row in Austria with an exemplary performance – including bagging an extra point for fastest lap – as he extended his lead at the top of the drivers’ standings.\r\n\r\nThe Red Bull man was dominant once more as he led home Ferrari’s Charles Leclerc and team mate Sergio Perez, who had an impressive drive of his own as he worked his way up from a P15 start to the podium.\r\n\r\nMcLaren’s Lando Norris was another who had much to celebrate at the Red Bull Ring, as he earned the Driver of the Day award for a stellar performance to take P5 in his upgraded car, one place behind his former team mate Carlos Sainz.\r\n\r\nIt was a less positive day for the likes of Mercedes, with Lewis Hamilton on the receiving end of a stern radio message from team boss Toto Wolff, while there was also a smattering of time penalties dished out to drivers for track limit violations.\r\n\r\nWatch the highlights from a frantic race in Austria by clicking on the video above.",
+                            IsActive = false,
                             Likes = 0,
-                            PublishedDateTime = new DateTime(2023, 7, 4, 10, 25, 40, 264, DateTimeKind.Utc).AddTicks(6435),
+                            PublishedDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PublisherId = new Guid("56b03886-bcb8-4775-ba5f-ade84e6b7a4f"),
                             ReadCount = 0,
                             Title = "Exhilarating race in Austria as Verstappen takes victory and Norris shines"
@@ -298,13 +317,14 @@ namespace Motorsport1.Data.Migrations
                         {
                             Id = 3,
                             CategoryId = 4,
-                            ImageUrl = "https://www.topgear.com/sites/default/files/news-listicle/image/2023/07/0-Austrian-GP.jpg",
+                            ImageUrl = "https://media.formula1.com/image/upload/t_16by9Centre/f_auto/q_auto/v1687120328/trackside-images/2023/F1_Grand_Prix_of_Canada/1499543157.jpg.transform/9col/image.jpg",
                             Information = "Q: Congratulations, Max yet another victory from the lights to the flag. How are you feeling?\r\n\r\nMax VERSTAPPEN: Yeah, of course I'm very happy right now. It was not a very straightforward race because the tyres were not really getting in their window. It was very cold today compared to Friday and we were sliding around quite a bit. But yeah, we made it work and yeah to win again, today to win the 100th Grand Prix for the team, that's incredible.\r\n\r\nQ: Yeah, you must have a pretty special feeling about that. You've worked with this team for many years. Hundredth win, how does that feel to take that for the team here?\r\n\r\nMV: It’s amazing. I mean, I never expected to be on these kinds of numbers myself as well, you know. So, yeah, we keep enjoying, we keep working hard. But today has been a great day again.\r\n\r\nQ: Did you expect a bigger challenge from Aston or Mercedes here? Or is this is pretty much what you expected here in Montréal?\r\n\r\nMV: Firstly, I expected more or less what we had today, but it was, like I said, really difficult to just keep the grip, the temperature into the tyres, because the grip was disappearing very quickly. That's why maybe the gap was not that big. But yeah, we had a few Safety Cars here and there. But yeah, overall, we won, that's the most important.\r\n\r\nQ: And lastly, this is always a very special race to come to. A lot of fans here for the sport. They've been through a lot this weekend with the weather. Have you got a message for them?\r\n\r\nMV: Yeah, I mean, they're so passionate about the sport. Also, yesterday with the rain, they were just hanging in there, so that was great to see. And yeah, we love coming here. And hopefully we can do this for a long time.\r\n\r\nQ: You’ve got a few fans here, Fernando. Was that the race you expected?\r\n\r\nFernando ALONSO: Probably yes. I think we were hoping to challenge a little more the Red Bull. But we lost a place at the start with Lewis and then yeah, it was a battle with the Mercedes and Lewis was pushing all the race, so I didn't have one lap where I could relax a little bit. So it was an amazing battle.\r\n\r\nQ: It was lovely watching three multiple World Champions going at it. And you had a good little tussle with Lewis out there as well.\r\n\r\nFA: I mean, at the beginning, I had a little bit more pace. At the end I think Lewis had a bit more pace. Yeah, it was tough. It was a very demanding race, you know, all 70 laps of qualifying today.\r\n\r\nQ: We heard you had a few issues. You had to do a little bit of lift and coast. It's always frustrating because you want to push to the maximum. Was that a fuel issue? Or was that a rear brake issue?\r\n\r\nFA: I don't really know. They didn't tell me so maybe it was not to make me worry too much. But I don't know. I felt the car was OK. But I was just following the instructions. So yeah, hopefully that means that we have a little bit more pace. So next one, putting more pressure on Max.",
+                            IsActive = false,
                             Likes = 0,
-                            PublishedDateTime = new DateTime(2023, 7, 4, 10, 25, 40, 264, DateTimeKind.Utc).AddTicks(6438),
+                            PublishedDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PublisherId = new Guid("56b03886-bcb8-4775-ba5f-ade84e6b7a4f"),
                             ReadCount = 0,
-                            Title = "Exhilarating race in Austria as Verstappen takes victory and Norris shines"
+                            Title = "Canada post-race press conference"
                         });
                 });
 
@@ -323,7 +343,7 @@ namespace Motorsport1.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
 
                     b.HasData(
                         new
@@ -364,14 +384,19 @@ namespace Motorsport1.Data.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("PublishedDateTime")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 7, 11, 17, 30, 49, 927, DateTimeKind.Utc).AddTicks(2385));
 
                     b.HasKey("Id");
 
                     b.HasIndex("ArticleId");
 
-                    b.ToTable("Comments");
+                    b.ToTable("Comments", (string)null);
 
                     b.HasData(
                         new
@@ -379,21 +404,602 @@ namespace Motorsport1.Data.Migrations
                             Id = 1,
                             ArticleId = 1,
                             Content = "Albon really deserve a better car!",
-                            PublishedDateTime = new DateTime(2023, 7, 4, 10, 25, 40, 264, DateTimeKind.Utc).AddTicks(7157)
+                            IsActive = false,
+                            PublishedDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
                             ArticleId = 2,
                             Content = "It was a great race!",
-                            PublishedDateTime = new DateTime(2023, 7, 4, 10, 25, 40, 264, DateTimeKind.Utc).AddTicks(7161)
+                            IsActive = false,
+                            PublishedDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3,
                             ArticleId = 2,
                             Content = "Ferrari is back in the game!",
-                            PublishedDateTime = new DateTime(2023, 7, 4, 10, 25, 40, 264, DateTimeKind.Utc).AddTicks(7163)
+                            IsActive = false,
+                            PublishedDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
+                });
+
+            modelBuilder.Entity("Motorsport1.Data.Models.Driver", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Championships")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasMaxLength(2048)
+                        .HasColumnType("nvarchar(2048)");
+
+                    b.Property<bool>("IsCurrentChampion")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("Number")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Podiums")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Points")
+                        .HasColumnType("float");
+
+                    b.Property<int>("PolePositions")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("TeamId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("TotalPoints")
+                        .HasColumnType("float");
+
+                    b.Property<int>("Wins")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TeamId");
+
+                    b.ToTable("Drivers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BirthDate = new DateTime(1997, 9, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Championships = 2,
+                            ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/verstappen.jpg.img.1920.medium.jpg/1677069646195.jpg",
+                            IsCurrentChampion = true,
+                            Name = "Max Verstappen",
+                            Number = 1,
+                            Podiums = 87,
+                            Points = 255.0,
+                            PolePositions = 27,
+                            Price = 81m,
+                            TeamId = 1,
+                            TotalPoints = 2266.5,
+                            Wins = 43
+                        },
+                        new
+                        {
+                            Id = 2,
+                            BirthDate = new DateTime(1990, 1, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Championships = 0,
+                            ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/perez.jpg.img.1920.medium.jpg/1677069773437.jpg",
+                            IsCurrentChampion = false,
+                            Name = "Sergio Perez",
+                            Number = 11,
+                            Podiums = 31,
+                            Points = 156.0,
+                            PolePositions = 3,
+                            Price = 68m,
+                            TeamId = 1,
+                            TotalPoints = 1357.0,
+                            Wins = 6
+                        },
+                        new
+                        {
+                            Id = 3,
+                            BirthDate = new DateTime(1981, 7, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Championships = 2,
+                            ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/alonso.jpg.img.1920.medium.jpg/1677244577162.jpg",
+                            IsCurrentChampion = false,
+                            Name = "Fernando Alonso",
+                            Number = 14,
+                            Podiums = 104,
+                            Points = 137.0,
+                            PolePositions = 22,
+                            Price = 62m,
+                            TeamId = 3,
+                            TotalPoints = 2198.0,
+                            Wins = 32
+                        },
+                        new
+                        {
+                            Id = 4,
+                            BirthDate = new DateTime(1985, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Championships = 7,
+                            ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/hamilton.jpg.img.1920.medium.jpg/1677069594164.jpg",
+                            IsCurrentChampion = false,
+                            Name = "Lewis Hamilton",
+                            Number = 44,
+                            Podiums = 195,
+                            Points = 121.0,
+                            PolePositions = 103,
+                            Price = 58m,
+                            TeamId = 2,
+                            TotalPoints = 4526.5,
+                            Wins = 103
+                        },
+                        new
+                        {
+                            Id = 5,
+                            BirthDate = new DateTime(1994, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Championships = 0,
+                            ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/sainz.jpg.img.1920.medium.jpg/1677069189406.jpg",
+                            IsCurrentChampion = false,
+                            Name = "Carlos Sainz",
+                            Number = 55,
+                            Podiums = 15,
+                            Points = 83.0,
+                            PolePositions = 3,
+                            Price = 48m,
+                            TeamId = 4,
+                            TotalPoints = 865.5,
+                            Wins = 1
+                        },
+                        new
+                        {
+                            Id = 6,
+                            BirthDate = new DateTime(1998, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Championships = 0,
+                            ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/russell.jpg.img.1920.medium.jpg/1677069334466.jpg",
+                            IsCurrentChampion = false,
+                            Name = "George Russell",
+                            Number = 63,
+                            Podiums = 10,
+                            Points = 82.0,
+                            PolePositions = 2,
+                            Price = 47m,
+                            TeamId = 2,
+                            TotalPoints = 376.0,
+                            Wins = 1
+                        },
+                        new
+                        {
+                            Id = 7,
+                            BirthDate = new DateTime(1997, 10, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Championships = 0,
+                            ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/leclerc.jpg.img.1920.medium.jpg/1677069223130.jpg",
+                            IsCurrentChampion = false,
+                            Name = "Charles Leclerc",
+                            Number = 16,
+                            Podiums = 26,
+                            Points = 74.0,
+                            PolePositions = 19,
+                            Price = 42m,
+                            TeamId = 4,
+                            TotalPoints = 942.0,
+                            Wins = 5
+                        },
+                        new
+                        {
+                            Id = 8,
+                            BirthDate = new DateTime(1998, 10, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Championships = 0,
+                            ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/stroll.jpg.img.1920.medium.jpg/1677069453013.jpg",
+                            IsCurrentChampion = false,
+                            Name = "Lance Stroll",
+                            Number = 18,
+                            Podiums = 3,
+                            Points = 44.0,
+                            PolePositions = 1,
+                            Price = 31m,
+                            TeamId = 3,
+                            TotalPoints = 238.0,
+                            Wins = 0
+                        },
+                        new
+                        {
+                            Id = 9,
+                            BirthDate = new DateTime(1999, 11, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Championships = 0,
+                            ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/norris.jpg.img.1920.medium.jpg/1677069505471.jpg",
+                            IsCurrentChampion = false,
+                            Name = "Lando Norris",
+                            Number = 4,
+                            Podiums = 7,
+                            Points = 42.0,
+                            PolePositions = 1,
+                            Price = 30m,
+                            TeamId = 5,
+                            TotalPoints = 470.0,
+                            Wins = 0
+                        },
+                        new
+                        {
+                            Id = 10,
+                            BirthDate = new DateTime(1996, 9, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Championships = 0,
+                            ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/ocon.jpg.img.1920.medium.jpg/1677069269007.jpg",
+                            IsCurrentChampion = false,
+                            Name = "Esteban Ocon",
+                            Number = 31,
+                            Podiums = 3,
+                            Points = 31.0,
+                            PolePositions = 0,
+                            Price = 24m,
+                            TeamId = 6,
+                            TotalPoints = 395.0,
+                            Wins = 1
+                        },
+                        new
+                        {
+                            Id = 11,
+                            BirthDate = new DateTime(2001, 4, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Championships = 0,
+                            ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/piastri.jpg.img.1920.medium.jpg/1676983075734.jpg",
+                            IsCurrentChampion = false,
+                            Name = "Oscar Piastri",
+                            Number = 81,
+                            Podiums = 0,
+                            Points = 17.0,
+                            PolePositions = 0,
+                            Price = 17m,
+                            TeamId = 5,
+                            TotalPoints = 17.0,
+                            Wins = 0
+                        },
+                        new
+                        {
+                            Id = 12,
+                            BirthDate = new DateTime(1996, 2, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Championships = 0,
+                            ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/gasly.jpg.img.1920.medium.jpg/1676983081984.jpg",
+                            IsCurrentChampion = false,
+                            Name = "Pierre Gasly",
+                            Number = 10,
+                            Podiums = 3,
+                            Points = 16.0,
+                            PolePositions = 0,
+                            Price = 16m,
+                            TeamId = 6,
+                            TotalPoints = 348.0,
+                            Wins = 1
+                        },
+                        new
+                        {
+                            Id = 13,
+                            BirthDate = new DateTime(1996, 3, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Championships = 0,
+                            ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/albon.jpg.img.1920.medium.jpg/1677068770293.jpg",
+                            IsCurrentChampion = false,
+                            Name = "Alexander Albon",
+                            Number = 23,
+                            Podiums = 2,
+                            Points = 11.0,
+                            PolePositions = 0,
+                            Price = 14m,
+                            TeamId = 7,
+                            TotalPoints = 212.0,
+                            Wins = 0
+                        },
+                        new
+                        {
+                            Id = 14,
+                            BirthDate = new DateTime(1987, 8, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Championships = 0,
+                            ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/hulkenberg.jpg.img.1920.medium.jpg/1676983071882.jpg",
+                            IsCurrentChampion = false,
+                            Name = "Nico Hulkenberg",
+                            Number = 27,
+                            Podiums = 0,
+                            Points = 9.0,
+                            PolePositions = 1,
+                            Price = 13m,
+                            TeamId = 8,
+                            TotalPoints = 530.0,
+                            Wins = 0
+                        },
+                        new
+                        {
+                            Id = 15,
+                            BirthDate = new DateTime(1989, 8, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Championships = 0,
+                            ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/bottas.jpg.img.1920.medium.jpg/1677069810695.jpg",
+                            IsCurrentChampion = false,
+                            Name = "Valtteri Bottas",
+                            Number = 77,
+                            Podiums = 67,
+                            Points = 5.0,
+                            PolePositions = 20,
+                            Price = 10m,
+                            TeamId = 9,
+                            TotalPoints = 1792.0,
+                            Wins = 10
+                        },
+                        new
+                        {
+                            Id = 16,
+                            BirthDate = new DateTime(1999, 5, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Championships = 0,
+                            ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/zhou.jpg.img.1920.medium.jpg/1677069909295.jpg",
+                            IsCurrentChampion = false,
+                            Name = "Zhou Guanyu",
+                            Number = 24,
+                            Podiums = 0,
+                            Points = 4.0,
+                            PolePositions = 0,
+                            Price = 9m,
+                            TeamId = 9,
+                            TotalPoints = 10.0,
+                            Wins = 0
+                        },
+                        new
+                        {
+                            Id = 17,
+                            BirthDate = new DateTime(2000, 5, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Championships = 0,
+                            ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/tsunoda.jpg.img.1920.medium.jpg/1677069846213.jpg",
+                            IsCurrentChampion = false,
+                            Name = "Yuki Tsunoda",
+                            Number = 22,
+                            Podiums = 0,
+                            Points = 2.0,
+                            PolePositions = 0,
+                            Price = 7m,
+                            TeamId = 10,
+                            TotalPoints = 46.0,
+                            Wins = 0
+                        },
+                        new
+                        {
+                            Id = 18,
+                            BirthDate = new DateTime(1992, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Championships = 0,
+                            ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/magnussen.jpg.img.1920.medium.jpg/1677069387823.jpg",
+                            IsCurrentChampion = false,
+                            Name = "Kevin Magnussen",
+                            Number = 20,
+                            Podiums = 1,
+                            Points = 2.0,
+                            PolePositions = 0,
+                            Price = 7m,
+                            TeamId = 8,
+                            TotalPoints = 185.0,
+                            Wins = 0
+                        },
+                        new
+                        {
+                            Id = 19,
+                            BirthDate = new DateTime(2000, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Championships = 0,
+                            ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/sargeant.jpg.img.1920.medium.jpg/1676983079144.jpg",
+                            IsCurrentChampion = false,
+                            Name = "Logan Sargeant",
+                            Number = 2,
+                            Podiums = 0,
+                            Points = 0.0,
+                            PolePositions = 0,
+                            Price = 5m,
+                            TeamId = 7,
+                            TotalPoints = 0.0,
+                            Wins = 0
+                        },
+                        new
+                        {
+                            Id = 20,
+                            BirthDate = new DateTime(1995, 2, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Championships = 0,
+                            ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/devries.jpg.img.1920.medium.jpg/1676983081637.jpg",
+                            IsCurrentChampion = false,
+                            Name = "Nyck De Vries",
+                            Number = 21,
+                            Podiums = 0,
+                            Points = 0.0,
+                            PolePositions = 0,
+                            Price = 5m,
+                            TeamId = 10,
+                            TotalPoints = 2.0,
+                            Wins = 0
+                        });
+                });
+
+            modelBuilder.Entity("Motorsport1.Data.Models.Team", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Championships")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasMaxLength(2048)
+                        .HasColumnType("nvarchar(2048)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("Podiums")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Points")
+                        .HasColumnType("float");
+
+                    b.Property<int>("PolePositions")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<double>("TotalPoints")
+                        .HasColumnType("float");
+
+                    b.Property<int>("Wins")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Teams", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Championships = 5,
+                            ImageUrl = "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/team%20logos/red%20bull.jpg",
+                            Name = "Oracle Red Bull Racing",
+                            Podiums = 249,
+                            Points = 411.0,
+                            PolePositions = 91,
+                            Price = 93m,
+                            TotalPoints = 6799.0,
+                            Wins = 102
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Championships = 8,
+                            ImageUrl = "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/team%20logos/mercedes.jpg",
+                            Name = "Mercedes-AMG PETRONAS F1 Team",
+                            Podiums = 286,
+                            Points = 203.0,
+                            PolePositions = 128,
+                            Price = 77m,
+                            TotalPoints = 7155.6400000000003,
+                            Wins = 116
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Championships = 0,
+                            ImageUrl = "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/team%20logos/aston%20martin.jpg",
+                            Name = "Aston Martin Aramco Cognizant F1 Team",
+                            Podiums = 7,
+                            Points = 181.0,
+                            PolePositions = 0,
+                            Price = 75m,
+                            TotalPoints = 313.0,
+                            Wins = 0
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Championships = 16,
+                            ImageUrl = "https://media.formula1.com/content/dam/fom-website/teams/Ferrari/logo-ferrari-18%20.jpg",
+                            Name = "Scuderia Ferrari",
+                            Podiums = 811,
+                            Points = 157.0,
+                            PolePositions = 244,
+                            Price = 71m,
+                            TotalPoints = 10315.77,
+                            Wins = 243
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Championships = 8,
+                            ImageUrl = "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/team%20logos/mclaren.jpg",
+                            Name = "McLaren F1 Team",
+                            Podiums = 495,
+                            Points = 59.0,
+                            PolePositions = 156,
+                            Price = 37m,
+                            TotalPoints = 6366.5,
+                            Wins = 183
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Championships = 0,
+                            ImageUrl = "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/team%20logos/alpine.jpg",
+                            Name = "BWT Alpine F1 Team",
+                            Podiums = 3,
+                            Points = 47.0,
+                            PolePositions = 0,
+                            Price = 35m,
+                            TotalPoints = 375.0,
+                            Wins = 1
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Championships = 9,
+                            ImageUrl = "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/team%20logos/williams.jpg",
+                            Name = "Williams Racing",
+                            Podiums = 313,
+                            Points = 11.0,
+                            PolePositions = 128,
+                            Price = 14m,
+                            TotalPoints = 3609.0,
+                            Wins = 114
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Championships = 0,
+                            ImageUrl = "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/team%20logos/haas.jpg",
+                            Name = "MoneyGram Haas F1 Team",
+                            Podiums = 0,
+                            Points = 11.0,
+                            PolePositions = 0,
+                            Price = 14m,
+                            TotalPoints = 248.0,
+                            Wins = 0
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Championships = 2,
+                            ImageUrl = "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/team%20logos/alfa%20romeo.jpg",
+                            Name = "Alfa Romeo F1 Team Stake",
+                            Podiums = 28,
+                            Points = 9.0,
+                            PolePositions = 12,
+                            Price = 13m,
+                            TotalPoints = 356.0,
+                            Wins = 11
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Championships = 0,
+                            ImageUrl = "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/team%20logos/alphatauri.jpg",
+                            Name = "Scuderia AlphaTauri",
+                            Podiums = 2,
+                            Points = 2.0,
+                            PolePositions = 0,
+                            Price = 9m,
+                            TotalPoints = 286.0,
+                            Wins = 1
                         });
                 });
 
@@ -448,6 +1054,23 @@ namespace Motorsport1.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Motorsport1.Data.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("Motorsport1.Data.Models.Driver", "Driver")
+                        .WithMany("DraftUsers")
+                        .HasForeignKey("DriverId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Motorsport1.Data.Models.Team", "Team")
+                        .WithMany("DraftUsers")
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Driver");
+
+                    b.Navigation("Team");
+                });
+
             modelBuilder.Entity("Motorsport1.Data.Models.Article", b =>
                 {
                     b.HasOne("Motorsport1.Data.Models.Category", "Category")
@@ -478,6 +1101,17 @@ namespace Motorsport1.Data.Migrations
                     b.Navigation("Article");
                 });
 
+            modelBuilder.Entity("Motorsport1.Data.Models.Driver", b =>
+                {
+                    b.HasOne("Motorsport1.Data.Models.Team", "Team")
+                        .WithMany("Drivers")
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Team");
+                });
+
             modelBuilder.Entity("Motorsport1.Data.Models.ApplicationUser", b =>
                 {
                     b.Navigation("Articles");
@@ -491,6 +1125,18 @@ namespace Motorsport1.Data.Migrations
             modelBuilder.Entity("Motorsport1.Data.Models.Category", b =>
                 {
                     b.Navigation("Articles");
+                });
+
+            modelBuilder.Entity("Motorsport1.Data.Models.Driver", b =>
+                {
+                    b.Navigation("DraftUsers");
+                });
+
+            modelBuilder.Entity("Motorsport1.Data.Models.Team", b =>
+                {
+                    b.Navigation("DraftUsers");
+
+                    b.Navigation("Drivers");
                 });
 #pragma warning restore 612, 618
         }

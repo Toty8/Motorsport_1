@@ -19,7 +19,9 @@
     <ProjectReference Include="..\Motorsport1.Common\Motorsport1.Common.csproj" />
     <ProjectReference Include="..\Motorsport1.Data.Models\Motorsport1.Data.Models.csproj" />
     <ProjectReference Include="..\Motorsport1.Data\Motorsport1.Data.csproj" />
+    <ProjectReference Include="..\Motorsport1.Web.Infrastructure\Motorsport1.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\Motorsport1.Web.ViewModels\Motorsport1.Web.ViewModels.csproj" />
+    <ProjectReference Include="..\Mototsport1.Services.Data\Mototsport1.Services.Data.csproj" />
   </ItemGroup>
 
 </Project>

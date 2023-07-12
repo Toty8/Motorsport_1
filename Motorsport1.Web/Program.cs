@@ -4,6 +4,9 @@ namespace Motorsport1.Web
 
     using Data;
     using Data.Models;
+    using Mototsport1.Services.Data.Interfaces;
+    using Mototsport1.Services.Data;
+    using Motorsport1.Web.Infrastructor.Extensions;
 
     public class Program
     {
@@ -32,6 +35,8 @@ namespace Motorsport1.Web
                     builder.Configuration.GetValue<int>("Identity:Password:RequiredLength");
             })
                 .AddEntityFrameworkStores<Motorsport1DbContext>();
+
+            builder.Services.AddApplicationServices(typeof(IArticleService));
 
             builder.Services.AddControllersWithViews();
 

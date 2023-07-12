@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "WquHhCNHTh0mri5D02qhbjhEe/mGA2KhdEaUot/KUYA=",
+  "Hash": "3JXzvw8+PiGlmN+KcVERDLSXOjVqjTIy2aypqI38300=",
   "Source": "Motorsport1.Web",
   "BasePath": "_content/Motorsport1.Web",
   "Mode": "Default",
@@ -1103,6 +1103,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\MSuser\\source\\repos\\Motorsport1\\Motorsport1.Web\\wwwroot\\js\\jquery-override.js",
+      "SourceId": "Motorsport1.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\MSuser\\source\\repos\\Motorsport1\\Motorsport1.Web\\wwwroot\\",
+      "BasePath": "_content/Motorsport1.Web",
+      "RelativePath": "js/jquery-override.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\jquery-override.js"
     },
     {
       "Identity": "C:\\Users\\MSuser\\source\\repos\\Motorsport1\\Motorsport1.Web\\wwwroot\\js\\site.js",

@@ -1,0 +1,14 @@
+﻿@model AddArticleViewModel;
+@{
+    ViewData["Title"] = "Add Article";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+<partial name="_ArticleFormPartial" model="@Model">
+
+@section Scripts
+{
+        <partial name="_ValidationScriptsPartial"/>
+}

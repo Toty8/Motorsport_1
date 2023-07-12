@@ -11,5 +11,13 @@
         }
 
         public virtual ICollection<Article> Articles { get; set; }
+
+        public int? DriverId { get; set; }
+
+        public virtual Driver? Driver { get; set; }
+
+        public int? TeamId { get; set; }
+
+        public virtual Team? Team { get; set; }
     }
 }

@@ -27,5 +27,12 @@ namespace Mototsport1.Services.Data
 
             return categories;
         }
+
+        public async Task<bool> ExistByIdAsync(int id)
+        {
+            bool result = await dbContext.Categories.AnyAsync(c => c.Id == id);
+
+            return result;
+        }
     }
 }

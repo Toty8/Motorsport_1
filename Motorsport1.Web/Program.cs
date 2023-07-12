@@ -7,6 +7,7 @@ namespace Motorsport1.Web
     using Mototsport1.Services.Data.Interfaces;
     using Mototsport1.Services.Data;
     using Motorsport1.Web.Infrastructor.Extensions;
+    using Motorsport1.Web.Infrastructure.ModelBinders;
 
     public class Program
     {
@@ -38,7 +39,13 @@ namespace Motorsport1.Web
 
             builder.Services.AddApplicationServices(typeof(IArticleService));
 
-            builder.Services.AddControllersWithViews();
+            builder.Services
+                .AddControllersWithViews()
+                .AddMvcOptions(options =>
+                {
+                    options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
+                    options.ModelBinderProviders.Insert(1, new DoubleModelBinderProvider());
+                });
 
             WebApplication app = builder.Build();
 

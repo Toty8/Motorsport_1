@@ -20,7 +20,7 @@
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
-            IEnumerable<IndexViewModel> viewModel = await articleService.GetLastFiveArticles();
+            IEnumerable<IndexViewModel> viewModel = await articleService.GetLastFiveArticlesAsync();
              
             return View(viewModel);
         }

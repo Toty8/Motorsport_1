@@ -6,7 +6,7 @@
         {
             public const string InvalidCategory = "Selected category is invalid!";
             public const string InvalidModelState = "Please enter valid data!";
-            public const string UnexpectedError = "Unexpected error occured! Please try again or contact an administrator.";
+            public const string UnexpectedError = "Unexpected error occured! Please try again or contact administrator!";
 
             public const string UnexistingArticle = "Article with the provided id does not exist!";
         }
@@ -17,7 +17,8 @@
 
         public static class SuccessMessages
         { 
-            public const string SuccessfullyAddedArticle = "Your article is successfully published"; 
+            public const string SuccessfullyAddedArticle = "Your article is successfully published!"; 
+            public const string SuccessfullyEditedArticle = "Your article is successfully edited!"; 
         }
     }
 }

@@ -6,14 +6,20 @@ namespace Mototsport1.Services.Data.Interfaces
 {
     public interface IArticleService
     {
-        public Task<IEnumerable<IndexViewModel>> GetLastFiveArticles();
+        public Task<IEnumerable<IndexViewModel>> GetLastFiveArticlesAsync();
 
-        public Task AddArticleAsync(AddArticleViewModel model, string publisherId);
+        public Task AddArticleAsync(AddAndEditArticleViewModel model, string publisherId);
 
         public Task<AllArticlesFilteredAndPagedServiceModel> AllAsync(AllArticlesQueryModel queryModel);
 
         public Task<IEnumerable<AllArticleViewModel>> MineAsync(string publisherId);
 
-        public Task<ArticleDetailsViewModel?> GetDetailsByIdAsync(int articleId);
+        public Task<ArticleDetailsViewModel> GetDetailsByIdAsync(int articleId);
+
+        public Task<bool> ExistByIdAsync(int id);
+
+        public Task EditAsync(AddAndEditArticleViewModel article, int articleId);
+
+        public Task<AddAndEditArticleViewModel> GetArticleToEditAsync(int id);
     }
 }

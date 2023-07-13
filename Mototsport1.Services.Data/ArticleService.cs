@@ -20,7 +20,7 @@ namespace Mototsport1.Services.Data
             this.dbContext = dbContext;
         }
 
-        public async Task AddArticleAsync(AddArticleViewModel model, string publisherId)
+        public async Task AddArticleAsync(AddAndEditArticleViewModel model, string publisherId)
         {
             Article article = new Article()
             {
@@ -31,8 +31,8 @@ namespace Mototsport1.Services.Data
                 PublisherId = Guid.Parse(publisherId)
             };
 
-            await dbContext.Articles.AddAsync(article);
-            await dbContext.SaveChangesAsync();
+            await this.dbContext.Articles.AddAsync(article);
+            await this.dbContext.SaveChangesAsync();
         }
 
         public async Task<AllArticlesFilteredAndPagedServiceModel> AllAsync(AllArticlesQueryModel queryModel)
@@ -79,18 +79,49 @@ namespace Mototsport1.Services.Data
             };
         }
 
-        public async Task<ArticleDetailsViewModel?> GetDetailsByIdAsync(int articleId)
+        public async Task EditAsync(AddAndEditArticleViewModel article, int articleId)
         {
-            Article? article = await this.dbContext.Articles
+            Article currArticle = await this.dbContext.Articles
+                .Where(a => a.IsActive == true)
+                .FirstAsync(a => a.Id == articleId);
+
+            currArticle.Title = article.Title;
+            currArticle.Information = article.Information;
+            currArticle.CategoryId = article.CategoryId;
+            currArticle.ImageUrl = article.ImageUrl;
+
+            await this.dbContext.SaveChangesAsync();
+        }
+
+        public async Task<bool> ExistByIdAsync(int id)
+        {
+            return await this.dbContext.Articles
+                .Where(a => a.IsActive == true)
+                .AnyAsync(a => a.Id == id);
+        }
+
+        public async Task<AddAndEditArticleViewModel> GetArticleToEditAsync(int id)
+        {
+            var article = await this.dbContext.Articles
+                .Where(a => a.IsActive == true && a.Id == id)
+                .Select(a => new AddAndEditArticleViewModel
+                {
+                    Title = a.Title,
+                    Information = a.Information,
+                    ImageUrl = a.ImageUrl,
+                    CategoryId = a.CategoryId
+                }).FirstAsync();
+
+            return article;
+        }
+
+        public async Task<ArticleDetailsViewModel> GetDetailsByIdAsync(int articleId)
+        {
+            Article article = await this.dbContext.Articles
                 .Include(a => a.Comments)
                 .Include(a => a.Publisher)
                 .Where(a => a.IsActive == true)
-                .FirstOrDefaultAsync(a => a.Id == articleId);
-
-            if (article == null)
-            {
-                return null;
-            }
+                .FirstAsync(a => a.Id == articleId);
 
             article.ReadCount++;
 
@@ -129,9 +160,9 @@ namespace Mototsport1.Services.Data
             };
         }
 
-        public async Task<IEnumerable<IndexViewModel>> GetLastFiveArticles()
+        public async Task<IEnumerable<IndexViewModel>> GetLastFiveArticlesAsync()
         {
-            var articles = await dbContext.Articles
+            var articles = await this.dbContext.Articles
                 .Where(a => a.IsActive == true)
                 .OrderByDescending(a => a.PublishedDateTime)
                 .Take(5)
@@ -148,7 +179,7 @@ namespace Mototsport1.Services.Data
 
         public async Task<IEnumerable<AllArticleViewModel>> MineAsync(string publisherId)
         {
-            IEnumerable<AllArticleViewModel> articles = await dbContext.Articles
+            IEnumerable<AllArticleViewModel> articles = await this.dbContext.Articles
                 .Where(a => a.IsActive == true && a.PublisherId.ToString() == publisherId)
                 .Select(a => new AllArticleViewModel
                 {

@@ -21,11 +21,11 @@
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> All([FromQuery]AllArticlesQueryModel queryModel)
+        public async Task<IActionResult> All([FromQuery] AllArticlesQueryModel queryModel)
         {
-            AllArticlesFilteredAndPagedServiceModel serviceModel = 
+            AllArticlesFilteredAndPagedServiceModel serviceModel =
                 await this.articleService.AllAsync(queryModel);
-            
+
             queryModel.Articles = serviceModel.Articles;
             queryModel.TotalArticles = serviceModel.TotalArticlesCount;
             queryModel.Categories = await this.categoryService.AllNamesAsync();
@@ -37,15 +37,22 @@
         [HttpGet]
         public async Task<IActionResult> Add()
         {
-            AddArticleViewModel model = new AddArticleViewModel();
+            try
+            {
+                AddAndEditArticleViewModel model = new AddAndEditArticleViewModel();
 
-            model.Categories = await this.categoryService.AllCategoriesAsync();
+                model.Categories = await this.categoryService.AllCategoriesAsync();
 
-            return View(model);
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                return this.GeneralError();
+            }
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(AddArticleViewModel model)
+        public async Task<IActionResult> Add(AddAndEditArticleViewModel model)
         {
             bool exists = await categoryService.ExistByIdAsync(model.CategoryId);
 
@@ -91,16 +98,90 @@
         [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
-            ArticleDetailsViewModel? viewmodel = await this.articleService.GetDetailsByIdAsync(id);
+            bool exist = await this.articleService.ExistByIdAsync(id);
 
-            if (viewmodel == null)
+            if (exist == false)
             {
                 this.TempData[ErrorMessage] = ErrorMessages.UnexistingArticle;
 
                 return this.RedirectToAction(nameof(All));
             }
 
-            return View(viewmodel);
+            try
+            {
+                ArticleDetailsViewModel viewmodel = await this.articleService.GetDetailsByIdAsync(id);
+
+                return View(viewmodel);
+            }
+            catch (Exception)
+            {
+                return this.GeneralError();
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            bool exist = await this.articleService.ExistByIdAsync(id);
+
+            if (exist == false)
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.UnexistingArticle;
+
+                return this.RedirectToAction(nameof(All));
+            }
+
+            try
+            {
+                var article = await this.articleService.GetArticleToEditAsync(id);
+
+                article.Categories = await this.categoryService.AllCategoriesAsync();
+
+                return this.View(article);
+            }
+            catch (Exception)
+            {
+                return this.GeneralError();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(AddAndEditArticleViewModel model, int id)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                model.Categories = await this.categoryService.AllCategoriesAsync();
+                return this.View(model);
+            }
+
+            bool exists = await categoryService.ExistByIdAsync(model.CategoryId);
+
+            if (!exists)
+            {
+                this.ModelState.AddModelError(nameof(model.CategoryId), ErrorMessages.InvalidCategory);
+            }
+
+            try
+            {
+                await this.articleService.EditAsync(model, id);
+            }
+            catch (Exception)
+            {
+                this.ModelState.AddModelError(string.Empty, ErrorMessages.UnexpectedError);
+                model.Categories = await this.categoryService.AllCategoriesAsync();
+
+                return this.View(model);
+            }
+
+            this.TempData[SuccessMessage] = SuccessMessages.SuccessfullyEditedArticle;
+
+            return RedirectToAction(nameof(Details), new {id});
+        }
+        private IActionResult GeneralError()
+        {
+            this.ModelState.AddModelError(string.Empty, ErrorMessages.UnexpectedError);
+
+            return this.RedirectToAction(nameof(All));
         }
     }
 }

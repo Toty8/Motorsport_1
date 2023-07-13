@@ -6,7 +6,8 @@
     using Motorsport1.Services.Data.Models.Article;
     using Motorsport1.Web.ViewModels.Article;
     using Mototsport1.Services.Data.Interfaces;
-    using static Common.ModelStateMessages;
+    using static Common.UIMessages;
+    using static Common.NotificationMessageConstants;
 
     public class ArticleController : BaseController
     {
@@ -50,14 +51,14 @@
 
             if (!exists)
             {
-                this.ModelState.AddModelError(nameof(model.CategoryId), ErrorMessage.InvalidCategory);
+                this.ModelState.AddModelError(nameof(model.CategoryId), ErrorMessages.InvalidCategory);
             }
 
             if (!this.ModelState.IsValid)
             {
                 model.Categories = await this.categoryService.AllCategoriesAsync();
 
-                this.ModelState.AddModelError(string.Empty, ErrorMessage.InvalidModelState);
+                this.ModelState.AddModelError(string.Empty, ErrorMessages.InvalidModelState);
 
                 return this.View(model);
             }
@@ -68,11 +69,13 @@
             }
             catch (Exception e)
             {
-                this.ModelState.AddModelError(string.Empty, ErrorMessage.UnexpectedError);
+                this.ModelState.AddModelError(string.Empty, ErrorMessages.UnexpectedError);
                 model.Categories = await this.categoryService.AllCategoriesAsync();
 
                 return this.View(model);
             }
+
+            this.TempData[SuccessMessage] = SuccessMessages.SuccessfullyAddedArticle;
 
             return RedirectToAction(nameof(All));
         }
@@ -82,6 +85,22 @@
             IEnumerable<AllArticleViewModel> model = await this.articleService.MineAsync(GetUserId());
 
             return this.View(model);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(int id)
+        {
+            ArticleDetailsViewModel? viewmodel = await this.articleService.GetDetailsByIdAsync(id);
+
+            if (viewmodel == null)
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.UnexistingArticle;
+
+                return this.RedirectToAction(nameof(All));
+            }
+
+            return View(viewmodel);
         }
     }
 }

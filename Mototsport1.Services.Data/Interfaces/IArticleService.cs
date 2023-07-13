@@ -13,5 +13,7 @@ namespace Mototsport1.Services.Data.Interfaces
         public Task<AllArticlesFilteredAndPagedServiceModel> AllAsync(AllArticlesQueryModel queryModel);
 
         public Task<IEnumerable<AllArticleViewModel>> MineAsync(string publisherId);
+
+        public Task<ArticleDetailsViewModel?> GetDetailsByIdAsync(int articleId);
     }
 }

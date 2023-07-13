@@ -3,9 +3,11 @@ using Motorsport1.Data;
 using Motorsport1.Data.Models;
 using Motorsport1.Services.Data.Models.Article;
 using Motorsport1.Web.ViewModels.Article;
+using Motorsport1.Web.ViewModels.Publisher;
 using Motorsport1.Web.ViewModels.Home;
 using Mototsport1.Services.Data.Interfaces;
 using System.ComponentModel;
+using Motorsport1.Web.ViewModels.Comment;
 
 namespace Mototsport1.Services.Data
 {
@@ -74,6 +76,56 @@ namespace Mototsport1.Services.Data
             {
                 TotalArticlesCount = totalArticles,
                 Articles = allArticles
+            };
+        }
+
+        public async Task<ArticleDetailsViewModel?> GetDetailsByIdAsync(int articleId)
+        {
+            Article? article = await this.dbContext.Articles
+                .Include(a => a.Comments)
+                .Include(a => a.Publisher)
+                .Where(a => a.IsActive == true)
+                .FirstOrDefaultAsync(a => a.Id == articleId);
+
+            if (article == null)
+            {
+                return null;
+            }
+
+            article.ReadCount++;
+
+            await this.dbContext.SaveChangesAsync();
+
+            ICollection<CommentDetailViewModel> comments = new HashSet<CommentDetailViewModel>();
+
+            CommentDetailViewModel currentComment;
+
+            foreach (Comment comment in article.Comments)
+            {
+                currentComment = new CommentDetailViewModel
+                {
+                    Content = comment.Content,
+                    PublishedDateTime = comment.PublishedDateTime,
+                };
+
+                comments.Add(currentComment);
+            }
+
+            return new ArticleDetailsViewModel
+            {
+                Id = article.Id,
+                Title = article.Title,
+                ImageUrl = article.ImageUrl,
+                Likes = article.Likes,
+                ReadCount = article.ReadCount,
+                Information = article.Information,
+                PublishedDateTime = article.PublishedDateTime,
+                Publisher = new PublisherDetailsViewModel
+                {
+                    Email = article.Publisher.Email,
+                },
+                Comments = comments
+                
             };
         }
 

@@ -20,7 +20,7 @@ namespace Mototsport1.Services.Data
             this.dbContext = dbContext;
         }
 
-        public async Task AddArticleAsync(AddAndEditArticleViewModel model, string publisherId)
+        public async Task<int> AddArticleAsync(AddAndEditArticleViewModel model, string publisherId)
         {
             Article article = new Article()
             {
@@ -33,6 +33,8 @@ namespace Mototsport1.Services.Data
 
             await this.dbContext.Articles.AddAsync(article);
             await this.dbContext.SaveChangesAsync();
+
+            return article.Id;
         }
 
         public async Task<AllArticlesFilteredAndPagedServiceModel> AllAsync(AllArticlesQueryModel queryModel)
@@ -79,6 +81,17 @@ namespace Mototsport1.Services.Data
             };
         }
 
+        public async Task DeleteAsync(int id)
+        {
+            Article article = await this.dbContext.Articles
+                .Where(a => a.IsActive == true)
+                .FirstAsync(a => a.Id == id);
+
+            article.IsActive = false;
+
+            await this.dbContext.SaveChangesAsync();
+        }
+
         public async Task EditAsync(AddAndEditArticleViewModel article, int articleId)
         {
             Article currArticle = await this.dbContext.Articles
@@ -98,6 +111,19 @@ namespace Mototsport1.Services.Data
             return await this.dbContext.Articles
                 .Where(a => a.IsActive == true)
                 .AnyAsync(a => a.Id == id);
+        }
+
+        public async Task<ArticlePreDeleteViewModel> GetArticleForDeleteByIdAsync(int id)
+        {
+            Article article = await this.dbContext.Articles
+                .Where (a => a.IsActive == true)
+                .FirstAsync (a => a.Id == id);
+
+            return new ArticlePreDeleteViewModel
+            {
+                Title = article.Title,
+                ImageUrl = article.ImageUrl,
+            };
         }
 
         public async Task<AddAndEditArticleViewModel> GetArticleToEditAsync(int id)

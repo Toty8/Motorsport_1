@@ -72,7 +72,9 @@
 
             try
             {
-                await articleService.AddArticleAsync(model, GetUserId());
+                int articleId = await articleService.AddArticleAsync(model, GetUserId());
+
+                return RedirectToAction(nameof(Details), new { articleId });
             }
             catch (Exception e)
             {
@@ -83,8 +85,6 @@
             }
 
             this.TempData[SuccessMessage] = SuccessMessages.SuccessfullyAddedArticle;
-
-            return RedirectToAction(nameof(All));
         }
 
         public async Task<IActionResult> Mine()
@@ -176,6 +176,57 @@
             this.TempData[SuccessMessage] = SuccessMessages.SuccessfullyEditedArticle;
 
             return RedirectToAction(nameof(Details), new {id});
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            bool exist = await this.articleService.ExistByIdAsync(id);
+
+            if (exist == false)
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.UnexistingArticle;
+
+                return this.RedirectToAction(nameof(All));
+            }
+
+            try
+            {
+                var article = await this.articleService.GetArticleForDeleteByIdAsync(id);
+
+                return this.View(article);
+            }
+            catch (Exception)
+            {
+                return this.GeneralError();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(ArticlePreDeleteViewModel model, int id)
+        {
+            bool exist = await this.articleService.ExistByIdAsync(id);
+
+            if (exist == false)
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.UnexistingArticle;
+
+                return this.RedirectToAction(nameof(All));
+            }
+            try
+            {
+                await this.articleService.DeleteAsync(id);
+            }
+            catch (Exception)
+            {
+                this.ModelState.AddModelError(string.Empty, ErrorMessages.UnexpectedError);
+
+                return this.View(model);
+            }
+
+            this.TempData[WarningMessage] = InformationMessages.InformationDeletedArticle;
+
+            return RedirectToAction(nameof(Mine));
         }
         private IActionResult GeneralError()
         {

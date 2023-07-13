@@ -13,12 +13,15 @@
 
         public static class WarningMessages { }
 
-        public static class InformationMessages { }
+        public static class InformationMessages 
+        {
+            public const string InformationDeletedArticle = "Your article was successfully deleted!";
+        }
 
         public static class SuccessMessages
         { 
             public const string SuccessfullyAddedArticle = "Your article is successfully published!"; 
-            public const string SuccessfullyEditedArticle = "Your article is successfully edited!"; 
+            public const string SuccessfullyEditedArticle = "Your article is successfully edited!";
         }
     }
 }

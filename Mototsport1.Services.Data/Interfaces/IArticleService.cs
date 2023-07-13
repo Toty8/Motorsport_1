@@ -8,7 +8,7 @@ namespace Mototsport1.Services.Data.Interfaces
     {
         public Task<IEnumerable<IndexViewModel>> GetLastFiveArticlesAsync();
 
-        public Task AddArticleAsync(AddAndEditArticleViewModel model, string publisherId);
+        public Task<int> AddArticleAsync(AddAndEditArticleViewModel model, string publisherId);
 
         public Task<AllArticlesFilteredAndPagedServiceModel> AllAsync(AllArticlesQueryModel queryModel);
 
@@ -21,5 +21,9 @@ namespace Mototsport1.Services.Data.Interfaces
         public Task EditAsync(AddAndEditArticleViewModel article, int articleId);
 
         public Task<AddAndEditArticleViewModel> GetArticleToEditAsync(int id);
+
+        public Task<ArticlePreDeleteViewModel> GetArticleForDeleteByIdAsync(int id);
+
+        public Task DeleteAsync(int id);
     }
 }

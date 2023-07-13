@@ -93,5 +93,22 @@ namespace Mototsport1.Services.Data
 
             return articles;
         }
+
+        public async Task<IEnumerable<AllArticleViewModel>> MineAsync(string publisherId)
+        {
+            IEnumerable<AllArticleViewModel> articles = await dbContext.Articles
+                .Where(a => a.IsActive == true && a.PublisherId.ToString() == publisherId)
+                .Select(a => new AllArticleViewModel
+                {
+                    Id = a.Id,
+                    Title = a.Title,
+                    ImageUrl = a.ImageUrl,
+                    Likes = a.Likes,
+                    ReadCount = a.ReadCount,
+                })
+                .ToArrayAsync();
+
+            return articles;
+        }
     }
 }

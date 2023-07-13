@@ -2,6 +2,7 @@
 {
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.ModelBinding;
     using Motorsport1.Services.Data.Models.Article;
     using Motorsport1.Web.ViewModels.Article;
     using Mototsport1.Services.Data.Interfaces;
@@ -72,7 +73,15 @@
 
                 return this.View(model);
             }
+
             return RedirectToAction(nameof(All));
+        }
+
+        public async Task<IActionResult> Mine()
+        {
+            IEnumerable<AllArticleViewModel> model = await this.articleService.MineAsync(GetUserId());
+
+            return this.View(model);
         }
     }
 }

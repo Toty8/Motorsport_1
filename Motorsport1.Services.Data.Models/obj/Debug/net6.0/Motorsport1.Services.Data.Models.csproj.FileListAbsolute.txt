@@ -1,0 +1,17 @@
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Services.Data.Models\bin\Debug\net6.0\Motorsport1.Services.Data.Models.deps.json
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Services.Data.Models\bin\Debug\net6.0\Motorsport1.Services.Data.Models.dll
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Services.Data.Models\bin\Debug\net6.0\Motorsport1.Services.Data.Models.pdb
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Services.Data.Models\bin\Debug\net6.0\Motorsport1.Common.dll
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Services.Data.Models\bin\Debug\net6.0\Motorsport1.Web.ViewModels.dll
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Services.Data.Models\bin\Debug\net6.0\Motorsport1.Web.ViewModels.pdb
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Services.Data.Models\bin\Debug\net6.0\Motorsport1.Common.pdb
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Services.Data.Models\obj\Debug\net6.0\Motorsport1.Services.Data.Models.csproj.AssemblyReference.cache
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Services.Data.Models\obj\Debug\net6.0\Motorsport1.Services.Data.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Services.Data.Models\obj\Debug\net6.0\Motorsport1.Services.Data.Models.AssemblyInfoInputs.cache
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Services.Data.Models\obj\Debug\net6.0\Motorsport1.Services.Data.Models.AssemblyInfo.cs
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Services.Data.Models\obj\Debug\net6.0\Motorsport1.Services.Data.Models.csproj.CoreCompileInputs.cache
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Services.Data.Models\obj\Debug\net6.0\Motorsport1.Services.Data.Models.csproj.CopyComplete
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Services.Data.Models\obj\Debug\net6.0\Motorsport1.Services.Data.Models.dll
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Services.Data.Models\obj\Debug\net6.0\refint\Motorsport1.Services.Data.Models.dll
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Services.Data.Models\obj\Debug\net6.0\Motorsport1.Services.Data.Models.pdb
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Services.Data.Models\obj\Debug\net6.0\ref\Motorsport1.Services.Data.Models.dll

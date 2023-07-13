@@ -3356,6 +3356,19 @@
           "bin/placeholder/Motorsport1.Data.Models.dll": {}
         }
       },
+      "Motorsport1.Services.Data.Models/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Motorsport1.Web.ViewModels": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Motorsport1.Services.Data.Models.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Motorsport1.Services.Data.Models.dll": {}
+        }
+      },
       "Motorsport1.Web.ViewModels/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -3376,6 +3389,7 @@
           "Motorsport1.Common": "1.0.0",
           "Motorsport1.Data": "1.0.0",
           "Motorsport1.Data.Models": "1.0.0",
+          "Motorsport1.Services.Data.Models": "1.0.0",
           "Motorsport1.Web.ViewModels": "1.0.0"
         },
         "compile": {
@@ -9253,6 +9267,11 @@
       "type": "project",
       "path": "../Motorsport1.Data.Models/Motorsport1.Data.Models.csproj",
       "msbuildProject": "../Motorsport1.Data.Models/Motorsport1.Data.Models.csproj"
+    },
+    "Motorsport1.Services.Data.Models/1.0.0": {
+      "type": "project",
+      "path": "../Motorsport1.Services.Data.Models/Motorsport1.Services.Data.Models.csproj",
+      "msbuildProject": "../Motorsport1.Services.Data.Models/Motorsport1.Services.Data.Models.csproj"
     },
     "Motorsport1.Web.ViewModels/1.0.0": {
       "type": "project",

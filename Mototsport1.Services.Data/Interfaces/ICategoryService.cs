@@ -8,5 +8,7 @@ namespace Mototsport1.Services.Data.Interfaces
         public Task<IEnumerable<ArticleCategoryViewModel>> AllCategoriesAsync();
 
         public Task<bool> ExistByIdAsync(int id);
+
+        public Task<IEnumerable<string>> AllNamesAsync();
     }
 }

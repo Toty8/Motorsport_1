@@ -88,3 +88,15 @@ C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\Motots
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\Mototsport1.Services.Data.pdb
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\Motorsport1.Web.Infrastructure.dll
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\Motorsport1.Web.Infrastructure.pdb
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\Microsoft.AspNetCore.Razor.Language.dll
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\Microsoft.CodeAnalysis.dll
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\Microsoft.CodeAnalysis.Razor.dll
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\Microsoft.DotNet.PlatformAbstractions.dll
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\Motorsport1.Services.Data.Models.dll
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\Motorsport1.Services.Data.Models.pdb

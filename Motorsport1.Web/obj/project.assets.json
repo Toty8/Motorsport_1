@@ -3471,6 +3471,19 @@
           "bin/placeholder/Motorsport1.Data.Models.dll": {}
         }
       },
+      "Motorsport1.Services.Data.Models/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Motorsport1.Web.ViewModels": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Motorsport1.Services.Data.Models.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Motorsport1.Services.Data.Models.dll": {}
+        }
+      },
       "Motorsport1.Web.Infrastructure/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -3506,6 +3519,7 @@
           "Motorsport1.Common": "1.0.0",
           "Motorsport1.Data": "1.0.0",
           "Motorsport1.Data.Models": "1.0.0",
+          "Motorsport1.Services.Data.Models": "1.0.0",
           "Motorsport1.Web.ViewModels": "1.0.0"
         },
         "compile": {
@@ -9606,6 +9620,11 @@
       "path": "../Motorsport1.Data.Models/Motorsport1.Data.Models.csproj",
       "msbuildProject": "../Motorsport1.Data.Models/Motorsport1.Data.Models.csproj"
     },
+    "Motorsport1.Services.Data.Models/1.0.0": {
+      "type": "project",
+      "path": "../Motorsport1.Services.Data.Models/Motorsport1.Services.Data.Models.csproj",
+      "msbuildProject": "../Motorsport1.Services.Data.Models/Motorsport1.Services.Data.Models.csproj"
+    },
     "Motorsport1.Web.Infrastructure/1.0.0": {
       "type": "project",
       "path": "../Motorsport1.Web.Infrastructure/Motorsport1.Web.Infrastructure.csproj",
@@ -9632,6 +9651,7 @@
       "Motorsport1.Common >= 1.0.0",
       "Motorsport1.Data >= 1.0.0",
       "Motorsport1.Data.Models >= 1.0.0",
+      "Motorsport1.Services.Data.Models >= 1.0.0",
       "Motorsport1.Web.Infrastructure >= 1.0.0",
       "Motorsport1.Web.ViewModels >= 1.0.0",
       "Mototsport1.Services.Data >= 1.0.0"
@@ -9679,6 +9699,9 @@
             },
             "C:\\Users\\MSuser\\source\\repos\\Motorsport1\\Motorsport1.Data\\Motorsport1.Data.csproj": {
               "projectPath": "C:\\Users\\MSuser\\source\\repos\\Motorsport1\\Motorsport1.Data\\Motorsport1.Data.csproj"
+            },
+            "C:\\Users\\MSuser\\source\\repos\\Motorsport1\\Motorsport1.Services.Data.Models\\Motorsport1.Services.Data.Models.csproj": {
+              "projectPath": "C:\\Users\\MSuser\\source\\repos\\Motorsport1\\Motorsport1.Services.Data.Models\\Motorsport1.Services.Data.Models.csproj"
             },
             "C:\\Users\\MSuser\\source\\repos\\Motorsport1\\Motorsport1.Web.Infrastructure\\Motorsport1.Web.Infrastructure.csproj": {
               "projectPath": "C:\\Users\\MSuser\\source\\repos\\Motorsport1\\Motorsport1.Web.Infrastructure\\Motorsport1.Web.Infrastructure.csproj"

@@ -28,6 +28,16 @@ namespace Mototsport1.Services.Data
             return categories;
         }
 
+        public async Task<IEnumerable<string>> AllNamesAsync()
+        {
+            IEnumerable<string> names = await dbContext.Categories
+                .AsNoTracking()
+                .Select(a => a.Name)
+                .ToArrayAsync();
+
+            return names;
+        }
+
         public async Task<bool> ExistByIdAsync(int id)
         {
             bool result = await dbContext.Categories.AnyAsync(c => c.Id == id);

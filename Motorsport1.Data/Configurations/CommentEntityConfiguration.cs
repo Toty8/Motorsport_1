@@ -9,7 +9,7 @@ namespace Motorsport1.Data.Configurations
         public void Configure(EntityTypeBuilder<Comment> builder)
         {
             builder.Property(a => a.PublishedDateTime)
-                .HasDefaultValue(DateTime.UtcNow);
+                .HasDefaultValueSql("GETDATE()");
 
             builder
                 .HasOne(c => c.Article)

@@ -2,7 +2,7 @@
 {
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-
+    using Motorsport1.Services.Data.Models.Article;
     using Motorsport1.Web.ViewModels.Article;
     using Mototsport1.Services.Data.Interfaces;
     using static Common.ModelStateMessages;
@@ -19,9 +19,17 @@
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All([FromQuery]AllArticlesQueryModel queryModel)
         {
-            return View();
+            AllArticlesFilteredAndPagedServiceModel serviceModel = 
+                await this.articleService.AllAsync(queryModel);
+            
+            queryModel.Articles = serviceModel.Articles;
+            queryModel.TotalArticles = serviceModel.TotalArticlesCount;
+            queryModel.Categories = await this.categoryService.AllNamesAsync();
+
+            return this.View(queryModel);
+
         }
 
         [HttpGet]

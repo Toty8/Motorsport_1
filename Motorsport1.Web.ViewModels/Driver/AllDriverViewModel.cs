@@ -12,7 +12,7 @@ namespace Motorsport1.Web.ViewModels.Driver
         [Display(Name = "Image Link")]
         public string ImageUrl { get; set; } = null!;
 
-        public string Team { get; set; } = null!;
+        public string TeamName { get; set; } = null!;
 
         public int Number { get; set; }
     }

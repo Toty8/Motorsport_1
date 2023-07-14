@@ -9,6 +9,8 @@
             public const string UnexpectedError = "Unexpected error occured! Please try again or contact administrator!";
 
             public const string UnexistingArticle = "Article with the provided id does not exist!";
+
+            public const string UnexistingDriver = "Driver with the provided id does not exist!";
         }
 
         public static class WarningMessages { }

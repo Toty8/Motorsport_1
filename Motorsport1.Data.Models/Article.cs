@@ -8,6 +8,7 @@
         public Article()
         {
             this.Comments = new HashSet<Comment>();
+            this.UsersLikedTheArticle = new HashSet<LikedArticle>();
         }
 
         [Key]
@@ -44,5 +45,7 @@
         public virtual ApplicationUser Publisher { get; set; } = null!;
 
         public virtual ICollection<Comment> Comments { get; set; }
+
+        public virtual ICollection<LikedArticle> UsersLikedTheArticle { get; set; }
     }
 }

@@ -34,6 +34,12 @@
 
         public int PolePositions { get; set; }
 
+        public int? BestResult { get; set; }
+
+        public int? BestResultCount { get; set; }
+
+        public int? LastYearStanding { get; set; }
+
         public double TotalPoints { get; set; }
 
         public virtual ICollection<Driver> Drivers { get; set; }

@@ -8,6 +8,7 @@
         {
             this.Id = Guid.NewGuid();
             this.Articles = new HashSet<Article>();
+            this.LikedArticles = new HashSet<LikedArticle>();
         }
 
         public virtual ICollection<Article> Articles { get; set; }
@@ -19,5 +20,7 @@
         public int? TeamId { get; set; }
 
         public virtual Team? Team { get; set; }
+
+        public virtual ICollection<LikedArticle> LikedArticles { get; set; }
     }
 }

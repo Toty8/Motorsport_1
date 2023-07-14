@@ -40,6 +40,9 @@ namespace Motorsport1.Data.Configurations
                 PolePositions = 27,
                 Podiums = 87,
                 TotalPoints = 2266.5,
+                BestResult = 1,
+                BestResultCount = 8,
+                LastYearStanding = 1,
                 Number = 1,
                 TeamId = 1
             };
@@ -59,6 +62,9 @@ namespace Motorsport1.Data.Configurations
                 PolePositions = 3,
                 Podiums = 31,
                 TotalPoints = 1357,
+                BestResult = 1,
+                BestResultCount = 2,
+                LastYearStanding = 3,
                 Number = 11,
                 TeamId = 1
             };
@@ -78,6 +84,9 @@ namespace Motorsport1.Data.Configurations
                 PolePositions = 22,
                 Podiums = 104,
                 TotalPoints = 2198,
+                BestResult = 2,
+                BestResultCount = 2,
+                LastYearStanding = 9,
                 Number = 14,
                 TeamId = 3
             };
@@ -97,6 +106,9 @@ namespace Motorsport1.Data.Configurations
                 PolePositions = 103,
                 Podiums = 195,
                 TotalPoints = 4526.5,
+                BestResult = 2,
+                BestResultCount = 2,
+                LastYearStanding = 6,
                 Number = 44,
                 TeamId = 2
             };
@@ -116,6 +128,9 @@ namespace Motorsport1.Data.Configurations
                 PolePositions = 3,
                 Podiums = 15,
                 TotalPoints = 865.5,
+                BestResult = 4,
+                BestResultCount = 1,
+                LastYearStanding = 5,
                 Number = 55,
                 TeamId = 4
             };
@@ -135,6 +150,9 @@ namespace Motorsport1.Data.Configurations
                 PolePositions = 2,
                 Podiums = 10,
                 TotalPoints = 376,
+                BestResult = 3,
+                BestResultCount = 1,
+                LastYearStanding = 4,
                 Number = 63,
                 TeamId = 2
             };
@@ -154,6 +172,9 @@ namespace Motorsport1.Data.Configurations
                 PolePositions = 19,
                 Podiums = 26,
                 TotalPoints = 942,
+                BestResult = 2,
+                BestResultCount = 1,
+                LastYearStanding = 2,
                 Number = 16,
                 TeamId = 4
             };
@@ -173,6 +194,9 @@ namespace Motorsport1.Data.Configurations
                 PolePositions = 1,
                 Podiums = 3,
                 TotalPoints = 238,
+                BestResult = 4,
+                BestResultCount = 1,
+                LastYearStanding = 15,
                 Number = 18,
                 TeamId = 3
             };
@@ -192,6 +216,9 @@ namespace Motorsport1.Data.Configurations
                 PolePositions = 1,
                 Podiums = 7,
                 TotalPoints = 470,
+                BestResult = 2,
+                BestResultCount = 1,
+                LastYearStanding = 7,
                 Number = 4,
                 TeamId = 5
             };
@@ -211,6 +238,9 @@ namespace Motorsport1.Data.Configurations
                 PolePositions = 0,
                 Podiums = 3,
                 TotalPoints = 395,
+                BestResult = 3,
+                BestResultCount = 1,
+                LastYearStanding = 8,
                 Number = 31,
                 TeamId = 6
             };
@@ -230,6 +260,9 @@ namespace Motorsport1.Data.Configurations
                 PolePositions = 0,
                 Podiums = 0,
                 TotalPoints = 17,
+                BestResult = 4,
+                BestResultCount = 1,
+                LastYearStanding = null,
                 Number = 81,
                 TeamId = 5
             };
@@ -249,6 +282,9 @@ namespace Motorsport1.Data.Configurations
                 PolePositions = 0,
                 Podiums = 3,
                 TotalPoints = 348,
+                BestResult = 7,
+                BestResultCount = 1,
+                LastYearStanding = 14,
                 Number = 10,
                 TeamId = 6
             };
@@ -268,6 +304,9 @@ namespace Motorsport1.Data.Configurations
                 PolePositions = 0,
                 Podiums = 2,
                 TotalPoints = 212,
+                BestResult = 7,
+                BestResultCount = 1,
+                LastYearStanding = 19,
                 Number = 23,
                 TeamId = 7
             };
@@ -287,6 +326,9 @@ namespace Motorsport1.Data.Configurations
                 PolePositions = 1,
                 Podiums = 0,
                 TotalPoints = 530,
+                BestResult = 7,
+                BestResultCount = 1,
+                LastYearStanding = 22,
                 Number = 27,
                 TeamId = 8
             };
@@ -306,6 +348,9 @@ namespace Motorsport1.Data.Configurations
                 PolePositions = 20,
                 Podiums = 67,
                 TotalPoints = 1792,
+                BestResult = 8,
+                BestResultCount = 1,
+                LastYearStanding = 10,
                 Number = 77,
                 TeamId = 9
             };
@@ -325,6 +370,9 @@ namespace Motorsport1.Data.Configurations
                 PolePositions = 0,
                 Podiums = 0,
                 TotalPoints = 10,
+                BestResult = 9,
+                BestResultCount = 2,
+                LastYearStanding = 18,
                 Number = 24,
                 TeamId = 9
             };
@@ -344,6 +392,9 @@ namespace Motorsport1.Data.Configurations
                 PolePositions = 0,
                 Podiums = 0,
                 TotalPoints = 46,
+                BestResult = 10,
+                BestResultCount = 2,
+                LastYearStanding = 17,
                 Number = 22,
                 TeamId = 10
             };
@@ -363,6 +414,9 @@ namespace Motorsport1.Data.Configurations
                 PolePositions = 0,
                 Podiums = 1,
                 TotalPoints = 185,
+                BestResult = 10,
+                BestResultCount = 2,
+                LastYearStanding = 13,
                 Number = 20,
                 TeamId = 8
             };
@@ -382,6 +436,9 @@ namespace Motorsport1.Data.Configurations
                 PolePositions = 0,
                 Podiums = 0,
                 TotalPoints = 0,
+                BestResult = 11,
+                BestResultCount = 1,
+                LastYearStanding = null,
                 Number = 2,
                 TeamId = 7
             };
@@ -401,6 +458,9 @@ namespace Motorsport1.Data.Configurations
                 PolePositions = 0,
                 Podiums = 0,
                 TotalPoints = 2,
+                BestResult = 12,
+                BestResultCount = 1,
+                LastYearStanding = 21,
                 Number = 21,
                 TeamId = 10
             };

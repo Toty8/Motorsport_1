@@ -1,0 +1,21 @@
+﻿@model IEnumerable<AllArticleViewModel>
+@{
+    ViewData["Title"] = "My Articles";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+@if(!Model.Any())
+{
+    <h2 class="text-center">You do not have any articles yet!</h2>
+}
+else
+{
+    <div class="row">
+        @foreach(AllArticleViewModel article in Model)
+        {
+            <partial name="_ArticlePartial" model="article"/>
+        }
+    </div>
+}

@@ -1,0 +1,14 @@
+﻿@model AddAndEditOldDriverViewModel;
+@{
+    ViewData["Title"] = "Add driver who has already raced in F1";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+<partial name="_OldDriverFormPartial" model="@Model">
+
+    @section Scripts
+        {
+        <partial name="_ValidationScriptsPartial" />
+    }

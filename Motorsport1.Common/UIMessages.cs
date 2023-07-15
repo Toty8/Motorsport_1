@@ -11,6 +11,7 @@
             public const string UnexistingArticle = "Article with the provided id does not exist!";
 
             public const string UnexistingDriver = "Driver with the provided id does not exist!";
+            public const string DriverAreEnough = "There are already enough drivers!";
         }
 
         public static class WarningMessages { }
@@ -18,6 +19,7 @@
         public static class InformationMessages 
         {
             public const string InformationDeletedArticle = "Your article was successfully deleted!";
+            public const string InformationDeletedDriver = "You succesfully unactivated a driver!";
         }
 
         public static class SuccessMessages

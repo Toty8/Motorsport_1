@@ -1,11 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Motorsport1.Data;
-using Motorsport1.Data.Models;
-using Motorsport1.Web.ViewModels.Driver;
-using Mototsport1.Services.Data.Interfaces;
-
-namespace Mototsport1.Services.Data
+﻿namespace Mototsport1.Services.Data
 {
+
+    using Microsoft.EntityFrameworkCore;
+
+    using Motorsport1.Data;
+    using Motorsport1.Data.Models;
+    using Motorsport1.Web.ViewModels.Driver;
+    using Mototsport1.Services.Data.Interfaces;
+    using static Motorsport1.Common.GeneralApplicationConstants;
+
     public class DriverService : IDriverService
     {
         private readonly Motorsport1DbContext dbContext;
@@ -18,7 +21,7 @@ namespace Mototsport1.Services.Data
         public async Task<IEnumerable<AllDriverViewModel>> AllAsync()
         {
             ICollection<AllDriverViewModel> drivers = await this.dbContext.Drivers
-                .Where(d => d.TeamId != null)
+                .Where(d => d.TeamId != null && d.Team!.Drivers.Count == MaxDriversPerTeam)
                 .OrderBy(d => d.Team!.LastYearStanding)
                 .ThenBy(d => d.LastYearStanding == null)
                 .Select(d => new AllDriverViewModel
@@ -32,6 +35,18 @@ namespace Mototsport1.Services.Data
                 .ToArrayAsync();
 
             return drivers;
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            Driver driver = await this.dbContext.Drivers
+                .Where(d => d.Team != null)
+                .FirstAsync(d => d.Id == id);
+
+            driver.TeamId = null;
+            driver.Team = null;
+
+            await this.dbContext.SaveChangesAsync();
         }
 
         public async Task<bool> ExistByIdAsync(int id)
@@ -64,6 +79,28 @@ namespace Mototsport1.Services.Data
                 TotalPoints = model.TotalPoints,
                 TeamName = model.Team!.Name
             };
+        }
+
+        public async Task<DriverPreDeleteViewModel> GetDriverForDeleteById(int id)
+        {
+            Driver driver = await this.dbContext.Drivers
+                .Where (d => d.Team != null)
+                .FirstAsync(d => d.Id == id);
+
+            return new DriverPreDeleteViewModel
+            {
+                Name = driver.Name,
+                ImageUrl = driver.ImageUrl,
+            };
+        }
+
+        public async Task<bool> IsGridOfDriversFull()
+        {
+            int driversCount = await this.dbContext.Drivers
+                .Where(d => d.Team != null)
+                .CountAsync();
+
+            return driversCount == MaxDrivers;
         }
     }
 }

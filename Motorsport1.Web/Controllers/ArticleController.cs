@@ -74,6 +74,8 @@
             {
                 int articleId = await articleService.AddArticleAsync(model, GetUserId());
 
+                this.TempData[SuccessMessage] = SuccessMessages.SuccessfullyAddedArticle;
+
                 return RedirectToAction(nameof(Details), new { articleId });
             }
             catch (Exception e)
@@ -83,8 +85,6 @@
 
                 return this.View(model);
             }
-
-            this.TempData[SuccessMessage] = SuccessMessages.SuccessfullyAddedArticle;
         }
 
         public async Task<IActionResult> Mine()

@@ -6,5 +6,10 @@
 
         public const int DefaulPage = 1;
         public const int EntitiesPerPage = 3;
+
+        public const int MaxDrivers = 20;
+
+        public const int MaxTeams = 20;
+        public const int MaxDriversPerTeam = 2;
     }
 }

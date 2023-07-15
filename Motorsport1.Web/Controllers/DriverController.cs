@@ -9,6 +9,7 @@
     using static Motorsport1.Common.UIMessages;
     using static Motorsport1.Common.NotificationMessageConstants;
     using static Humanizer.In;
+    using Mototsport1.Services.Data;
 
     public class DriverController : BaseController
     {
@@ -57,8 +58,6 @@
 
         [HttpGet]
         public async Task<IActionResult> AddOld()
-
-
         {
             bool isGridOfDriversFull = await this.driverService.IsGridOfDriversFull();
 
@@ -81,6 +80,58 @@
                 return this.GeneralError();
             }
 
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddOld(AddAndEditOldDriverViewModel model)
+        {
+            bool isGridOfDriversFull = await this.driverService.IsGridOfDriversFull();
+
+            if (isGridOfDriversFull)
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.DriverAreEnough;
+
+                return this.RedirectToAction(nameof(All));
+            }
+
+            bool teamExist = await this.teamService.ExistByIdAsync(model.TeamId);
+
+            if (!teamExist)
+            {
+                this.ModelState.AddModelError(nameof(model.TeamId), ErrorMessages.InvalidTeam);
+            }
+
+            bool isThereAFreeSeat = await this.teamService.DoesTeamHaveFreeSeat(model.TeamId);
+
+            if (!isThereAFreeSeat)
+            {
+                this.ModelState.AddModelError(nameof(model.TeamId), ErrorMessages.FullTeam);
+            }
+
+            if (!this.ModelState.IsValid)
+            {
+                model.Teams = await this.teamService.AllTeamsAvailableAsync();
+
+                this.ModelState.AddModelError(string.Empty, ErrorMessages.InvalidModelState);
+
+                return this.View(model);
+            }
+
+            try
+            {
+                await this.driverService.AddOldAsync(model);
+
+                this.TempData[SuccessMessage] = SuccessMessages.SuccessfullyAddedDriver;
+
+                return RedirectToAction(nameof(All));
+            }
+            catch (Exception e)
+            {
+                this.ModelState.AddModelError(string.Empty, ErrorMessages.UnexpectedError);
+                model.Teams = await this.teamService.AllTeamsAvailableAsync();
+
+                return this.View(model);
+            }
         }
 
         [HttpGet]

@@ -5,6 +5,7 @@
         public static class ErrorMessages
         {
             public const string InvalidCategory = "Selected category is invalid!";
+
             public const string InvalidModelState = "Please enter valid data!";
             public const string UnexpectedError = "Unexpected error occured! Please try again or contact administrator!";
 
@@ -12,6 +13,10 @@
 
             public const string UnexistingDriver = "Driver with the provided id does not exist!";
             public const string DriverAreEnough = "There are already enough drivers!";
+
+            public const string InvalidTeam = "Selected team is invalid!";
+            public const string FullTeam = "Selected team is already have enough drivers!";
+
         }
 
         public static class WarningMessages { }
@@ -26,6 +31,9 @@
         { 
             public const string SuccessfullyAddedArticle = "Your article is successfully published!"; 
             public const string SuccessfullyEditedArticle = "Your article is successfully edited!";
+
+            public const string SuccessfullyAddedDriver = "Your driver is successfully added!";
+
         }
     }
 }

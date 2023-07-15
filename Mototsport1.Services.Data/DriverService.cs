@@ -18,6 +18,18 @@
             this.dbContext = dbContext;
         }
 
+        public async Task AddOldAsync(AddAndEditOldDriverViewModel model)
+        {
+            Driver driver = await this.dbContext.Drivers
+                .FirstAsync(d => d.Name == model.Name);
+
+            driver.ImageUrl = model.ImageUrl;
+
+            driver.TeamId = model.TeamId;
+
+            await this.dbContext.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<AllDriverViewModel>> AllAsync()
         {
             ICollection<AllDriverViewModel> drivers = await this.dbContext.Drivers
@@ -40,7 +52,7 @@
         public async Task DeleteAsync(int id)
         {
             Driver driver = await this.dbContext.Drivers
-                .Where(d => d.Team != null)
+                .Where(d => d.TeamId != null)
                 .FirstAsync(d => d.Id == id);
 
             driver.TeamId = null;
@@ -52,7 +64,7 @@
         public async Task<bool> ExistByIdAsync(int id)
         {
             return await this.dbContext.Drivers
-                .Where(d => d.Team != null)
+                .Where(d => d.TeamId != null)
                 .AnyAsync(d => d.Id == id);
         }
 
@@ -61,7 +73,7 @@
             Driver model =
                 await this.dbContext.Drivers
                 .Include(d => d.Team)
-                .Where(d => d.Team != null)
+                .Where(d => d.TeamId != null)
                 .FirstAsync(d => d.Id == id);
 
             return new DriverDetailsViewModel
@@ -84,7 +96,7 @@
         public async Task<DriverPreDeleteViewModel> GetDriverForDeleteById(int id)
         {
             Driver driver = await this.dbContext.Drivers
-                .Where (d => d.Team != null)
+                .Where (d => d.TeamId != null)
                 .FirstAsync(d => d.Id == id);
 
             return new DriverPreDeleteViewModel
@@ -97,7 +109,7 @@
         public async Task<bool> IsGridOfDriversFull()
         {
             int driversCount = await this.dbContext.Drivers
-                .Where(d => d.Team != null)
+                .Where(d => d.TeamId != null)
                 .CountAsync();
 
             return driversCount == MaxDrivers;

@@ -2,6 +2,7 @@
 {
     using Microsoft.EntityFrameworkCore;
     using Motorsport1.Data;
+    using Motorsport1.Data.Models;
     using Motorsport1.Web.ViewModels.Team;
     using Mototsport1.Services.Data.Interfaces;
     using static Motorsport1.Common.GeneralApplicationConstants;
@@ -27,6 +28,23 @@
                 .ToArrayAsync();
 
             return teams;
+        }
+
+        public async Task<bool> DoesTeamHaveFreeSeat(int id)
+        {
+            int driversCount = await this.dbContext.Teams
+                .Where(t => t.Id == id)
+                .Select(t => t.Drivers)
+                .CountAsync();
+
+            return driversCount < MaxDriversPerTeam;
+        }
+
+        public async Task<bool> ExistByIdAsync(int id)
+        {
+            bool result = await this.dbContext.Teams.AnyAsync(c => c.Id == id);
+
+            return result;
         }
     }
 }

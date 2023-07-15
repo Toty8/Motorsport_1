@@ -15,5 +15,7 @@ namespace Mototsport1.Services.Data.Interfaces
         public Task<DriverPreDeleteViewModel> GetDriverForDeleteById(int id);
 
         public Task DeleteAsync(int id);
+
+        public Task AddOldAsync(AddAndEditOldDriverViewModel model);
     }
 }

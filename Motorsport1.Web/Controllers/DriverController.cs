@@ -69,7 +69,7 @@
             }
             try
             {
-                AddAndEditOldDriverViewModel model = new AddAndEditOldDriverViewModel();
+                AddOldDriverViewModel model = new AddOldDriverViewModel();
 
                 model.Teams = await this.teamService.AllTeamsAvailableAsync();
 
@@ -83,7 +83,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddOld(AddAndEditOldDriverViewModel model)
+        public async Task<IActionResult> AddOld(AddOldDriverViewModel model)
         {
             bool isGridOfDriversFull = await this.driverService.IsGridOfDriversFull();
 
@@ -92,6 +92,17 @@
                 this.TempData[ErrorMessage] = ErrorMessages.DriverAreEnough;
 
                 return this.RedirectToAction(nameof(All));
+            }
+
+            bool driverExist = await this.driverService.ExistByNameAsync(model.Name);
+
+            if (!driverExist)
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.UnexistingDriverByName;
+
+                model.Teams = await this.teamService.AllTeamsAvailableAsync();
+
+                return this.View(model);
             }
 
             bool teamExist = await this.teamService.ExistByIdAsync(model.TeamId);
@@ -112,7 +123,7 @@
             {
                 model.Teams = await this.teamService.AllTeamsAvailableAsync();
 
-                this.ModelState.AddModelError(string.Empty, ErrorMessages.InvalidModelState);
+                this.TempData[ErrorMessage] = ErrorMessages.InvalidModelState;
 
                 return this.View(model);
             }
@@ -132,6 +143,183 @@
 
                 return this.View(model);
             }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddNew()
+        {
+            bool isGridOfDriversFull = await this.driverService.IsGridOfDriversFull();
+
+            if (isGridOfDriversFull)
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.DriverAreEnough;
+
+                return this.RedirectToAction(nameof(All));
+            }
+            try
+            {
+                AddNewDriverViewModel model = new AddNewDriverViewModel();
+
+                model.Teams = await this.teamService.AllTeamsAvailableAsync();
+
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                return this.GeneralError();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddNew(AddNewDriverViewModel model)
+        {
+            bool isGridOfDriversFull = await this.driverService.IsGridOfDriversFull();
+
+            if (isGridOfDriversFull)
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.DriverAreEnough;
+
+                return this.RedirectToAction(nameof(All));
+            }
+
+            bool driverExist = await this.driverService.ExistByNameAsync(model.Name);
+
+            if (driverExist)
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.ExistingDriverByName;
+
+                model.Teams = await this.teamService.AllTeamsAvailableAsync();
+
+                return this.View(model);
+            }
+
+            bool driverNumberTaken = await this.driverService.IsThisNumberTaken(model.Number);
+
+            if (driverNumberTaken)
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.DriverNumberTaken;
+
+                model.Teams = await this.teamService.AllTeamsAvailableAsync();
+
+                return this.View(model);
+            }
+
+            bool teamExist = await this.teamService.ExistByIdAsync(model.TeamId);
+
+            if (!teamExist)
+            {
+                this.ModelState.AddModelError(nameof(model.TeamId), ErrorMessages.InvalidTeam);
+            }
+
+            bool isThereAFreeSeat = await this.teamService.DoesTeamHaveFreeSeat(model.TeamId);
+
+            if (!isThereAFreeSeat)
+            {
+                this.ModelState.AddModelError(nameof(model.TeamId), ErrorMessages.FullTeam);
+            }
+
+            if (!this.ModelState.IsValid)
+            {
+                model.Teams = await this.teamService.AllTeamsAvailableAsync();
+
+                this.TempData[ErrorMessage] = ErrorMessages.InvalidModelState;
+
+                return this.View(model);
+            }
+
+            try
+            {
+                await this.driverService.AddNewAsync(model);
+
+                this.TempData[SuccessMessage] = SuccessMessages.SuccessfullyAddedDriver;
+
+                return RedirectToAction(nameof(All));
+            }
+            catch (Exception e)
+            {
+                this.ModelState.AddModelError(string.Empty, ErrorMessages.UnexpectedError);
+
+                return this.View(model);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            bool exist = await this.driverService.ExistByIdAsync(id);
+
+            if (exist == false)
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.UnexistingDriver;
+
+                return this.RedirectToAction(nameof(All));
+            }
+            try
+            {
+                var teamId = await this.driverService.GetTeamIdByDriverId(id);
+
+                var model = await this.driverService.GetDriverForEditById(id, teamId);
+
+                model.Teams = await this.teamService.AllTeamsAvailableAndDriversTeamAsync(teamId);
+
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                return this.GeneralError();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditDriverViewModel model, int id)
+        {
+            var currentDriverNumber = await this.driverService.GetNumberByIdAsync(id);
+
+            bool driverNumberTaken = await this.driverService.IsThisNumberTaken(model.Number);
+
+            if (driverNumberTaken && model.Number != currentDriverNumber)
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.DriverNumberTaken;
+
+                var teamId = await this.driverService.GetTeamIdByDriverId(id);
+
+                model.Teams = await this.teamService.AllTeamsAvailableAndDriversTeamAsync(teamId);
+
+                return this.View(model);
+            }
+
+            bool teamExist = await this.teamService.ExistByIdAsync(model.TeamId);
+
+            if (!teamExist)
+            {
+                this.ModelState.AddModelError(nameof(model.TeamId), ErrorMessages.InvalidTeam);
+            }
+
+            if (!this.ModelState.IsValid)
+            {
+
+                var teamId = await this.driverService.GetTeamIdByDriverId(id);
+
+                model.Teams = await this.teamService.AllTeamsAvailableAndDriversTeamAsync(teamId);
+
+                this.TempData[ErrorMessage] = ErrorMessages.InvalidModelState;
+
+                return this.View(model);
+            }
+
+            try
+            {
+                await this.driverService.EditAsync(model, id);
+            }
+            catch (Exception e)
+            {
+                this.ModelState.AddModelError(string.Empty, ErrorMessages.UnexpectedError);
+
+                return this.View(model);
+            }
+            this.TempData[SuccessMessage] = SuccessMessages.SuccessfullyEditedDriver;
+
+            return RedirectToAction(nameof(Details), new { id });
         }
 
         [HttpGet]

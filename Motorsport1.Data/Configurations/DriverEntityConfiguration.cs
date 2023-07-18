@@ -17,6 +17,33 @@ namespace Motorsport1.Data.Configurations
             builder.Property(d => d.IsCurrentChampion)
                 .HasDefaultValue(false);
 
+            builder.Property(d => d.BestResult)
+                .HasDefaultValue(null);
+
+            builder.Property(d => d.BestResultCount)
+                .HasDefaultValue(null);
+
+            builder.Property(d => d.LastYearStanding)
+                .HasDefaultValue(null);
+
+            builder.Property(d => d.TotalPoints)
+                .HasDefaultValue(0);
+
+            builder.Property(d => d.Points)
+                .HasDefaultValue(0);
+
+            builder.Property(d => d.Wins)
+                .HasDefaultValue(0);
+
+            builder.Property(d => d.Podiums)
+                .HasDefaultValue(0);
+
+            builder.Property(d => d.PolePositions)
+                .HasDefaultValue(0);
+
+            builder.Property(d => d.Championships)
+                .HasDefaultValue(0);
+
             builder.HasData(this.GenerateDrivers());
         }
 

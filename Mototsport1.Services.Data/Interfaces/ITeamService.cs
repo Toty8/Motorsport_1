@@ -9,5 +9,7 @@ namespace Mototsport1.Services.Data.Interfaces
         public Task<bool> ExistByIdAsync(int id);
 
         public Task<bool> DoesTeamHaveFreeSeat(int id);
+
+        public Task<IEnumerable<TeamNamesViewModel>> AllTeamsAvailableAndDriversTeamAsync(int id);
     }
 }

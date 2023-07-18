@@ -1,4 +1,4 @@
-﻿@model AddOldDriverViewModel
+﻿@model AddNewDriverViewModel
 <div class="row">
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
         <form method="post">
@@ -11,6 +11,21 @@
                 <label asp-for="ImageUrl"></label>
                 <input asp-for="ImageUrl" class="form-control" placeholder="Image Link...">
                 <span asp-validation-for="ImageUrl" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BirthDate"></label>
+                <input asp-for="BirthDate" class="form-control" placeholder="Birth Date..." value="@DateTime.Now.ToString("dd-MM-yyyy")">
+                <span asp-validation-for="BirthDate" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Number"></label>
+                <input asp-for="Number" class="form-control" placeholder="Racing Number...">
+                <span asp-validation-for="Number" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price"></label>
+                <input asp-for="Price" class="form-control" placeholder="Draft price...">
+                <span asp-validation-for="Price" class="small text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="TeamId"></label>

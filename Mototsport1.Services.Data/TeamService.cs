@@ -16,6 +16,20 @@
             this.dbContext = dbContext;
         }
 
+        public async Task<IEnumerable<TeamNamesViewModel>> AllTeamsAvailableAndDriversTeamAsync(int id)
+        {
+            IEnumerable<TeamNamesViewModel> teams = await this.dbContext.Teams
+                 .Where(t => t.Drivers.Count < MaxDriversPerTeam || t.Id == id)
+                 .Select(t => new TeamNamesViewModel
+                 {
+                     Id = t.Id,
+                     Name = t.Name,
+                 })
+                 .ToArrayAsync();
+
+            return teams;
+        }
+
         public async Task<IEnumerable<TeamNamesViewModel>> AllTeamsAvailableAsync()
         {
             IEnumerable<TeamNamesViewModel> teams = await this.dbContext.Teams

@@ -18,7 +18,23 @@
             this.dbContext = dbContext;
         }
 
-        public async Task AddOldAsync(AddAndEditOldDriverViewModel model)
+        public async Task AddNewAsync(AddNewDriverViewModel model)
+        {
+            Driver driver = new Driver()
+            {
+                Name = model.Name,
+                ImageUrl = model.ImageUrl,
+                Number = model.Number,
+                TeamId = model.TeamId,
+                Price = model.Price,
+                BirthDate = DateTime.ParseExact(model.BirthDate, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture),
+            };
+
+            await this.dbContext.Drivers.AddAsync(driver);
+            await this.dbContext.SaveChangesAsync();
+        }
+
+        public async Task AddOldAsync(AddOldDriverViewModel model)
         {
             Driver driver = await this.dbContext.Drivers
                 .FirstAsync(d => d.Name == model.Name);
@@ -35,7 +51,8 @@
             ICollection<AllDriverViewModel> drivers = await this.dbContext.Drivers
                 .Where(d => d.TeamId != null && d.Team!.Drivers.Count == MaxDriversPerTeam)
                 .OrderBy(d => d.Team!.LastYearStanding)
-                .ThenBy(d => d.LastYearStanding == null)
+                .ThenByDescending(d => d.LastYearStanding.HasValue)
+                .ThenBy(d => d.LastYearStanding)
                 .Select(d => new AllDriverViewModel
                 {
                     Id = d.Id,
@@ -61,11 +78,30 @@
             await this.dbContext.SaveChangesAsync();
         }
 
+        public async Task EditAsync(EditDriverViewModel model, int id)
+        {
+            Driver driver = await this.dbContext.Drivers
+                .Where (d => d.TeamId != null)
+                .FirstAsync (d => d.Id == id);
+
+            driver.Number = model.Number;
+            driver.TeamId = model.TeamId;
+            driver.ImageUrl = model.ImageUrl;
+
+            await this.dbContext.SaveChangesAsync();
+        }
+
         public async Task<bool> ExistByIdAsync(int id)
         {
             return await this.dbContext.Drivers
                 .Where(d => d.TeamId != null)
                 .AnyAsync(d => d.Id == id);
+        }
+
+        public async Task<bool> ExistByNameAsync(string name)
+        {
+            return await this.dbContext.Drivers
+                .AnyAsync(d => d.Name == name);
         }
 
         public async Task<DriverDetailsViewModel> GetDetailsByIdAsync(int id)
@@ -96,7 +132,7 @@
         public async Task<DriverPreDeleteViewModel> GetDriverForDeleteById(int id)
         {
             Driver driver = await this.dbContext.Drivers
-                .Where (d => d.TeamId != null)
+                .Where(d => d.TeamId != null)
                 .FirstAsync(d => d.Id == id);
 
             return new DriverPreDeleteViewModel
@@ -106,6 +142,36 @@
             };
         }
 
+        public async Task<EditDriverViewModel> GetDriverForEditById(int id, int teamId)
+        {
+            EditDriverViewModel model = await this.dbContext.Drivers
+                .Where(d => d.TeamId != null && d.Id == id)
+                .Select(d => new EditDriverViewModel
+                {
+                    Number = d.Number,
+                    ImageUrl = d.ImageUrl,
+                    TeamId = teamId
+                }).FirstAsync();
+
+            return model;
+        }
+
+        public async Task<int> GetNumberByIdAsync(int driverId)
+        {
+            return await this.dbContext.Drivers
+                .Where(d => d.TeamId != null && driverId == d.Id)
+                .Select(d => d.Number)
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<int> GetTeamIdByDriverId(int id)
+        {
+            return await this.dbContext.Drivers
+                .Where(d => d.Id == id)
+                .Select(d => d.Team!.Id)
+                .FirstAsync();
+        }
+
         public async Task<bool> IsGridOfDriversFull()
         {
             int driversCount = await this.dbContext.Drivers
@@ -113,6 +179,12 @@
                 .CountAsync();
 
             return driversCount == MaxDrivers;
+        }
+
+        public async Task<bool> IsThisNumberTaken(int number)
+        {
+            return await this.dbContext.Drivers
+                .AnyAsync(d => d.Number == number);
         }
     }
 }

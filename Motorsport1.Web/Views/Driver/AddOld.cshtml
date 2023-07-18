@@ -1,10 +1,14 @@
-﻿@model AddAndEditOldDriverViewModel;
+﻿@model AddOldDriverViewModel;
 @{
     ViewData["Title"] = "Add driver who has already raced in F1";
 }
 
 <h2 class="text-center">@ViewData["Title"]</h2>
 <hr />
+
+<div class="text-center">
+    <a class="btn btn-warning" asp-controller="Driver" asp-action="AddNew">Add new driver!</a>
+</div>
 
 <partial name="_OldDriverFormPartial" model="@Model">
 

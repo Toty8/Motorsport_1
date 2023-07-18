@@ -12,7 +12,10 @@
             public const string UnexistingArticle = "Article with the provided id does not exist!";
 
             public const string UnexistingDriver = "Driver with the provided id does not exist!";
+            public const string UnexistingDriverByName = "Driver with the provided name does not exist!";
+            public const string ExistingDriverByName = "Driver with the provided name already exist!";
             public const string DriverAreEnough = "There are already enough drivers!";
+            public const string DriverNumberTaken = "This racing number is already taken!";
 
             public const string InvalidTeam = "Selected team is invalid!";
             public const string FullTeam = "Selected team is already have enough drivers!";
@@ -33,6 +36,7 @@
             public const string SuccessfullyEditedArticle = "Your article is successfully edited!";
 
             public const string SuccessfullyAddedDriver = "Your driver is successfully added!";
+            public const string SuccessfullyEditedDriver = "Your driver is successfully edited!";
 
         }
     }

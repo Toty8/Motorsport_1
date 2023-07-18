@@ -16,6 +16,20 @@ namespace Mototsport1.Services.Data.Interfaces
 
         public Task DeleteAsync(int id);
 
-        public Task AddOldAsync(AddAndEditOldDriverViewModel model);
+        public Task AddOldAsync(AddOldDriverViewModel model);
+
+        public Task<bool> ExistByNameAsync(string name);
+
+        public Task AddNewAsync(AddNewDriverViewModel model);
+
+        public Task<bool> IsThisNumberTaken(int number);
+
+        public Task<EditDriverViewModel> GetDriverForEditById(int id, int teamId);
+
+        public Task<int> GetTeamIdByDriverId(int id);
+
+        public Task EditAsync(EditDriverViewModel model, int id);
+
+        public Task<int> GetNumberByIdAsync(int driverId);
     }
 }

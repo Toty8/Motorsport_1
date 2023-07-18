@@ -3,13 +3,10 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    using Motorsport1.Web.ViewModels.Article;
     using Motorsport1.Web.ViewModels.Driver;
     using Mototsport1.Services.Data.Interfaces;
     using static Motorsport1.Common.UIMessages;
     using static Motorsport1.Common.NotificationMessageConstants;
-    using static Humanizer.In;
-    using Mototsport1.Services.Data;
 
     public class DriverController : BaseController
     {

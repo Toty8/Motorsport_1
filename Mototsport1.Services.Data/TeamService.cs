@@ -16,6 +16,24 @@
             this.dbContext = dbContext;
         }
 
+        public async Task<IEnumerable<AllTeamsViewModel>> AllAsync()
+        {
+            ICollection<AllTeamsViewModel> teams = await this.dbContext.Teams
+                .Where(t => t.Drivers.Count == MaxDriversPerTeam)
+                .OrderByDescending(t => t.LastYearStanding.HasValue)
+                .ThenBy(t => t.LastYearStanding)
+                .Select(t => new AllTeamsViewModel
+                {
+                    Id = t.Id,
+                    Name = t.Name,
+                    ImageUrl = t.ImageUrl,
+                    Drivers = t.Drivers.Select(d => d.Name).ToList(),
+                })
+                .ToListAsync();
+
+            return teams;
+        }
+
         public async Task<IEnumerable<TeamNamesViewModel>> AllTeamsAvailableAndDriversTeamAsync(int id)
         {
             IEnumerable<TeamNamesViewModel> teams = await this.dbContext.Teams

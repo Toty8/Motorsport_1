@@ -56,9 +56,9 @@
         [HttpGet]
         public async Task<IActionResult> AddOld()
         {
-            bool isGridOfDriversFull = await this.driverService.IsGridOfDriversFull();
+            bool isGridOfTeamsFull = await this.teamService.IsGridOfTeamsFull();
 
-            if (isGridOfDriversFull)
+            if (isGridOfTeamsFull)
             {
                 this.TempData[ErrorMessage] = ErrorMessages.DriverAreEnough;
 
@@ -82,9 +82,9 @@
         [HttpPost]
         public async Task<IActionResult> AddOld(AddOldDriverViewModel model)
         {
-            bool isGridOfDriversFull = await this.driverService.IsGridOfDriversFull();
+            bool isGridOfTeamsFull = await this.teamService.IsGridOfTeamsFull();
 
-            if (isGridOfDriversFull)
+            if (isGridOfTeamsFull)
             {
                 this.TempData[ErrorMessage] = ErrorMessages.DriverAreEnough;
 
@@ -145,9 +145,9 @@
         [HttpGet]
         public async Task<IActionResult> AddNew()
         {
-            bool isGridOfDriversFull = await this.driverService.IsGridOfDriversFull();
+            bool isGridOfTeamsFull = await this.teamService.IsGridOfTeamsFull();
 
-            if (isGridOfDriversFull)
+            if (isGridOfTeamsFull)
             {
                 this.TempData[ErrorMessage] = ErrorMessages.DriverAreEnough;
 
@@ -170,9 +170,9 @@
         [HttpPost]
         public async Task<IActionResult> AddNew(AddNewDriverViewModel model)
         {
-            bool isGridOfDriversFull = await this.driverService.IsGridOfDriversFull();
+            bool isGridOfTeamsFull = await this.teamService.IsGridOfTeamsFull();
 
-            if (isGridOfDriversFull)
+            if (isGridOfTeamsFull)
             {
                 this.TempData[ErrorMessage] = ErrorMessages.DriverAreEnough;
 
@@ -195,6 +195,15 @@
             if (driverNumberTaken)
             {
                 this.TempData[ErrorMessage] = ErrorMessages.DriverNumberTaken;
+
+                model.Teams = await this.teamService.AllTeamsAvailableAsync();
+
+                return this.View(model);
+            }
+
+            if (model.Number == 1)
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.DriverIsnotCurrentChampion;
 
                 model.Teams = await this.teamService.AllTeamsAvailableAsync();
 
@@ -285,6 +294,19 @@
                 return this.View(model);
             }
 
+            bool isDriverCurrentChamion = await this.driverService.IsDriverCurrentChampion(id);
+
+            if (isDriverCurrentChamion != true && model.Number == 1)
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.DriverIsnotCurrentChampion;
+
+                var teamId = await this.driverService.GetTeamIdByDriverId(id);
+
+                model.Teams = await this.teamService.AllTeamsAvailableAndDriversTeamAsync(teamId);
+
+                return this.View(model);
+            }
+
             bool teamExist = await this.teamService.ExistByIdAsync(model.TeamId);
 
             if (!teamExist)
@@ -366,7 +388,7 @@
                 return this.View(model);
             }
 
-            this.TempData[WarningMessage] = InformationMessages.InformationDeletedDriver;
+            this.TempData[WarningMessage] = InformationMessages.InformationUnactivatedDriver;
 
             return RedirectToAction(nameof(All));
         }

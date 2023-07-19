@@ -10,8 +10,6 @@ namespace Mototsport1.Services.Data.Interfaces
 
         public Task<DriverDetailsViewModel> GetDetailsByIdAsync(int id);
 
-        public Task<bool> IsGridOfDriversFull();
-
         public Task<DriverPreDeleteViewModel> GetDriverForDeleteById(int id);
 
         public Task DeleteAsync(int id);
@@ -31,5 +29,7 @@ namespace Mototsport1.Services.Data.Interfaces
         public Task EditAsync(EditDriverViewModel model, int id);
 
         public Task<int> GetNumberByIdAsync(int driverId);
+
+        public Task<bool> IsDriverCurrentChampion(int id);
     }
 }

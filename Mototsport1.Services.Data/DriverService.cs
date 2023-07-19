@@ -50,7 +50,8 @@
         {
             ICollection<AllDriverViewModel> drivers = await this.dbContext.Drivers
                 .Where(d => d.TeamId != null && d.Team!.Drivers.Count == MaxDriversPerTeam)
-                .OrderBy(d => d.Team!.LastYearStanding)
+                .OrderByDescending(d => d.Team!.LastYearStanding.HasValue)
+                .ThenBy(d => d.Team!.LastYearStanding)
                 .ThenByDescending(d => d.LastYearStanding.HasValue)
                 .ThenBy(d => d.LastYearStanding)
                 .Select(d => new AllDriverViewModel
@@ -172,13 +173,14 @@
                 .FirstAsync();
         }
 
-        public async Task<bool> IsGridOfDriversFull()
+        public async Task<bool> IsDriverCurrentChampion(int id)
         {
-            int driversCount = await this.dbContext.Drivers
-                .Where(d => d.TeamId != null)
-                .CountAsync();
+            bool isChamopion = await this.dbContext.Drivers
+                .Where(d => d.TeamId != null && d.Id == id)
+                .Select(d => d.IsCurrentChampion)
+                .FirstOrDefaultAsync();
 
-            return driversCount == MaxDrivers;
+            return isChamopion;
         }
 
         public async Task<bool> IsThisNumberTaken(int number)

@@ -36,6 +36,12 @@
 
         public double TotalPoints { get; set; }
 
+        public int? BestResult { get; set; }
+
+        public int? BestResultCount { get; set; }
+
+        public int? LastYearStanding { get; set; }
+
         public virtual ICollection<Driver> Drivers { get; set; }
 
         public virtual ICollection<ApplicationUser> DraftUsers { get; set; }

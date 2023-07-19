@@ -8,6 +8,33 @@ namespace Motorsport1.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Team> builder)
         {
+            builder.Property(d => d.BestResult)
+                .HasDefaultValue(null);
+
+            builder.Property(d => d.BestResultCount)
+                .HasDefaultValue(null);
+
+            builder.Property(d => d.LastYearStanding)
+                .HasDefaultValue(null);
+
+            builder.Property(d => d.TotalPoints)
+                .HasDefaultValue(0);
+
+            builder.Property(d => d.Points)
+                .HasDefaultValue(0);
+
+            builder.Property(d => d.Wins)
+                .HasDefaultValue(0);
+
+            builder.Property(d => d.Podiums)
+                .HasDefaultValue(0);
+
+            builder.Property(d => d.PolePositions)
+                .HasDefaultValue(0);
+
+            builder.Property(d => d.Championships)
+                .HasDefaultValue(0);
+
             builder.HasData(this.GenerateTeams());
         }
 
@@ -28,7 +55,10 @@ namespace Motorsport1.Data.Configurations
                 Wins = 102,
                 PolePositions = 91,
                 Podiums = 249,
-                TotalPoints = 6799
+                TotalPoints = 6799,
+                BestResult = 1,
+                BestResultCount = 10,
+                LastYearStanding = 1,
             };
 
             teams.Add(team);
@@ -45,7 +75,10 @@ namespace Motorsport1.Data.Configurations
                 Wins = 116,
                 PolePositions = 128,
                 Podiums = 286,
-                TotalPoints = 7155.64
+                TotalPoints = 7155.64,
+                BestResult = 2,
+                BestResultCount = 2,
+                LastYearStanding = 3,
             };
 
             teams.Add(team);
@@ -62,7 +95,10 @@ namespace Motorsport1.Data.Configurations
                 Wins = 0,
                 PolePositions = 0,
                 Podiums = 7,
-                TotalPoints = 313
+                TotalPoints = 313,
+                BestResult = 2,
+                BestResultCount = 2,
+                LastYearStanding = 7,
             };
 
             teams.Add(team);
@@ -78,7 +114,10 @@ namespace Motorsport1.Data.Configurations
                 Wins = 243,
                 PolePositions = 244,
                 Podiums = 811,
-                TotalPoints = 10315.77
+                TotalPoints = 10315.77,
+                BestResult = 2,
+                BestResultCount = 1,
+                LastYearStanding = 2,
             };
 
             teams.Add(team);
@@ -94,7 +133,10 @@ namespace Motorsport1.Data.Configurations
                 Wins = 183,
                 PolePositions = 156,
                 Podiums = 495,
-                TotalPoints = 6366.5
+                TotalPoints = 6366.5,
+                BestResult = 2,
+                BestResultCount = 1,
+                LastYearStanding = 5,
             };
 
             teams.Add(team);
@@ -110,7 +152,10 @@ namespace Motorsport1.Data.Configurations
                 Wins = 1,
                 PolePositions = 0,
                 Podiums = 3,
-                TotalPoints = 375
+                TotalPoints = 375,
+                BestResult = 3,
+                BestResultCount = 1,
+                LastYearStanding = 4,
             };
 
             teams.Add(team);
@@ -126,7 +171,10 @@ namespace Motorsport1.Data.Configurations
                 Wins = 114,
                 PolePositions = 128,
                 Podiums = 313,
-                TotalPoints = 3609
+                TotalPoints = 3609,
+                BestResult = 7,
+                BestResultCount = 1,
+                LastYearStanding = 10,
             };
 
             teams.Add(team);
@@ -142,7 +190,10 @@ namespace Motorsport1.Data.Configurations
                 Wins = 0,
                 PolePositions = 0,
                 Podiums = 0,
-                TotalPoints = 248
+                TotalPoints = 248,
+                BestResult = 7,
+                BestResultCount = 1,
+                LastYearStanding = 8,
             };
 
             teams.Add(team);
@@ -158,7 +209,10 @@ namespace Motorsport1.Data.Configurations
                 Wins = 11,
                 PolePositions = 12,
                 Podiums = 28,
-                TotalPoints = 356
+                TotalPoints = 356,
+                BestResult = 8,
+                BestResultCount = 1,
+                LastYearStanding = 6,
             };
 
             teams.Add(team);
@@ -174,7 +228,10 @@ namespace Motorsport1.Data.Configurations
                 Wins = 1,
                 PolePositions = 0,
                 Podiums = 2,
-                TotalPoints = 286
+                TotalPoints = 286,
+                BestResult = 10,
+                BestResultCount = 2,
+                LastYearStanding = 9,
             };
 
             teams.Add(team);

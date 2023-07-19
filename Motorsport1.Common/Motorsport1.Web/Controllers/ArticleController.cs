@@ -65,7 +65,7 @@
             {
                 model.Categories = await this.categoryService.AllCategoriesAsync();
 
-                this.ModelState.AddModelError(string.Empty, ErrorMessages.InvalidModelState);
+                this.TempData[ErrorMessage] = ErrorMessages.InvalidModelState;
 
                 return this.View(model);
             }
@@ -74,17 +74,16 @@
             {
                 int articleId = await articleService.AddArticleAsync(model, GetUserId());
 
+                this.TempData[SuccessMessage] = SuccessMessages.SuccessfullyAddedArticle;
+
                 return RedirectToAction(nameof(Details), new { articleId });
             }
             catch (Exception e)
             {
                 this.ModelState.AddModelError(string.Empty, ErrorMessages.UnexpectedError);
-                model.Categories = await this.categoryService.AllCategoriesAsync();
 
                 return this.View(model);
             }
-
-            this.TempData[SuccessMessage] = SuccessMessages.SuccessfullyAddedArticle;
         }
 
         public async Task<IActionResult> Mine()
@@ -151,6 +150,9 @@
             if (!this.ModelState.IsValid)
             {
                 model.Categories = await this.categoryService.AllCategoriesAsync();
+
+                this.TempData[ErrorMessage] = ErrorMessages.InvalidModelState;
+
                 return this.View(model);
             }
 
@@ -168,7 +170,6 @@
             catch (Exception)
             {
                 this.ModelState.AddModelError(string.Empty, ErrorMessages.UnexpectedError);
-                model.Categories = await this.categoryService.AllCategoriesAsync();
 
                 return this.View(model);
             }

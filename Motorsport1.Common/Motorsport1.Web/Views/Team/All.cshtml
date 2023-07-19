@@ -1,0 +1,16 @@
+﻿@model IEnumerable<AllTeamsViewModel>
+@{
+    ViewBag.Title = "All Teams";
+}
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+@if (!Model.Any())
+{
+    <h2 class="text-center">There are no teams yet!</h2>
+}
+<div class="row">
+    @foreach (var team in Model)
+    {
+        <partial name="_TeamPartial" model="@team" />
+    }
+</div>

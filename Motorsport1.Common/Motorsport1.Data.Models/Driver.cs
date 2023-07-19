@@ -43,7 +43,13 @@
 
         public int Number { get; set; }
 
-        public int TeamId { get; set; }
+        public int? BestResult { get; set; }
+
+        public int? BestResultCount { get; set; }
+
+        public int? LastYearStanding { get; set; }
+
+        public int? TeamId { get; set; }
 
         public virtual Team? Team { get; set; }
 

@@ -32,11 +32,11 @@ namespace Motorsport1.Common
             public const int NameMinLength = 3;
             public const int NameMaxLength = 100;
 
+            public const string PriceMinValue = "0";
             public const string PriceMaxValue = "100";
 
             public const string NumberMaxValue = "99";
             public const string NumberMinValue = "1";
-            public const string NumberRetiredValue = "17";
 
             public const int ImageUrlMaxLength = 2048;
         }
@@ -46,6 +46,7 @@ namespace Motorsport1.Common
             public const int NameMinLength = 3;
             public const int NameMaxLength = 100;
 
+            public const string PriceMinValue = "0";
             public const string PriceMaxValue = "100";
 
             public const int ImageUrlMaxLength = 2048;

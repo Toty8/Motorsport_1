@@ -433,11 +433,19 @@ namespace Motorsport1.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int?>("BestResult")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("BestResultCount")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Championships")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
@@ -449,6 +457,9 @@ namespace Motorsport1.Data.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
 
+                    b.Property<int?>("LastYearStanding")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -458,25 +469,35 @@ namespace Motorsport1.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Podiums")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.Property<double>("Points")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<int>("PolePositions")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("TeamId")
+                    b.Property<int?>("TeamId")
                         .HasColumnType("int");
 
                     b.Property<double>("TotalPoints")
-                        .HasColumnType("float");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
 
                     b.Property<int>("Wins")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.HasKey("Id");
 
@@ -488,10 +509,13 @@ namespace Motorsport1.Data.Migrations
                         new
                         {
                             Id = 1,
+                            BestResult = 1,
+                            BestResultCount = 8,
                             BirthDate = new DateTime(1997, 9, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Championships = 2,
                             ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/verstappen.jpg.img.1920.medium.jpg/1677069646195.jpg",
                             IsCurrentChampion = true,
+                            LastYearStanding = 1,
                             Name = "Max Verstappen",
                             Number = 1,
                             Podiums = 87,
@@ -505,10 +529,13 @@ namespace Motorsport1.Data.Migrations
                         new
                         {
                             Id = 2,
+                            BestResult = 1,
+                            BestResultCount = 2,
                             BirthDate = new DateTime(1990, 1, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Championships = 0,
                             ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/perez.jpg.img.1920.medium.jpg/1677069773437.jpg",
                             IsCurrentChampion = false,
+                            LastYearStanding = 3,
                             Name = "Sergio Perez",
                             Number = 11,
                             Podiums = 31,
@@ -522,10 +549,13 @@ namespace Motorsport1.Data.Migrations
                         new
                         {
                             Id = 3,
+                            BestResult = 2,
+                            BestResultCount = 2,
                             BirthDate = new DateTime(1981, 7, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Championships = 2,
                             ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/alonso.jpg.img.1920.medium.jpg/1677244577162.jpg",
                             IsCurrentChampion = false,
+                            LastYearStanding = 9,
                             Name = "Fernando Alonso",
                             Number = 14,
                             Podiums = 104,
@@ -539,10 +569,13 @@ namespace Motorsport1.Data.Migrations
                         new
                         {
                             Id = 4,
+                            BestResult = 2,
+                            BestResultCount = 2,
                             BirthDate = new DateTime(1985, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Championships = 7,
                             ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/hamilton.jpg.img.1920.medium.jpg/1677069594164.jpg",
                             IsCurrentChampion = false,
+                            LastYearStanding = 6,
                             Name = "Lewis Hamilton",
                             Number = 44,
                             Podiums = 195,
@@ -556,10 +589,13 @@ namespace Motorsport1.Data.Migrations
                         new
                         {
                             Id = 5,
+                            BestResult = 4,
+                            BestResultCount = 1,
                             BirthDate = new DateTime(1994, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Championships = 0,
                             ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/sainz.jpg.img.1920.medium.jpg/1677069189406.jpg",
                             IsCurrentChampion = false,
+                            LastYearStanding = 5,
                             Name = "Carlos Sainz",
                             Number = 55,
                             Podiums = 15,
@@ -573,10 +609,13 @@ namespace Motorsport1.Data.Migrations
                         new
                         {
                             Id = 6,
+                            BestResult = 3,
+                            BestResultCount = 1,
                             BirthDate = new DateTime(1998, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Championships = 0,
                             ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/russell.jpg.img.1920.medium.jpg/1677069334466.jpg",
                             IsCurrentChampion = false,
+                            LastYearStanding = 4,
                             Name = "George Russell",
                             Number = 63,
                             Podiums = 10,
@@ -590,10 +629,13 @@ namespace Motorsport1.Data.Migrations
                         new
                         {
                             Id = 7,
+                            BestResult = 2,
+                            BestResultCount = 1,
                             BirthDate = new DateTime(1997, 10, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Championships = 0,
                             ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/leclerc.jpg.img.1920.medium.jpg/1677069223130.jpg",
                             IsCurrentChampion = false,
+                            LastYearStanding = 2,
                             Name = "Charles Leclerc",
                             Number = 16,
                             Podiums = 26,
@@ -607,10 +649,13 @@ namespace Motorsport1.Data.Migrations
                         new
                         {
                             Id = 8,
+                            BestResult = 4,
+                            BestResultCount = 1,
                             BirthDate = new DateTime(1998, 10, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Championships = 0,
                             ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/stroll.jpg.img.1920.medium.jpg/1677069453013.jpg",
                             IsCurrentChampion = false,
+                            LastYearStanding = 15,
                             Name = "Lance Stroll",
                             Number = 18,
                             Podiums = 3,
@@ -624,10 +669,13 @@ namespace Motorsport1.Data.Migrations
                         new
                         {
                             Id = 9,
+                            BestResult = 2,
+                            BestResultCount = 1,
                             BirthDate = new DateTime(1999, 11, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Championships = 0,
                             ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/norris.jpg.img.1920.medium.jpg/1677069505471.jpg",
                             IsCurrentChampion = false,
+                            LastYearStanding = 7,
                             Name = "Lando Norris",
                             Number = 4,
                             Podiums = 7,
@@ -641,10 +689,13 @@ namespace Motorsport1.Data.Migrations
                         new
                         {
                             Id = 10,
+                            BestResult = 3,
+                            BestResultCount = 1,
                             BirthDate = new DateTime(1996, 9, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Championships = 0,
                             ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/ocon.jpg.img.1920.medium.jpg/1677069269007.jpg",
                             IsCurrentChampion = false,
+                            LastYearStanding = 8,
                             Name = "Esteban Ocon",
                             Number = 31,
                             Podiums = 3,
@@ -658,6 +709,8 @@ namespace Motorsport1.Data.Migrations
                         new
                         {
                             Id = 11,
+                            BestResult = 4,
+                            BestResultCount = 1,
                             BirthDate = new DateTime(2001, 4, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Championships = 0,
                             ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/piastri.jpg.img.1920.medium.jpg/1676983075734.jpg",
@@ -675,10 +728,13 @@ namespace Motorsport1.Data.Migrations
                         new
                         {
                             Id = 12,
+                            BestResult = 7,
+                            BestResultCount = 1,
                             BirthDate = new DateTime(1996, 2, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Championships = 0,
                             ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/gasly.jpg.img.1920.medium.jpg/1676983081984.jpg",
                             IsCurrentChampion = false,
+                            LastYearStanding = 14,
                             Name = "Pierre Gasly",
                             Number = 10,
                             Podiums = 3,
@@ -692,10 +748,13 @@ namespace Motorsport1.Data.Migrations
                         new
                         {
                             Id = 13,
+                            BestResult = 7,
+                            BestResultCount = 1,
                             BirthDate = new DateTime(1996, 3, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Championships = 0,
                             ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/albon.jpg.img.1920.medium.jpg/1677068770293.jpg",
                             IsCurrentChampion = false,
+                            LastYearStanding = 19,
                             Name = "Alexander Albon",
                             Number = 23,
                             Podiums = 2,
@@ -709,10 +768,13 @@ namespace Motorsport1.Data.Migrations
                         new
                         {
                             Id = 14,
+                            BestResult = 7,
+                            BestResultCount = 1,
                             BirthDate = new DateTime(1987, 8, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Championships = 0,
                             ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/hulkenberg.jpg.img.1920.medium.jpg/1676983071882.jpg",
                             IsCurrentChampion = false,
+                            LastYearStanding = 22,
                             Name = "Nico Hulkenberg",
                             Number = 27,
                             Podiums = 0,
@@ -726,10 +788,13 @@ namespace Motorsport1.Data.Migrations
                         new
                         {
                             Id = 15,
+                            BestResult = 8,
+                            BestResultCount = 1,
                             BirthDate = new DateTime(1989, 8, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Championships = 0,
                             ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/bottas.jpg.img.1920.medium.jpg/1677069810695.jpg",
                             IsCurrentChampion = false,
+                            LastYearStanding = 10,
                             Name = "Valtteri Bottas",
                             Number = 77,
                             Podiums = 67,
@@ -743,10 +808,13 @@ namespace Motorsport1.Data.Migrations
                         new
                         {
                             Id = 16,
+                            BestResult = 9,
+                            BestResultCount = 2,
                             BirthDate = new DateTime(1999, 5, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Championships = 0,
                             ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/zhou.jpg.img.1920.medium.jpg/1677069909295.jpg",
                             IsCurrentChampion = false,
+                            LastYearStanding = 18,
                             Name = "Zhou Guanyu",
                             Number = 24,
                             Podiums = 0,
@@ -760,10 +828,13 @@ namespace Motorsport1.Data.Migrations
                         new
                         {
                             Id = 17,
+                            BestResult = 10,
+                            BestResultCount = 2,
                             BirthDate = new DateTime(2000, 5, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Championships = 0,
                             ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/tsunoda.jpg.img.1920.medium.jpg/1677069846213.jpg",
                             IsCurrentChampion = false,
+                            LastYearStanding = 17,
                             Name = "Yuki Tsunoda",
                             Number = 22,
                             Podiums = 0,
@@ -777,10 +848,13 @@ namespace Motorsport1.Data.Migrations
                         new
                         {
                             Id = 18,
+                            BestResult = 10,
+                            BestResultCount = 2,
                             BirthDate = new DateTime(1992, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Championships = 0,
                             ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/magnussen.jpg.img.1920.medium.jpg/1677069387823.jpg",
                             IsCurrentChampion = false,
+                            LastYearStanding = 13,
                             Name = "Kevin Magnussen",
                             Number = 20,
                             Podiums = 1,
@@ -794,6 +868,8 @@ namespace Motorsport1.Data.Migrations
                         new
                         {
                             Id = 19,
+                            BestResult = 11,
+                            BestResultCount = 1,
                             BirthDate = new DateTime(2000, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Championships = 0,
                             ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/sargeant.jpg.img.1920.medium.jpg/1676983079144.jpg",
@@ -811,10 +887,13 @@ namespace Motorsport1.Data.Migrations
                         new
                         {
                             Id = 20,
+                            BestResult = 12,
+                            BestResultCount = 1,
                             BirthDate = new DateTime(1995, 2, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Championships = 0,
                             ImageUrl = "https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/devries.jpg.img.1920.medium.jpg/1676983081637.jpg",
                             IsCurrentChampion = false,
+                            LastYearStanding = 21,
                             Name = "Nyck De Vries",
                             Number = 21,
                             Podiums = 0,
@@ -850,6 +929,12 @@ namespace Motorsport1.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int?>("BestResult")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("BestResultCount")
+                        .HasColumnType("int");
+
                     b.Property<int>("Championships")
                         .HasColumnType("int");
 
@@ -857,6 +942,9 @@ namespace Motorsport1.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(2048)
                         .HasColumnType("nvarchar(2048)");
+
+                    b.Property<int?>("LastYearStanding")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -889,8 +977,11 @@ namespace Motorsport1.Data.Migrations
                         new
                         {
                             Id = 1,
+                            BestResult = 1,
+                            BestResultCount = 10,
                             Championships = 5,
                             ImageUrl = "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/team%20logos/red%20bull.jpg",
+                            LastYearStanding = 1,
                             Name = "Oracle Red Bull Racing",
                             Podiums = 249,
                             Points = 411.0,
@@ -902,8 +993,11 @@ namespace Motorsport1.Data.Migrations
                         new
                         {
                             Id = 2,
+                            BestResult = 2,
+                            BestResultCount = 2,
                             Championships = 8,
                             ImageUrl = "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/team%20logos/mercedes.jpg",
+                            LastYearStanding = 3,
                             Name = "Mercedes-AMG PETRONAS F1 Team",
                             Podiums = 286,
                             Points = 203.0,
@@ -915,8 +1009,11 @@ namespace Motorsport1.Data.Migrations
                         new
                         {
                             Id = 3,
+                            BestResult = 2,
+                            BestResultCount = 2,
                             Championships = 0,
                             ImageUrl = "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/team%20logos/aston%20martin.jpg",
+                            LastYearStanding = 7,
                             Name = "Aston Martin Aramco Cognizant F1 Team",
                             Podiums = 7,
                             Points = 181.0,
@@ -928,8 +1025,11 @@ namespace Motorsport1.Data.Migrations
                         new
                         {
                             Id = 4,
+                            BestResult = 2,
+                            BestResultCount = 1,
                             Championships = 16,
                             ImageUrl = "https://media.formula1.com/content/dam/fom-website/teams/Ferrari/logo-ferrari-18%20.jpg",
+                            LastYearStanding = 2,
                             Name = "Scuderia Ferrari",
                             Podiums = 811,
                             Points = 157.0,
@@ -941,8 +1041,11 @@ namespace Motorsport1.Data.Migrations
                         new
                         {
                             Id = 5,
+                            BestResult = 2,
+                            BestResultCount = 1,
                             Championships = 8,
                             ImageUrl = "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/team%20logos/mclaren.jpg",
+                            LastYearStanding = 5,
                             Name = "McLaren F1 Team",
                             Podiums = 495,
                             Points = 59.0,
@@ -954,8 +1057,11 @@ namespace Motorsport1.Data.Migrations
                         new
                         {
                             Id = 6,
+                            BestResult = 3,
+                            BestResultCount = 1,
                             Championships = 0,
                             ImageUrl = "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/team%20logos/alpine.jpg",
+                            LastYearStanding = 4,
                             Name = "BWT Alpine F1 Team",
                             Podiums = 3,
                             Points = 47.0,
@@ -967,8 +1073,11 @@ namespace Motorsport1.Data.Migrations
                         new
                         {
                             Id = 7,
+                            BestResult = 7,
+                            BestResultCount = 1,
                             Championships = 9,
                             ImageUrl = "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/team%20logos/williams.jpg",
+                            LastYearStanding = 10,
                             Name = "Williams Racing",
                             Podiums = 313,
                             Points = 11.0,
@@ -980,8 +1089,11 @@ namespace Motorsport1.Data.Migrations
                         new
                         {
                             Id = 8,
+                            BestResult = 7,
+                            BestResultCount = 1,
                             Championships = 0,
                             ImageUrl = "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/team%20logos/haas.jpg",
+                            LastYearStanding = 8,
                             Name = "MoneyGram Haas F1 Team",
                             Podiums = 0,
                             Points = 11.0,
@@ -993,8 +1105,11 @@ namespace Motorsport1.Data.Migrations
                         new
                         {
                             Id = 9,
+                            BestResult = 8,
+                            BestResultCount = 1,
                             Championships = 2,
                             ImageUrl = "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/team%20logos/alfa%20romeo.jpg",
+                            LastYearStanding = 6,
                             Name = "Alfa Romeo F1 Team Stake",
                             Podiums = 28,
                             Points = 9.0,
@@ -1006,8 +1121,11 @@ namespace Motorsport1.Data.Migrations
                         new
                         {
                             Id = 10,
+                            BestResult = 10,
+                            BestResultCount = 2,
                             Championships = 0,
                             ImageUrl = "https://media.formula1.com/content/dam/fom-website/2018-redesign-assets/team%20logos/alphatauri.jpg",
+                            LastYearStanding = 9,
                             Name = "Scuderia AlphaTauri",
                             Podiums = 2,
                             Points = 2.0,
@@ -1121,8 +1239,7 @@ namespace Motorsport1.Data.Migrations
                     b.HasOne("Motorsport1.Data.Models.Team", "Team")
                         .WithMany("Drivers")
                         .HasForeignKey("TeamId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Team");
                 });

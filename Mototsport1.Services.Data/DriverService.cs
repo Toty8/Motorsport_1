@@ -6,6 +6,7 @@
     using Motorsport1.Data;
     using Motorsport1.Data.Models;
     using Motorsport1.Web.ViewModels.Driver;
+    using Motorsport1.Web.ViewModels.Standing;
     using Mototsport1.Services.Data.Interfaces;
     using static Motorsport1.Common.GeneralApplicationConstants;
 
@@ -187,6 +188,27 @@
         {
             return await this.dbContext.Drivers
                 .AnyAsync(d => d.Number == number);
+        }
+
+        public async Task<IEnumerable<DriversStandingViewModel>> StandingAsync()
+        {
+            IEnumerable<DriversStandingViewModel> drivers = await this.dbContext.Drivers
+                .Where(d => d.TeamId != null && d.Team!.Drivers.Count == MaxDriversPerTeam || d.BestResult != null)
+                .OrderByDescending(d => d.Points)
+                .ThenByDescending(d => d.BestResult.HasValue)
+                .ThenBy(d => d.BestResult)
+                .ThenByDescending(d => d.BestResultCount.HasValue)
+                .ThenBy(d => d.BestResultCount)
+                .Select(d => new DriversStandingViewModel
+                {
+                    Id = d.Id,
+                    Name = d.Name,
+                    ImageUrl = d.ImageUrl,
+                    Points = d.Points,
+                    TeamName = d.Team!.Name
+                }).ToArrayAsync();
+
+            return drivers;
         }
     }
 }

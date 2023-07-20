@@ -3,6 +3,7 @@
     using Microsoft.EntityFrameworkCore;
     using Motorsport1.Data;
     using Motorsport1.Data.Models;
+    using Motorsport1.Web.ViewModels.Standing;
     using Motorsport1.Web.ViewModels.Team;
     using Mototsport1.Services.Data.Interfaces;
     using static Motorsport1.Common.GeneralApplicationConstants;
@@ -18,7 +19,7 @@
 
         public async Task AddAsync(AddTeamViewModel model)
         {
-            Team team = new Team() 
+            Team team = new Team()
             {
                 Name = model.Name,
                 ImageUrl = model.ImageUrl,
@@ -121,8 +122,9 @@
                 .Where(t => t.Drivers.Count == MaxDriversPerTeam)
                 .FirstAsync(t => t.Id == id);
 
-            return new TeamDetailsViewModel { 
-                Id = team.Id, 
+            return new TeamDetailsViewModel
+            {
+                Id = team.Id,
                 Name = team.Name,
                 ImageUrl = team.ImageUrl,
                 Championships = team.Championships,
@@ -159,6 +161,27 @@
                 .CountAsync();
 
             return teamsCount == MaxTeams;
+        }
+
+        public async Task<IEnumerable<TeamStandingViewModel>> StandingAsync()
+        {
+            IEnumerable<TeamStandingViewModel> teams = await this.dbContext.Teams
+                .Where(t => t.Drivers.Count == MaxDriversPerTeam)
+                .OrderByDescending(t => t.Points)
+                .ThenByDescending(t => t.BestResult.HasValue)
+                .ThenBy(t => t.BestResult)
+                .ThenByDescending(t => t.BestResultCount.HasValue)
+                .ThenBy(t => t.BestResultCount)
+                .Select(t => new TeamStandingViewModel
+                {
+                    Id = t.Id,
+                    Name = t.Name,
+                    ImageUrl = t.ImageUrl,
+                    Points = t.Points,
+                    TeamDrivers = String.Join(" and ", t.Drivers.Select(d => d.Name).ToArray())
+                }).ToArrayAsync();
+
+            return teams;
         }
     }
 }

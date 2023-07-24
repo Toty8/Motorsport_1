@@ -1,6 +1,7 @@
 ﻿using Motorsport1.Services.Data.Models.Article;
 using Motorsport1.Web.ViewModels.Article;
 using Motorsport1.Web.ViewModels.Home;
+using Motorsport1.Web.ViewModels.Publisher;
 
 namespace Mototsport1.Services.Data.Interfaces
 {
@@ -25,5 +26,9 @@ namespace Mototsport1.Services.Data.Interfaces
         public Task<ArticlePreDeleteViewModel> GetArticleForDeleteByIdAsync(int id);
 
         public Task DeleteAsync(int id);
+
+        public Task<bool> IsArticleLikedAsync(int id, string userId);
+
+        public Task LikeArticleAsync(int articleId, string userId);
     }
 }

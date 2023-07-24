@@ -203,6 +203,30 @@ namespace Mototsport1.Services.Data
             return articles;
         }
 
+        public async Task<bool> IsArticleLikedAsync(int id, string userId)
+        {
+            return await this.dbContext.LikedArticles
+                .AnyAsync(la => la.UserId.ToString() == userId && la.ArticleId == id);
+        }
+
+        public async Task LikeArticleAsync(int articleId, string userId)
+        {
+            LikedArticle likedArticle = new LikedArticle
+            {
+                ArticleId = articleId,
+                UserId = Guid.Parse(userId)
+            };
+
+            Article article = await this.dbContext.Articles
+                .FirstAsync(a => a.Id == articleId);
+
+            await this.dbContext.LikedArticles.AddAsync(likedArticle);
+
+            article.Likes++;
+
+            await this.dbContext.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<AllArticleViewModel>> MineAsync(string publisherId)
         {
             IEnumerable<AllArticleViewModel> articles = await this.dbContext.Articles

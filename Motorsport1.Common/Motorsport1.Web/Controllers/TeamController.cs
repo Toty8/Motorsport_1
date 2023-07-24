@@ -70,7 +70,7 @@
 
             if (isGridOfTeamsFull)
             {
-                this.TempData[ErrorMessage] = ErrorMessages.DriverAreEnough;
+                this.TempData[ErrorMessage] = ErrorMessages.TeamsAreEnough;
 
                 return this.RedirectToAction(nameof(All));
             }
@@ -85,7 +85,108 @@
                 return this.GeneralError();
             }
         }
-        
+
+        [HttpPost]
+        public async Task<IActionResult> Add(AddTeamViewModel model)
+        {
+            bool isGridOfTeamsFull = await this.teamService.IsGridOfTeamsFull();
+
+            if (isGridOfTeamsFull)
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.TeamsAreEnough;
+
+                return this.RedirectToAction(nameof(All));
+            }
+
+            bool teamExist = await this.teamService.ExistByNameAsync(model.Name);
+
+            if (teamExist)
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.ExistingTeamByName;
+
+                return this.View(model);
+            }
+
+            if (!this.ModelState.IsValid)
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.InvalidModelState;
+
+                return this.View(model);
+            }
+
+            try
+            {
+                await this.teamService.AddAsync(model);
+
+                this.TempData[SuccessMessage] = SuccessMessages.SuccessfullyAddedTeam;
+
+                return RedirectToAction(nameof(All));
+            }
+            catch (Exception e)
+            {
+                this.ModelState.AddModelError(string.Empty, ErrorMessages.UnexpectedError);
+
+                return this.View(model);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            bool exist = await this.teamService.ExistByIdAsync(id);
+
+            if (exist == false)
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.UnexistingTeam;
+
+                return this.RedirectToAction(nameof(All));
+            }
+            try
+            {
+                var model = await this.teamService.GetTeamForEditById(id);
+
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                return this.GeneralError();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditTeamViewModel model, int id)
+        {
+            bool teamExist = await this.teamService.ExistByNameAsync(model.Name);
+
+            if (teamExist)
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.ExistingTeamByName;
+
+                return this.View(model);
+            }
+
+            if (!this.ModelState.IsValid)
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.InvalidModelState;
+
+                return this.View(model);
+            }
+
+            try
+            {
+                await this.teamService.EditAsync(model, id);
+            }
+            catch (Exception e)
+            {
+                this.ModelState.AddModelError(string.Empty, ErrorMessages.UnexpectedError);
+
+                return this.View(model);
+            }
+            this.TempData[SuccessMessage] = SuccessMessages.SuccessfullyEditedTeam;
+
+            return RedirectToAction(nameof(Details), new { id });
+        }
+
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {

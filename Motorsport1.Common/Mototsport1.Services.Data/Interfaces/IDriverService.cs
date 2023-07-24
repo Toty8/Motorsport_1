@@ -1,4 +1,5 @@
 ﻿using Motorsport1.Web.ViewModels.Driver;
+using Motorsport1.Web.ViewModels.Standing;
 
 namespace Mototsport1.Services.Data.Interfaces
 {
@@ -31,5 +32,7 @@ namespace Mototsport1.Services.Data.Interfaces
         public Task<int> GetNumberByIdAsync(int driverId);
 
         public Task<bool> IsDriverCurrentChampion(int id);
+
+        public Task<IEnumerable<DriversStandingViewModel>> StandingAsync();
     }
 }

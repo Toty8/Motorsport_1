@@ -1,4 +1,5 @@
-﻿using Motorsport1.Web.ViewModels.Team;
+﻿using Motorsport1.Web.ViewModels.Standing;
+using Motorsport1.Web.ViewModels.Team;
 
 namespace Mototsport1.Services.Data.Interfaces
 {
@@ -21,5 +22,15 @@ namespace Mototsport1.Services.Data.Interfaces
         public Task DeleteAsync(int id);
 
         public Task<bool> IsGridOfTeamsFull();
+
+        public Task<bool> ExistByNameAsync(string name);
+
+        public Task AddAsync(AddTeamViewModel model);
+
+        public Task<IEnumerable<TeamStandingViewModel>> StandingAsync();
+
+        public Task<EditTeamViewModel> GetTeamForEditById(int id);
+
+        public Task EditAsync(EditTeamViewModel model, int id);
     }
 }

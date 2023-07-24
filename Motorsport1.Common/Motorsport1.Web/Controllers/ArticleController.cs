@@ -229,6 +229,29 @@
 
             return RedirectToAction(nameof(Mine));
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Like(int id)
+        {
+            bool isArticleLiked = await this.articleService.IsArticleLikedAsync(id, GetUserId());
+
+            if (isArticleLiked)
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.AllreadyLikedArticle;
+
+                return this.RedirectToAction(nameof(Details), new {id});
+            }
+
+            try
+            {
+                await this.articleService.LikeArticleAsync(id, GetUserId());
+            }
+            catch (Exception)
+            {
+                return this.GeneralError();
+            }
+            return this.RedirectToAction(nameof(Details), new { id });
+        }
         private IActionResult GeneralError()
         {
             this.ModelState.AddModelError(string.Empty, ErrorMessages.UnexpectedError);

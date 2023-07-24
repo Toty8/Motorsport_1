@@ -48,6 +48,7 @@
             public const string SuccessfullyEditedDriver = "Your driver is successfully edited!";
 
             public const string SuccessfullyAddedTeam = "Your team is successfully added!";
+            public const string SuccessfullyEditedTeam = "Your team is successfully edited!";
 
         }
     }

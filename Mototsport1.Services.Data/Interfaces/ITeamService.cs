@@ -28,5 +28,9 @@ namespace Mototsport1.Services.Data.Interfaces
         public Task AddAsync(AddTeamViewModel model);
 
         public Task<IEnumerable<TeamStandingViewModel>> StandingAsync();
+
+        public Task<EditTeamViewModel> GetTeamForEditById(int id);
+
+        public Task EditAsync(EditTeamViewModel model, int id);
     }
 }

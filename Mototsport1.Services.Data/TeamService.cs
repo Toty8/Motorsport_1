@@ -102,6 +102,18 @@
             return driversCount < MaxDriversPerTeam;
         }
 
+        public async Task EditAsync(EditTeamViewModel model, int id)
+        {
+            Team team = await this.dbContext.Teams
+                .Where(t => t.Drivers.Count == MaxDriversPerTeam)
+                .FirstAsync(t => t.Id == id);
+
+            team.Name = model.Name;
+            team.ImageUrl = model.ImageUrl;
+
+            await this.dbContext.SaveChangesAsync();
+        }
+
         public async Task<bool> ExistByIdAsync(int id)
         {
             bool result = await this.dbContext.Teams.AnyAsync(c => c.Id == id);
@@ -152,6 +164,19 @@
                 ImageUrl = team.ImageUrl,
                 Drivers = String.Join(" and ", driverNames)
             };
+        }
+
+        public async Task<EditTeamViewModel> GetTeamForEditById(int id)
+        {
+            EditTeamViewModel team = await this.dbContext.Teams
+                .Where(t => t.Drivers.Count == MaxDriversPerTeam && t.Id == id)
+                .Select(t => new EditTeamViewModel
+                {
+                    Name = t.Name,
+                    ImageUrl = t.ImageUrl,
+                }).FirstAsync();
+
+            return team;
         }
 
         public async Task<bool> IsGridOfTeamsFull()

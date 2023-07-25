@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Motorsport1.Data;
 
@@ -11,9 +12,10 @@ using Motorsport1.Data;
 namespace Motorsport1.Data.Migrations
 {
     [DbContext(typeof(Motorsport1DbContext))]
-    partial class Motorsport1DbContextModelSnapshot : ModelSnapshot
+    [Migration("20230725170642_AddDefaultValuesForCommentIsActive")]
+    partial class AddDefaultValuesForCommentIsActive
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -406,7 +408,7 @@ namespace Motorsport1.Data.Migrations
                             Id = 1,
                             ArticleId = 1,
                             Content = "Albon really deserve a better car!",
-                            IsActive = true,
+                            IsActive = false,
                             PublishedDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
@@ -414,7 +416,7 @@ namespace Motorsport1.Data.Migrations
                             Id = 2,
                             ArticleId = 2,
                             Content = "It was a great race!",
-                            IsActive = true,
+                            IsActive = false,
                             PublishedDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
@@ -422,7 +424,7 @@ namespace Motorsport1.Data.Migrations
                             Id = 3,
                             ArticleId = 2,
                             Content = "Ferrari is back in the game!",
-                            IsActive = true,
+                            IsActive = false,
                             PublishedDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });

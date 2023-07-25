@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Motorsport1.Data;
 
@@ -11,9 +12,10 @@ using Motorsport1.Data;
 namespace Motorsport1.Data.Migrations
 {
     [DbContext(typeof(Motorsport1DbContext))]
-    partial class Motorsport1DbContextModelSnapshot : ModelSnapshot
+    [Migration("20230725171005_AddDefaultValuesForSeededComment")]
+    partial class AddDefaultValuesForSeededComment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

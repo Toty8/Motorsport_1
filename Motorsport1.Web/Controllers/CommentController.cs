@@ -7,6 +7,7 @@
     using Mototsport1.Services.Data.Interfaces;
     using static Motorsport1.Common.UIMessages;
     using static Motorsport1.Common.NotificationMessageConstants;
+    using Motorsport1.Web.ViewModels.Driver;
 
     public class CommentController : BaseController
     {
@@ -33,7 +34,7 @@
             }
             try
             {
-                AddAndEditCommentViewModel model = new AddAndEditCommentViewModel();
+                AddEditAndDeleteCommentViewModel model = new AddEditAndDeleteCommentViewModel();
 
                 return View(model);
             }
@@ -44,7 +45,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(AddAndEditCommentViewModel model, int id)
+        public async Task<IActionResult> Add(AddEditAndDeleteCommentViewModel model, int id)
         {
 
             if (!this.ModelState.IsValid)
@@ -60,7 +61,7 @@
 
                 this.TempData[SuccessMessage] = SuccessMessages.SuccessfullyAddedComment;
 
-                return RedirectToAction("Details", "Article", new {id});
+                return RedirectToAction("Details", "Article", new { id });
             }
             catch (Exception e)
             {
@@ -85,7 +86,7 @@
             {
                 var model = await this.commentService.GetCommentForEditByIdAsync(commentId);
 
-                return View(model);
+                return this.View(model);
             }
             catch (Exception e)
             {
@@ -94,7 +95,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(AddAndEditCommentViewModel model,  int commentId)
+        public async Task<IActionResult> Edit(AddEditAndDeleteCommentViewModel model, int commentId)
         {
             bool exist = await this.commentService.ExistByIdAsync(commentId);
 
@@ -144,7 +145,7 @@
             {
                 var model = await this.commentService.GetCommentForDeleteByIdAsync(commentId);
 
-                return View(model);
+                return this.View(model);
             }
             catch (Exception e)
             {
@@ -152,6 +153,34 @@
             }
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Delete(AddEditAndDeleteCommentViewModel model, int commentId)
+        {
+            bool exist = await this.commentService.ExistByIdAsync(commentId);
+
+            if (exist == false)
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.UnexistingComment;
+
+                return this.RedirectToAction("All", "Article");
+            }
+
+            try
+            {
+                int id = await this.commentService.DeleteAsync(commentId);
+
+                this.TempData[InformationMessage] = InformationMessages.InformationDeletedComment;
+
+                return RedirectToAction("Details", "Article", new { id });
+            }
+
+            catch (Exception e)
+            {
+                this.ModelState.AddModelError(string.Empty, ErrorMessages.UnexpectedError);
+
+                return this.View(model);
+            }
+        }
         private IActionResult GeneralError()
         {
             this.ModelState.AddModelError(string.Empty, ErrorMessages.UnexpectedError);

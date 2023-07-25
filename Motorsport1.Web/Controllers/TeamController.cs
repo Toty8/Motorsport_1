@@ -252,7 +252,7 @@
                 return this.View(model);
             }
 
-            this.TempData[WarningMessage] = InformationMessages.InformationUnactivatedTeam;
+            this.TempData[InformationMessage] = InformationMessages.InformationUnactivatedTeam;
 
             return RedirectToAction(nameof(All));
         }

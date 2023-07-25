@@ -38,6 +38,8 @@
             public const string InformationUnactivatedDriver = "You succesfully unactivated a driver!";
 
             public const string InformationUnactivatedTeam = "You succesfully unactivated a team!";
+
+            public const string InformationDeletedComment = "Your comment was successfully deleted!";
         }
 
         public static class SuccessMessages

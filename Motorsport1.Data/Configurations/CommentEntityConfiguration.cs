@@ -11,6 +11,9 @@ namespace Motorsport1.Data.Configurations
             builder.Property(a => a.PublishedDateTime)
                 .HasDefaultValueSql("GETDATE()");
 
+            builder.Property(a => a.IsActive)
+                .HasDefaultValue(true);
+
             builder
                 .HasOne(c => c.Article)
                 .WithMany(a => a.Comments)
@@ -31,6 +34,7 @@ namespace Motorsport1.Data.Configurations
                 Id = 1,
                 Content = "Albon really deserve a better car!",
                 ArticleId = 1,
+                IsActive = true,
             };
 
             comments.Add(comment);
@@ -40,6 +44,7 @@ namespace Motorsport1.Data.Configurations
                 Id = 2,
                 Content = "It was a great race!",
                 ArticleId = 2,
+                IsActive = true,
             };
 
             comments.Add(comment);
@@ -49,6 +54,7 @@ namespace Motorsport1.Data.Configurations
                 Id = 3,
                 Content = "Ferrari is back in the game!",
                 ArticleId = 2,
+                IsActive = true,
             };
 
             comments.Add(comment);

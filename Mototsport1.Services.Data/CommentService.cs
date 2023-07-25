@@ -15,7 +15,7 @@ namespace Mototsport1.Services.Data
             this.dbContext = dbContext;
         }
 
-        public async Task AddAsync(AddAndEditCommentViewModel model, int id)
+        public async Task AddAsync(AddEditAndDeleteCommentViewModel model, int id)
         {
             Comment comment = new Comment()
             {
@@ -27,11 +27,24 @@ namespace Mototsport1.Services.Data
             await this.dbContext.SaveChangesAsync();
         }
 
-        public async Task<int> EditAsync(AddAndEditCommentViewModel model, int commentId)
+        public async Task<int> DeleteAsync(int commentId)
         {
             Comment comment = await this.dbContext.Comments
-                .Where(c => c.Id == commentId)
-                .FirstAsync();
+                .Where(c => c.IsActive == true)
+                .FirstAsync(c => c.Id == commentId);
+
+            comment.IsActive = false;
+
+            await this.dbContext.SaveChangesAsync();
+
+            return comment.ArticleId;
+        }
+
+        public async Task<int> EditAsync(AddEditAndDeleteCommentViewModel model, int commentId)
+        {
+            Comment comment = await this.dbContext.Comments
+                .Where(c => c.IsActive == true)
+                .FirstAsync(c => c.Id == commentId);
 
             comment.Content = model.Content;
 
@@ -42,24 +55,31 @@ namespace Mototsport1.Services.Data
 
         public async Task<bool> ExistByIdAsync(int id)
         {
-            return await this.dbContext.Comments.AnyAsync(c => c.Id == id);
+            return await this.dbContext.Comments
+                .Where(c => c.IsActive == true)
+                .AnyAsync(c => c.Id == id);
         }
 
-        public async Task<string> GetCommentForDeleteByIdAsync(int commentId)
+        public async Task<AddEditAndDeleteCommentViewModel> GetCommentForDeleteByIdAsync(int commentId)
         {
             string content = await this.dbContext.Comments
-                .Where(c => c.Id == commentId)
+                .Where(c => c.Id == commentId && c.IsActive == true)
                 .Select(c => c.Content)
                 .FirstAsync();
 
-            return content;
+            AddEditAndDeleteCommentViewModel viewModel = new AddEditAndDeleteCommentViewModel()
+            {
+                Content = content,
+            };
+
+            return viewModel;
         }
 
-        public async Task<AddAndEditCommentViewModel> GetCommentForEditByIdAsync(int commentId)
+        public async Task<AddEditAndDeleteCommentViewModel> GetCommentForEditByIdAsync(int commentId)
         {
-            AddAndEditCommentViewModel comment = await this.dbContext.Comments
-                .Where(c => c.Id == commentId)
-                .Select(c => new AddAndEditCommentViewModel
+            AddEditAndDeleteCommentViewModel comment = await this.dbContext.Comments
+                .Where(c => c.Id == commentId && c.IsActive == true)
+                .Select(c => new AddEditAndDeleteCommentViewModel
                 {
                     Content = c.Content,
                 })

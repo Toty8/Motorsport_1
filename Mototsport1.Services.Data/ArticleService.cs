@@ -158,7 +158,7 @@ namespace Mototsport1.Services.Data
 
             CommentDetailViewModel currentComment;
 
-            foreach (Comment comment in article.Comments)
+            foreach (Comment comment in article.Comments.Where(c => c.IsActive == true))
             {
                 currentComment = new CommentDetailViewModel
                 {

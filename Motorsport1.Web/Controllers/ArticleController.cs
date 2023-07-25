@@ -225,7 +225,7 @@
                 return this.View(model);
             }
 
-            this.TempData[WarningMessage] = InformationMessages.InformationDeletedArticle;
+            this.TempData[InformationMessage] = InformationMessages.InformationDeletedArticle;
 
             return RedirectToAction(nameof(Mine));
         }

@@ -10,6 +10,7 @@
             public const string UnexpectedError = "Unexpected error occured! Please try again or contact administrator!";
 
             public const string UnexistingArticle = "Article with the provided id does not exist!";
+            public const string AllreadyLikedArticle = "This article has allready been liked by you!";
 
             public const string UnexistingDriver = "Driver with the provided id does not exist!";
             public const string UnexistingDriverByName = "Driver with the provided name does not exist!";
@@ -49,6 +50,8 @@
 
             public const string SuccessfullyAddedTeam = "Your team is successfully added!";
             public const string SuccessfullyEditedTeam = "Your team is successfully edited!";
+
+            public const string SuccessfullyAddedComment = "Your comment is successfully added!";
 
         }
     }

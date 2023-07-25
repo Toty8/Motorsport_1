@@ -2,25 +2,27 @@
 
 <h2 class="text-center">@Model.Title</h2>
 <hr />
-<div class="container" style="display:inline">
+<div class="container" style="text-align: center;">
     <div class="row">
-        <div class="col-4">
-            <img class="card-img-top" style="width: 20rem;"
-                 src="@Model.ImageUrl" alt="Article Image">
+        <div class="col-3">
+            <img class="card-img-top" src="@Model.ImageUrl" alt="Article Image">
         </div>
         <div class="card col-8 border-0">
-            <p>(@Model.PublishedDateTime.ToString("dd/MM/yyyy"))</p>
-            <p>Read @Model.ReadCount times</p>
+            <p>(@Model.PublishedDateTime)</p>
+            <p>Read <b>@Model.ReadCount</b> times</p>
             <p>@Model.Information</p>
             <p>Likes: <b>@Model.Likes</b></p>
             <div class="form-inline">
-                @if (this.User.Identity.IsAuthenticated)
-                {
-                    <a class="btn btn-warning" asp-controller="Article" asp-action="Edit"
+            @if (this.User.Identity.IsAuthenticated)
+            {
+                    <form method="post" asp-action="Like" asp-route-id="@Model.Id">
+                        <input type="submit" value="Like" class="btn btn-outline-info" />
+                    </form>
+                    <a class="ml-2 btn btn-warning" asp-controller="Article" asp-action="Edit"
                        asp-route-id="@Model.Id">Edit</a>
                     <a class="ml-2 btn btn-danger" asp-controller="Article" asp-action="Delete"
                        asp-route-id="@Model.Id">Delete</a>
-                }
+            }
             </div>
             <p></p>
             <div class="card" style="width: 18rem;">
@@ -29,6 +31,24 @@
                     <p class="card-text">Email: @Model.Publisher.Email</p>
                 </div>
             </div>
+            <br>
+            <div class="form-inline">
+            @if (this.User.Identity.IsAuthenticated)
+            {
+                    <a class="btn btn-primary" asp-controller="Comment" asp-action="Add" asp-route-articleId="@Model.Id">Add Comment</a>
+            }
+            </div>
+            <hr>
+            <ul class="list-group">
+            @foreach (var comment in Model.Comments)
+            {
+                    <li class="list-group-item" style="margin: 10px; background-color:#fcf5f5;">
+                        <h4>@comment.Content</h4>
+                        <hr />
+                        <small>(@comment.PublishedDateTime)</small>
+                    </li>
+            }
+            </ul>
         </div>
     </div>
 </div>

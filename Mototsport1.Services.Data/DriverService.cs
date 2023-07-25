@@ -8,6 +8,7 @@
     using Motorsport1.Web.ViewModels.Driver;
     using Motorsport1.Web.ViewModels.Standing;
     using Mototsport1.Services.Data.Interfaces;
+    using System.Globalization;
     using static Motorsport1.Common.GeneralApplicationConstants;
 
     public class DriverService : IDriverService
@@ -118,7 +119,7 @@
             {
                 Id = model.Id,
                 Name = model.Name,
-                BirthDate = model.BirthDate,
+                BirthDate = model.BirthDate.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture),
                 ImageUrl = model.ImageUrl,
                 Number = model.Number,
                 Championships = model.Championships,

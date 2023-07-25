@@ -6,6 +6,6 @@ namespace Motorsport1.Web.ViewModels.Comment
     {
         public string Content { get; set; } = null!;
 
-        public DateTime PublishedDateTime { get; set; }
+        public string PublishedDateTime { get; set; } = null!;
     }
 }

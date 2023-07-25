@@ -5,7 +5,7 @@ namespace Motorsport1.Web.ViewModels.Driver
     public class DriverDetailsViewModel : AllDriverViewModel
     {
 
-        public DateTime BirthDate { get; set; }
+        public string BirthDate { get; set; } = null!;
 
         public int Championships { get; set; }
 

@@ -21,9 +21,9 @@
         }
 
         [HttpGet]
-        public async Task<IActionResult> Add(int articleId)
+        public async Task<IActionResult> Add(int id)
         {
-            bool exist = await this.articleService.ExistByIdAsync(articleId);
+            bool exist = await this.articleService.ExistByIdAsync(id);
 
             if (exist == false)
             {
@@ -44,8 +44,9 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(AddAndEditCommentViewModel model, int articleId)
+        public async Task<IActionResult> Add(AddAndEditCommentViewModel model, int id)
         {
+
             if (!this.ModelState.IsValid)
             {
                 this.TempData[ErrorMessage] = ErrorMessages.InvalidModelState;
@@ -55,17 +56,99 @@
 
             try
             {
-                await this.commentService.AddAsync(model, articleId);
+                await this.commentService.AddAsync(model, id);
 
                 this.TempData[SuccessMessage] = SuccessMessages.SuccessfullyAddedComment;
 
-                return RedirectToAction("All", "Article", new {articleId});
+                return RedirectToAction("Details", "Article", new {id});
             }
             catch (Exception e)
             {
                 this.ModelState.AddModelError(string.Empty, ErrorMessages.UnexpectedError);
 
                 return this.View(model);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int commentId)
+        {
+            bool exist = await this.commentService.ExistByIdAsync(commentId);
+
+            if (exist == false)
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.UnexistingComment;
+
+                return this.RedirectToAction("All", "Article");
+            }
+            try
+            {
+                var model = await this.commentService.GetCommentForEditByIdAsync(commentId);
+
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                return this.GeneralError();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(AddAndEditCommentViewModel model,  int commentId)
+        {
+            bool exist = await this.commentService.ExistByIdAsync(commentId);
+
+            if (exist == false)
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.UnexistingComment;
+
+                return this.RedirectToAction("All", "Article");
+            }
+
+            if (!this.ModelState.IsValid)
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.InvalidModelState;
+
+                return this.View(model);
+            }
+
+            try
+            {
+                int id = await this.commentService.EditAsync(model, commentId);
+
+                this.TempData[SuccessMessage] = SuccessMessages.SuccessfullyEditedComment;
+
+                return RedirectToAction("Details", "Article", new { id });
+            }
+
+            catch (Exception e)
+            {
+                this.ModelState.AddModelError(string.Empty, ErrorMessages.UnexpectedError);
+
+                return this.View(model);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int commentId)
+        {
+            bool exist = await this.commentService.ExistByIdAsync(commentId);
+
+            if (exist == false)
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.UnexistingComment;
+
+                return this.RedirectToAction("All", "Article");
+            }
+            try
+            {
+                var model = await this.commentService.GetCommentForDeleteByIdAsync(commentId);
+
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                return this.GeneralError();
             }
         }
 

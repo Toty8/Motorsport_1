@@ -26,7 +26,7 @@
             public const string TeamsAreEnough = "There are already enough teams!";
             public const string ExistingTeamByName = "Team with the provided name already exist!";
 
-
+            public const string UnexistingComment = "Comment with the provided id does not exist!";
         }
 
         public static class WarningMessages { }
@@ -52,6 +52,7 @@
             public const string SuccessfullyEditedTeam = "Your team is successfully edited!";
 
             public const string SuccessfullyAddedComment = "Your comment is successfully added!";
+            public const string SuccessfullyEditedComment = "Your comment is successfully added!";
 
         }
     }

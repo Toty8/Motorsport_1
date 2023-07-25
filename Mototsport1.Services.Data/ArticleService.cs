@@ -162,6 +162,7 @@ namespace Mototsport1.Services.Data
             {
                 currentComment = new CommentDetailViewModel
                 {
+                    Id = comment.Id,
                     Content = comment.Content,
                     PublishedDateTime = comment.PublishedDateTime.ToString("HH:mm dd/MM/yyyy", CultureInfo.InvariantCulture)
                 };

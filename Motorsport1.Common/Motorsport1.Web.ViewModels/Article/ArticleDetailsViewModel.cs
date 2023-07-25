@@ -12,7 +12,7 @@ namespace Motorsport1.Web.ViewModels.Article
 
         public string Information { get; set; } = null!;
 
-        public DateTime PublishedDateTime { get; set; }
+        public string PublishedDateTime { get; set; } = null!;
 
         public virtual PublisherDetailsViewModel Publisher { get; set; } = null!;
 

@@ -47,7 +47,7 @@
             }
             catch (Exception e)
             {
-                return this.GeneralError();
+                return this.GeneralError("All");
             }
         }
 
@@ -114,7 +114,7 @@
             }
             catch (Exception)
             {
-                return this.GeneralError();
+                return this.GeneralError("All");
             }
         }
 
@@ -140,7 +140,7 @@
             }
             catch (Exception)
             {
-                return this.GeneralError();
+                return this.GeneralError("All");
             }
         }
 
@@ -199,7 +199,7 @@
             }
             catch (Exception)
             {
-                return this.GeneralError();
+                return this.GeneralError("All");
             }
         }
 
@@ -225,7 +225,7 @@
                 return this.View(model);
             }
 
-            this.TempData[WarningMessage] = InformationMessages.InformationDeletedArticle;
+            this.TempData[InformationMessage] = InformationMessages.InformationDeletedArticle;
 
             return RedirectToAction(nameof(Mine));
         }
@@ -248,15 +248,9 @@
             }
             catch (Exception)
             {
-                return this.GeneralError();
+                return this.GeneralError("All");
             }
             return this.RedirectToAction(nameof(Details), new { id });
-        }
-        private IActionResult GeneralError()
-        {
-            this.ModelState.AddModelError(string.Empty, ErrorMessages.UnexpectedError);
-
-            return this.RedirectToAction(nameof(All));
         }
     }
 }

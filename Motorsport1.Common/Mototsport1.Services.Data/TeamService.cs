@@ -188,6 +188,40 @@
             return teamsCount == MaxTeams;
         }
 
+        public async Task ResetAsync()
+        {
+            var activeTeams = await this.dbContext.Teams
+                .Where(t => t.Drivers.Count == MaxDriversPerTeam)
+                .OrderByDescending(t => t.Points)
+                .ThenByDescending(t => t.BestResult.HasValue)
+                .ThenBy(t => t.BestResult)
+                .ThenByDescending(t => t.BestResultCount.HasValue)
+                .ThenBy(t => t.BestResultCount)
+                .ToArrayAsync();
+
+            var champion = activeTeams.First();
+
+            champion.Championships++;
+
+            int lastYearStanding = 1;
+
+            foreach (var team in activeTeams)
+            {
+                team.Points = 0;
+                team.BestResult = null;
+                team.BestResultCount = null;
+                team.LastYearStanding = lastYearStanding;
+                lastYearStanding++;
+
+                foreach (var draftUser in team.DraftUsers)
+                {
+                    draftUser.TeamId = null;
+                }
+            }
+
+            await this.dbContext.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<TeamStandingViewModel>> StandingAsync()
         {
             IEnumerable<TeamStandingViewModel> teams = await this.dbContext.Teams

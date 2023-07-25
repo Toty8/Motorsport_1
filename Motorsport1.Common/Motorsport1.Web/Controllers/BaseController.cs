@@ -1,8 +1,12 @@
 ﻿namespace Motorsport1.Web.Controllers
 {
+    using System.Security.Claims;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using System.Security.Claims;
+
+    using static Common.NotificationMessageConstants;
+    using static Common.UIMessages;
 
     [Authorize]
     public class BaseController : Controller
@@ -17,6 +21,13 @@
             }
 
             return id;
+        }
+
+        protected IActionResult GeneralError(string redirection)
+        {
+            this.ModelState.AddModelError(string.Empty, ErrorMessages.UnexpectedError);
+
+            return this.RedirectToAction(nameof(redirection));
         }
     }
 }

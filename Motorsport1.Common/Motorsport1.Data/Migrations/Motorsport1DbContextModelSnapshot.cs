@@ -385,7 +385,9 @@ namespace Motorsport1.Data.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
 
                     b.Property<DateTime>("PublishedDateTime")
                         .ValueGeneratedOnAdd()
@@ -404,7 +406,7 @@ namespace Motorsport1.Data.Migrations
                             Id = 1,
                             ArticleId = 1,
                             Content = "Albon really deserve a better car!",
-                            IsActive = false,
+                            IsActive = true,
                             PublishedDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
@@ -412,7 +414,7 @@ namespace Motorsport1.Data.Migrations
                             Id = 2,
                             ArticleId = 2,
                             Content = "It was a great race!",
-                            IsActive = false,
+                            IsActive = true,
                             PublishedDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
@@ -420,7 +422,7 @@ namespace Motorsport1.Data.Migrations
                             Id = 3,
                             ArticleId = 2,
                             Content = "Ferrari is back in the game!",
-                            IsActive = false,
+                            IsActive = true,
                             PublishedDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });

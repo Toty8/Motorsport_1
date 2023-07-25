@@ -32,5 +32,7 @@ namespace Mototsport1.Services.Data.Interfaces
         public Task<EditTeamViewModel> GetTeamForEditById(int id);
 
         public Task EditAsync(EditTeamViewModel model, int id);
+
+        public Task ResetAsync();
     }
 }

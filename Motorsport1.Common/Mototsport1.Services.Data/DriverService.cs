@@ -8,6 +8,7 @@
     using Motorsport1.Web.ViewModels.Driver;
     using Motorsport1.Web.ViewModels.Standing;
     using Mototsport1.Services.Data.Interfaces;
+    using System.Globalization;
     using static Motorsport1.Common.GeneralApplicationConstants;
 
     public class DriverService : IDriverService
@@ -118,7 +119,7 @@
             {
                 Id = model.Id,
                 Name = model.Name,
-                BirthDate = model.BirthDate,
+                BirthDate = model.BirthDate.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture),
                 ImageUrl = model.ImageUrl,
                 Number = model.Number,
                 Championships = model.Championships,
@@ -188,6 +189,41 @@
         {
             return await this.dbContext.Drivers
                 .AnyAsync(d => d.Number == number);
+        }
+
+        public async Task ResetAsync()
+        {
+            var activeDrivers = await this.dbContext.Drivers
+                .Where(d => d.TeamId != null && d.Team!.Drivers.Count == MaxDriversPerTeam || d.BestResult != null)
+                .OrderByDescending(d => d.Points)
+                .ThenByDescending(d => d.BestResult.HasValue)
+                .ThenBy(d => d.BestResult)
+                .ThenByDescending(d => d.BestResultCount.HasValue)
+                .ThenBy(d => d.BestResultCount)
+                .ToArrayAsync();
+
+            var champion = activeDrivers.First();
+
+            champion.IsCurrentChampion = true;
+            champion.Championships++;
+
+            int lastYearStanding = 1;
+
+            foreach (var driver in activeDrivers) 
+            {
+                driver.Points = 0;
+                driver.BestResult = null;
+                driver.BestResultCount = null;
+                driver.LastYearStanding = lastYearStanding;
+                lastYearStanding++;
+
+                foreach (var draftUser in driver.DraftUsers)
+                {
+                    draftUser.DriverId = null;
+                }
+            }
+
+            await this.dbContext.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<DriversStandingViewModel>> StandingAsync()

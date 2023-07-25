@@ -26,7 +26,7 @@
             public const string TeamsAreEnough = "There are already enough teams!";
             public const string ExistingTeamByName = "Team with the provided name already exist!";
 
-
+            public const string UnexistingComment = "Comment with the provided id does not exist!";
         }
 
         public static class WarningMessages { }
@@ -38,6 +38,8 @@
             public const string InformationUnactivatedDriver = "You succesfully unactivated a driver!";
 
             public const string InformationUnactivatedTeam = "You succesfully unactivated a team!";
+
+            public const string InformationDeletedComment = "Your comment was successfully deleted!";
         }
 
         public static class SuccessMessages
@@ -50,6 +52,9 @@
 
             public const string SuccessfullyAddedTeam = "Your team is successfully added!";
             public const string SuccessfullyEditedTeam = "Your team is successfully edited!";
+
+            public const string SuccessfullyAddedComment = "Your comment is successfully added!";
+            public const string SuccessfullyEditedComment = "Your comment is successfully added!";
 
         }
     }

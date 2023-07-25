@@ -7,7 +7,7 @@
             <h6>Drivers: @String.Join(" and ", Model.Drivers)</h6>
             <br />
             <a asp-controller="Team" asp-action="Details" asp-route-id="@Model.Id"
-               class="btn btn-success">Details</a>
+               class="btn btn-outline-success">Details</a>
             @if (this.User.Identity.IsAuthenticated)
             {
                 <a asp-controller="Team" asp-action="Edit" asp-route-id="@Model.Id"

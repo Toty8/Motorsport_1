@@ -8,6 +8,7 @@ using Motorsport1.Web.ViewModels.Home;
 using Mototsport1.Services.Data.Interfaces;
 using System.ComponentModel;
 using Motorsport1.Web.ViewModels.Comment;
+using System.Globalization;
 
 namespace Mototsport1.Services.Data
 {
@@ -157,12 +158,13 @@ namespace Mototsport1.Services.Data
 
             CommentDetailViewModel currentComment;
 
-            foreach (Comment comment in article.Comments)
+            foreach (Comment comment in article.Comments.Where(c => c.IsActive == true))
             {
                 currentComment = new CommentDetailViewModel
                 {
+                    Id = comment.Id,
                     Content = comment.Content,
-                    PublishedDateTime = comment.PublishedDateTime,
+                    PublishedDateTime = comment.PublishedDateTime.ToString("HH:mm dd/MM/yyyy", CultureInfo.InvariantCulture)
                 };
 
                 comments.Add(currentComment);
@@ -176,12 +178,12 @@ namespace Mototsport1.Services.Data
                 Likes = article.Likes,
                 ReadCount = article.ReadCount,
                 Information = article.Information,
-                PublishedDateTime = article.PublishedDateTime,
+                PublishedDateTime = article.PublishedDateTime.ToString("HH:mm dd/MM/yyyy", CultureInfo.InvariantCulture),
                 Publisher = new PublisherDetailsViewModel
                 {
                     Email = article.Publisher.Email,
                 },
-                Comments = comments
+                Comments = comments.OrderBy(c => c.PublishedDateTime).ToArray(),
                 
             };
         }

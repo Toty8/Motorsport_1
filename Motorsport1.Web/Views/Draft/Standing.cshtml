@@ -1,0 +1,45 @@
+﻿@model IEnumerable<DraftAllViewModel>
+@{
+    ViewBag.Title = "Draft Standing";
+    int counter = 1;
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="text-center">
+    <a class="btn btn-warning" asp-controller="Draft" asp-action="Driver">Play!</a>
+</div>
+
+<br />
+
+<div class="text-center">
+    <h4>The rules of the draft are really simle. You will be given a budget of 100$ and you have to pick one driver and one team! The points are sumed by the drivers championship point and the team championship points. For each doller left unused, will be added 5 points to your result.</h4>
+    <br />
+    <h3>LETS DRAFT!</h3>
+</div>
+
+<hr />
+
+@if (!Model.Any())
+{
+    <h2 class="text-center">There are no drafts yet!</h2>
+}
+
+<ul class="list-group">
+    @foreach (var user in Model)
+    {
+        <li class="list-group-item" style="margin: 10px; background-color:#fcf5f5;">
+            <h2 class="li">@counter</h2><h5> Place</h5>
+            <hr />
+            <p class="h2">
+                @user.Email
+            </p>
+            <hr />
+            <h2>Points: @user.Points</h2>
+            <h5>Driver: @user.DriverName</h5>
+            <h5>Team: @user.TeamName</h5>
+        </li>
+        counter++;
+    }
+</ul>

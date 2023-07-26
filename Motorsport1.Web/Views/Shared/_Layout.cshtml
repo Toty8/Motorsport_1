@@ -37,6 +37,9 @@
                         <li class="nav-item">
                             <a class="nav-link h5 text-light" asp-area="" asp-controller="Standing" asp-action="Drivers">Standing</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link h5 text-light" asp-area="" asp-controller="Draft" asp-action="Standing">Draft</a>
+                        </li>
                         @if(this.User.Identity?.IsAuthenticated ?? false)
                         {
                             <li class="nav-item">

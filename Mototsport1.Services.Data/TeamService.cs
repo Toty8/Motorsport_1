@@ -114,6 +114,95 @@
             await this.dbContext.SaveChangesAsync();
         }
 
+        public async Task EditTeamStatisticsAsync(EditDriverStatisticsViewModel model, int id)
+        {
+            Team team = await this.dbContext.Teams
+                .Where(t => t.Drivers.Count == MaxDriversPerTeam)
+                .FirstAsync(t => t.Drivers.Any(d => d.Id == id));
+
+            if (model.WasDriverOnPolePosition)
+            {
+                team.PolePositions++;
+                team.Points++;
+                team.TotalPoints++;
+            }
+
+            if (model.DriverHaveFastestLap)
+            {
+                team.Points++;
+                team.TotalPoints++;
+            }
+
+            switch (model.RacePosition)
+            {
+                case 1:
+                    team.Points += 25;
+                    team.TotalPoints += 25;
+                    team.Wins++;
+                    team.Podiums++;
+                    break;
+
+                case 2:
+                    team.Points += 18;
+                    team.TotalPoints += 18;
+                    team.Podiums++;
+                    break;
+
+                case 3:
+                    team.Points += 15;
+                    team.TotalPoints += 15;
+                    team.Podiums++;
+                    break;
+
+                case 4:
+                    team.Points += 12;
+                    team.TotalPoints += 12;
+                    break;
+
+                case 5:
+                    team.Points += 10;
+                    team.TotalPoints += 10;
+                    break;
+
+                case 6:
+                    team.Points += 8;
+                    team.TotalPoints += 8;
+                    break;
+
+                case 7:
+                    team.Points += 6;
+                    team.TotalPoints += 6;
+                    break;
+
+                case 8:
+                    team.Points += 4;
+                    team.TotalPoints += 4;
+                    break;
+
+                case 9:
+                    team.Points += 2;
+                    team.TotalPoints += 2;
+                    break;
+
+                case 10:
+                    team.Points += 1;
+                    team.TotalPoints += 1;
+                    break;
+            }
+
+            if (team.BestResult > model.RacePosition)
+            {
+                team.BestResult = model.RacePosition;
+                team.BestResultCount = 1;
+            }
+            else if (team.BestResult == model.RacePosition)
+            {
+                team.BestResultCount++;
+            }
+
+            await this.dbContext.SaveChangesAsync();
+        }
+
         public async Task<bool> ExistByIdAsync(int id)
         {
             bool result = await this.dbContext.Teams.AnyAsync(c => c.Id == id);
@@ -186,6 +275,40 @@
                 .CountAsync();
 
             return teamsCount == MaxTeams;
+        }
+
+        public async Task ResetAsync()
+        {
+            var activeTeams = await this.dbContext.Teams
+                .Where(t => t.Drivers.Count == MaxDriversPerTeam)
+                .OrderByDescending(t => t.Points)
+                .ThenByDescending(t => t.BestResult.HasValue)
+                .ThenBy(t => t.BestResult)
+                .ThenByDescending(t => t.BestResultCount.HasValue)
+                .ThenBy(t => t.BestResultCount)
+                .ToArrayAsync();
+
+            var champion = activeTeams.First();
+
+            champion.Championships++;
+
+            int lastYearStanding = 1;
+
+            foreach (var team in activeTeams)
+            {
+                team.Points = 0;
+                team.BestResult = null;
+                team.BestResultCount = null;
+                team.LastYearStanding = lastYearStanding;
+                lastYearStanding++;
+
+                foreach (var draftUser in team.DraftUsers)
+                {
+                    draftUser.TeamId = null;
+                }
+            }
+
+            await this.dbContext.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<TeamStandingViewModel>> StandingAsync()

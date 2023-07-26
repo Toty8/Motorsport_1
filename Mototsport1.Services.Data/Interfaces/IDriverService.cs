@@ -34,5 +34,9 @@ namespace Mototsport1.Services.Data.Interfaces
         public Task<bool> IsDriverCurrentChampion(int id);
 
         public Task<IEnumerable<DriversStandingViewModel>> StandingAsync();
+
+        public Task ResetAsync();
+
+        public Task EditDriverStatisticsAsync(EditDriverStatisticsViewModel model, int id);
     }
 }

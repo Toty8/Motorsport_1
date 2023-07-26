@@ -56,6 +56,7 @@
             public const string SuccessfullyAddedComment = "Your comment is successfully added!";
             public const string SuccessfullyEditedComment = "Your comment is successfully added!";
 
+            public const string SuccessfullyAppliedStatistics = "Your statistics are successfully applied!";
         }
     }
 }

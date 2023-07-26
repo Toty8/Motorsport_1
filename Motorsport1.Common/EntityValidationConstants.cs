@@ -51,5 +51,11 @@ namespace Motorsport1.Common
 
             public const int ImageUrlMaxLength = 2048;
         }
+
+        public static class Standing
+        {
+            public const string PositionMinValue = "1";
+            public const string PositionMaxValue = "20";
+        }
     }
 }

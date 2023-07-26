@@ -40,7 +40,7 @@
             }
             catch (Exception e)
             {
-                return this.GeneralError();
+                return this.GeneralError("All");
             }
         }
 
@@ -90,7 +90,7 @@
             }
             catch (Exception e)
             {
-                return this.GeneralError();
+                return this.GeneralError("All");
             }
         }
 
@@ -149,7 +149,7 @@
             }
             catch (Exception e)
             {
-                return this.GeneralError();
+                return this.GeneralError("All");
             }
         }
 
@@ -180,12 +180,6 @@
 
                 return this.View(model);
             }
-        }
-        private IActionResult GeneralError()
-        {
-            this.ModelState.AddModelError(string.Empty, ErrorMessages.UnexpectedError);
-
-            return this.RedirectToAction("All", "Article");
         }
     }
 }

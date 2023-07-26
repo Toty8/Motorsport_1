@@ -94,6 +94,93 @@
             await this.dbContext.SaveChangesAsync();
         }
 
+        public async Task EditDriverStatisticsAsync(EditDriverStatisticsViewModel model, int id)
+        {
+            Driver driver = await this.dbContext.Drivers
+                .Where(d => d.TeamId != null)
+                .FirstAsync(d => d.Id == id);
+
+            if (model.WasDriverOnPolePosition)
+            {
+                driver.PolePositions++;
+            }
+
+            if (model.DriverHaveFastestLap)
+            {
+                driver.Points++;
+                driver.TotalPoints++;
+            }
+
+            switch (model.RacePosition)
+            {
+                case 1:
+                    driver.Points+=25;
+                    driver.TotalPoints+=25;
+                    driver.Wins++;
+                    driver.Podiums++;
+                    break;
+                    
+                case 2:
+                    driver.Points += 18;
+                    driver.TotalPoints += 18;
+                    driver.Podiums++;
+                    break;
+
+                case 3:
+                    driver.Points += 15;
+                    driver.TotalPoints += 15;
+                    driver.Podiums++;
+                    break;
+
+                case 4:
+                    driver.Points += 12;
+                    driver.TotalPoints += 12;
+                    break;
+
+                case 5:
+                    driver.Points += 10;
+                    driver.TotalPoints += 10;
+                    break;
+
+                case 6:
+                    driver.Points += 8;
+                    driver.TotalPoints += 8;
+                    break;
+
+                case 7:
+                    driver.Points += 6;
+                    driver.TotalPoints += 6;
+                    break;
+
+                case 8:
+                    driver.Points += 4;
+                    driver.TotalPoints += 4;
+                    break;
+
+                case 9:
+                    driver.Points += 2;
+                    driver.TotalPoints += 2;
+                    break;
+
+                case 10:
+                    driver.Points += 1;
+                    driver.TotalPoints += 1;
+                    break;
+            }
+
+            if (driver.BestResult > model.RacePosition)
+            {
+                driver.BestResult = model.RacePosition;
+                driver.BestResultCount = 1;
+            }
+            else if (driver.BestResult == model.RacePosition)
+            {
+                driver.BestResultCount++;
+            }
+
+            await this.dbContext.SaveChangesAsync();
+        }
+
         public async Task<bool> ExistByIdAsync(int id)
         {
             return await this.dbContext.Drivers
@@ -189,6 +276,41 @@
         {
             return await this.dbContext.Drivers
                 .AnyAsync(d => d.Number == number);
+        }
+
+        public async Task ResetAsync()
+        {
+            var activeDrivers = await this.dbContext.Drivers
+                .Where(d => d.TeamId != null && d.Team!.Drivers.Count == MaxDriversPerTeam || d.BestResult != null)
+                .OrderByDescending(d => d.Points)
+                .ThenByDescending(d => d.BestResult.HasValue)
+                .ThenBy(d => d.BestResult)
+                .ThenByDescending(d => d.BestResultCount.HasValue)
+                .ThenBy(d => d.BestResultCount)
+                .ToArrayAsync();
+
+            var champion = activeDrivers.First();
+
+            champion.IsCurrentChampion = true;
+            champion.Championships++;
+
+            int lastYearStanding = 1;
+
+            foreach (var driver in activeDrivers) 
+            {
+                driver.Points = 0;
+                driver.BestResult = null;
+                driver.BestResultCount = null;
+                driver.LastYearStanding = lastYearStanding;
+                lastYearStanding++;
+
+                foreach (var draftUser in driver.DraftUsers)
+                {
+                    draftUser.DriverId = null;
+                }
+            }
+
+            await this.dbContext.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<DriversStandingViewModel>> StandingAsync()

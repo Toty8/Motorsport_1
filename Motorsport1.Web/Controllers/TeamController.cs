@@ -59,7 +59,7 @@
             }
             catch (Exception)
             {
-                return this.GeneralError();
+                return this.GeneralError("All");
             }
         }
 
@@ -82,7 +82,7 @@
             }
             catch (Exception e)
             {
-                return this.GeneralError();
+                return this.GeneralError("All");
             }
         }
 
@@ -149,7 +149,7 @@
             }
             catch (Exception e)
             {
-                return this.GeneralError();
+                return this.GeneralError("All");
             }
         }
 
@@ -216,7 +216,7 @@
             }
             catch (Exception)
             {
-                return this.GeneralError();
+                return this.GeneralError("All");
             }
         }
 
@@ -255,13 +255,6 @@
             this.TempData[InformationMessage] = InformationMessages.InformationUnactivatedTeam;
 
             return RedirectToAction(nameof(All));
-        }
-
-        private IActionResult GeneralError()
-        {
-            this.ModelState.AddModelError(string.Empty, ErrorMessages.UnexpectedError);
-
-            return this.RedirectToAction(nameof(All));
         }
     }
 }

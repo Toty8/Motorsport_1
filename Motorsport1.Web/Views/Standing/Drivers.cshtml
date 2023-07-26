@@ -9,11 +9,16 @@
 <div class="text-center">
     <a class="btn btn-warning" asp-controller="Standing" asp-action="Teams">Teams standing</a>
 </div>
+<br />
+<div class="text-center">
+    <a class="btn btn-danger" asp-controller="Standing" asp-action="Reset">Reset (End Championship)</a>
+</div>
 
 <ul class="list-group">
     @foreach (var driver in Model)
     {
         <li class="list-group-item" style="margin: 10px; background-color:#fcf5f5;">
+            <a class="btn btn-warning" style="float:right;" asp-controller="Standing" asp-action="AddResult" asp-route-id="@driver.Id">Add results</a>
             <h2 class="li">@counter</h2><h5> Place</h5>
             <hr />
             <p class ="h2">

@@ -1,5 +1,5 @@
 ﻿function ordinal_suffix_of(i) {
-    var j = i % 10,
+    let j = i % 10,
         k = i % 100;
     if (j == 1 && k != 11) {
         return i + "st";
@@ -14,7 +14,7 @@
 }
 
 window.onload = function () {
-    for (var i = 0; i < document.getElementsByClassName("li").length; i++) {
+    for (let i = 0; i < document.getElementsByClassName("li").length; i++) {
         document.getElementsByClassName("li")[i].innerHTML = ordinal_suffix_of(i+1);
     }
 }

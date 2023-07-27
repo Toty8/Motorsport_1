@@ -37,5 +37,8 @@ namespace Mototsport1.Services.Data.Interfaces
 
         public Task EditTeamStatisticsAsync(EditDriverStatisticsViewModel model, int id);
 
+        public Task<IEnumerable<TeamDraftNamesViewModel>> AllNamesWithPricesAsync();
+
+        public Task EditDraftPriceAsync(decimal price, int id);
     }
 }

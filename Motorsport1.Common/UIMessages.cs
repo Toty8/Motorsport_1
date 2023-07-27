@@ -60,6 +60,7 @@
             public const string SuccessfullyAppliedStatistics = "Your statistics are successfully applied!";
             
             public const string SuccessfullyEditedDriverDraftPrice = "Driver draft price is successfully edited!"; 
+            public const string SuccessfullyEditedTeamDraftPrice = "Team draft price is successfully edited!"; 
         }
     }
 }

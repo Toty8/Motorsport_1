@@ -8,17 +8,20 @@
     using Mototsport1.Services.Data.Interfaces;
     using static Motorsport1.Common.UIMessages;
     using static Motorsport1.Common.NotificationMessageConstants;
+    using Motorsport1.Web.ViewModels.Team;
 
     public class DraftController : BaseController
     {
 
         private readonly IDraftService draftService;
         private readonly IDriverService driverService;
+        private readonly ITeamService teamService;
 
-        public DraftController(IDraftService draftService, IDriverService driverService)
+        public DraftController(IDraftService draftService, IDriverService driverService, ITeamService teamService)
         {
             this.draftService = draftService;
             this.driverService = driverService;
+            this.teamService = teamService;
         }
 
         [HttpGet]
@@ -84,7 +87,52 @@
         [HttpGet]
         public async Task<IActionResult> EditTeam()
         {
-            return this.Ok();
+            try
+            {
+                DraftEditTeamViewModel model = new DraftEditTeamViewModel();
+
+                model.NamesAndPrices = await this.teamService.AllNamesWithPricesAsync();
+
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                return this.GeneralError(nameof(Standing));
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditTeam(DraftEditTeamViewModel model)
+        {
+            bool exist = await this.teamService.ExistByIdAsync(model.Id);
+
+            if (exist == false)
+            {
+                this.ModelState.AddModelError(nameof(model.Id), ErrorMessages.InvalidTeam);
+            }
+
+            if (!this.ModelState.IsValid)
+            {
+                model.NamesAndPrices = await this.teamService.AllNamesWithPricesAsync();
+
+                this.TempData[ErrorMessage] = ErrorMessages.InvalidModelState;
+
+                return this.View(model);
+            }
+
+            try
+            {
+                await this.teamService.EditDraftPriceAsync(model.Price, model.Id);
+            }
+            catch (Exception e)
+            {
+                this.ModelState.AddModelError(string.Empty, ErrorMessages.UnexpectedError);
+
+                return this.View(model);
+            }
+            this.TempData[SuccessMessage] = SuccessMessages.SuccessfullyEditedTeamDraftPrice;
+
+            return RedirectToAction(nameof(Standing));
         }
     }
 }

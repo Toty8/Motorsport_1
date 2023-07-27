@@ -3,6 +3,7 @@
     using Microsoft.EntityFrameworkCore;
     using Motorsport1.Data;
     using Motorsport1.Data.Models;
+    using Motorsport1.Web.ViewModels.Driver;
     using Motorsport1.Web.ViewModels.Standing;
     using Motorsport1.Web.ViewModels.Team;
     using Mototsport1.Services.Data.Interfaces;
@@ -46,6 +47,21 @@
                 .ToListAsync();
 
             return teams;
+        }
+
+        public async Task<IEnumerable<TeamDraftNamesViewModel>> AllNamesWithPricesAsync()
+        {
+            IEnumerable<TeamDraftNamesViewModel> teamsNames = await this.dbContext.Teams
+                .Where(t => t.Drivers.Count == MaxDriversPerTeam)
+                .OrderByDescending(d => d.Price)
+                .Select(d => new TeamDraftNamesViewModel
+                {
+                    Id = d.Id,
+                    Name = $"{d.Name} - {d.Price:f2}$",
+                })
+                .ToArrayAsync();
+
+            return teamsNames;
         }
 
         public async Task<IEnumerable<TeamNamesViewModel>> AllTeamsAvailableAndDriversTeamAsync(int id)
@@ -110,6 +126,17 @@
 
             team.Name = model.Name;
             team.ImageUrl = model.ImageUrl;
+
+            await this.dbContext.SaveChangesAsync();
+        }
+
+        public async Task EditDraftPriceAsync(decimal price, int id)
+        {
+            Team team = await this.dbContext.Teams
+                .Where(t => t.Drivers.Count == MaxDriversPerTeam)
+                .FirstAsync(d => d.Id == id);
+
+            team.Price = price;
 
             await this.dbContext.SaveChangesAsync();
         }

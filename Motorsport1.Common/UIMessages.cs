@@ -12,6 +12,7 @@
             public const string UnexistingArticle = "Article with the provided id does not exist!";
             public const string AllreadyLikedArticle = "This article has allready been liked by you!";
 
+            public const string InvalidDriver = "Selected driver is invalid!";
             public const string UnexistingDriver = "Driver with the provided id does not exist!";
             public const string UnexistingDriverByName = "Driver with the provided name does not exist!";
             public const string ExistingDriverByName = "Driver with the provided name already exist!";
@@ -47,16 +48,18 @@
             public const string SuccessfullyAddedArticle = "Your article is successfully published!"; 
             public const string SuccessfullyEditedArticle = "Your article is successfully edited!";
 
-            public const string SuccessfullyAddedDriver = "Your driver is successfully added!";
-            public const string SuccessfullyEditedDriver = "Your driver is successfully edited!";
+            public const string SuccessfullyAddedDriver = "Driver is successfully added!";
+            public const string SuccessfullyEditedDriver = "Driver is successfully edited!";
 
-            public const string SuccessfullyAddedTeam = "Your team is successfully added!";
-            public const string SuccessfullyEditedTeam = "Your team is successfully edited!";
+            public const string SuccessfullyAddedTeam = "Team is successfully added!";
+            public const string SuccessfullyEditedTeam = "Team is successfully edited!";
 
             public const string SuccessfullyAddedComment = "Your comment is successfully added!";
-            public const string SuccessfullyEditedComment = "Your comment is successfully added!";
+            public const string SuccessfullyEditedComment = "Your comment is successfully edited!";
 
             public const string SuccessfullyAppliedStatistics = "Your statistics are successfully applied!";
+            
+            public const string SuccessfullyEditedDriverDraftPrice = "Driver draft price is successfully edited!"; 
         }
     }
 }

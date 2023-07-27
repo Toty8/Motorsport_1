@@ -69,6 +69,21 @@
             return drivers;
         }
 
+        public async Task<IEnumerable<DriverDraftNamesViewModel>> AllNamesWithPricesAsync()
+        {
+            IEnumerable<DriverDraftNamesViewModel> driversNames = await this.dbContext.Drivers
+                .Where(d => d.TeamId != null && d.Team!.Drivers.Count == MaxDriversPerTeam || d.BestResult != null)
+                .OrderByDescending(d => d.Price)
+                .Select(d => new DriverDraftNamesViewModel
+                {
+                    Id = d.Id,
+                    Name = $"{d.Name} - {d.Price:f2}$",
+                })
+                .ToArrayAsync();
+
+            return driversNames;
+        }
+
         public async Task DeleteAsync(int id)
         {
             Driver driver = await this.dbContext.Drivers
@@ -90,6 +105,17 @@
             driver.Number = model.Number;
             driver.TeamId = model.TeamId;
             driver.ImageUrl = model.ImageUrl;
+
+            await this.dbContext.SaveChangesAsync();
+        }
+
+        public async Task EditDraftPriceAsync(decimal price, int id)
+        {
+            Driver driver = await this.dbContext.Drivers
+                .Where(d => d.TeamId != null && d.Team!.Drivers.Count == MaxDriversPerTeam || d.BestResult != null)
+                .FirstAsync(d => d.Id == id);
+
+            driver.Price = price;
 
             await this.dbContext.SaveChangesAsync();
         }

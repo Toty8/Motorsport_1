@@ -38,5 +38,9 @@ namespace Mototsport1.Services.Data.Interfaces
         public Task ResetAsync();
 
         public Task EditDriverStatisticsAsync(EditDriverStatisticsViewModel model, int id);
+
+        public Task<IEnumerable<DriverDraftNamesViewModel>> AllNamesWithPricesAsync();
+
+        public Task EditDraftPriceAsync(decimal price, int id);
     }
 }

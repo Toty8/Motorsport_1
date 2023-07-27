@@ -237,7 +237,7 @@
 
             if (isArticleLiked)
             {
-                this.TempData[ErrorMessage] = ErrorMessages.AllreadyLikedArticle;
+                this.TempData[ErrorMessage] = ErrorMessages.AlreadyLikedArticle;
 
                 return this.RedirectToAction(nameof(Details), new {id});
             }

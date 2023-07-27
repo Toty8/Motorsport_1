@@ -15,6 +15,24 @@ namespace Mototsport1.Services.Data
             this.dbContext = dbContext;
         }
 
+        public async Task<bool> IsUserDrafted(string userId)
+        {
+            return await this.dbContext.Users
+                .Where(u => u.TeamId != null)
+                .AnyAsync(u => u.Id.ToString() == userId);
+        }
+
+        public async Task SelectDriverAsync(int driverId, string userId)
+        {
+            var user = await this.dbContext.Users
+                .Where(u => u.TeamId == null)
+                .FirstAsync(u => u.Id.ToString() == userId);
+
+            user.DriverId = driverId;
+
+            await this.dbContext.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<DraftAllViewModel>> StandingAsync()
         {
             IEnumerable<DraftAllViewModel> drafts = await this.dbContext.Users

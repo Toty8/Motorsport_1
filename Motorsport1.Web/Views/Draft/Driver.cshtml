@@ -1,0 +1,35 @@
+﻿@model SelectDriverViewModel;
+@{
+    ViewData["Title"] = "Select your driver!";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+<div class="text-center mb-3">
+    <h4 class="mb-2">Your current budget is 100$</h4>
+    <h5>But keep in mind that you have to choose a team after you choose your driver!</h5>
+</div>
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Id"></label>
+                <select asp-for="Id" class="form-control">
+                    @foreach (var nameAndPrice in Model.NamesAndPrices)
+                    {
+                        <option value="@nameAndPrice.Id">@nameAndPrice.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="Id" class="small text-danger"></span>
+            </div>
+            <div class="text-center">
+                <input class="btn btn-primary mt-3" type="submit" value="Save" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+    {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -10,7 +10,7 @@
             public const string UnexpectedError = "Unexpected error occured! Please try again or contact administrator!";
 
             public const string UnexistingArticle = "Article with the provided id does not exist!";
-            public const string AllreadyLikedArticle = "This article has allready been liked by you!";
+            public const string AlreadyLikedArticle = "This article has already been liked by you!";
 
             public const string InvalidDriver = "Selected driver is invalid!";
             public const string UnexistingDriver = "Driver with the provided id does not exist!";
@@ -28,6 +28,8 @@
             public const string ExistingTeamByName = "Team with the provided name already exist!";
 
             public const string UnexistingComment = "Comment with the provided id does not exist!";
+
+            public const string AlreadyDraftedUser = "You have already made a draft!";
         }
 
         public static class WarningMessages { }
@@ -61,6 +63,7 @@
             
             public const string SuccessfullyEditedDriverDraftPrice = "Driver draft price is successfully edited!"; 
             public const string SuccessfullyEditedTeamDraftPrice = "Team draft price is successfully edited!"; 
+            public const string SuccessfullySelectedDriver = "You successfully chose your driver!"; 
         }
     }
 }

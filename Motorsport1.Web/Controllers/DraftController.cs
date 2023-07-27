@@ -9,6 +9,7 @@
     using static Motorsport1.Common.UIMessages;
     using static Motorsport1.Common.NotificationMessageConstants;
     using Motorsport1.Web.ViewModels.Team;
+    using Motorsport1.Web.ViewModels.Driver;
 
     public class DraftController : BaseController
     {
@@ -133,6 +134,69 @@
             this.TempData[SuccessMessage] = SuccessMessages.SuccessfullyEditedTeamDraftPrice;
 
             return RedirectToAction(nameof(Standing));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Driver()
+        {
+            var isUserDrafted = await this.draftService.IsUserDrafted(GetUserId());
+
+            if (!isUserDrafted)
+            {
+                this.ModelState.AddModelError(GetUserId(), ErrorMessages.AlreadyDraftedUser);
+            }
+
+            try
+            {
+                SelectDriverViewModel model = new SelectDriverViewModel();
+
+                model.NamesAndPrices = await this.driverService.AllNamesWithPricesAsync();
+
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                return this.GeneralError(nameof(Standing));
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> Driver(SelectDriverViewModel model)
+        {
+            bool exist = await this.driverService.ExistByIdAsync(model.Id);
+
+            if (exist == false)
+            {
+                this.ModelState.AddModelError(nameof(model.Id), ErrorMessages.InvalidDriver);
+            }
+
+            if (!this.ModelState.IsValid)
+            {
+                model.NamesAndPrices = await this.driverService.AllNamesWithPricesAsync();
+
+                this.TempData[ErrorMessage] = ErrorMessages.InvalidModelState;
+
+                return this.View(model);
+            }
+
+            try
+            {
+                await this.draftService.SelectDriverAsync(model.Id, GetUserId());
+            }
+            catch (Exception e)
+            {
+                this.ModelState.AddModelError(string.Empty, ErrorMessages.UnexpectedError);
+
+                return this.View(model);
+            }
+            this.TempData[SuccessMessage] = SuccessMessages.SuccessfullySelectedDriver;
+
+            return RedirectToAction(nameof(Team));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Team()
+        {
+            return this.Ok();
         }
     }
 }

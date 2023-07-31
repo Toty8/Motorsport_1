@@ -64,6 +64,21 @@
             return teamsNames;
         }
 
+        public async Task<IEnumerable<TeamDraftNamesViewModel>> AllNamesWithPricesInRangeAsync(decimal budget)
+        {
+            IEnumerable<TeamDraftNamesViewModel> teamsNames = await this.dbContext.Teams
+                .Where(t => t.Drivers.Count == MaxDriversPerTeam && t.Price <= budget)
+                .OrderByDescending(d => d.Price)
+                .Select(d => new TeamDraftNamesViewModel
+                {
+                    Id = d.Id,
+                    Name = $"{d.Name} - {d.Price:f2}$",
+                    })
+                .ToArrayAsync();
+
+            return teamsNames;
+        }
+
         public async Task<IEnumerable<TeamNamesViewModel>> AllTeamsAvailableAndDriversTeamAsync(int id)
         {
             IEnumerable<TeamNamesViewModel> teams = await this.dbContext.Teams
@@ -106,16 +121,6 @@
             }
 
             await this.dbContext.SaveChangesAsync();
-        }
-
-        public async Task<bool> DoesTeamHaveFreeSeat(int id)
-        {
-            int driversCount = await this.dbContext.Teams
-                .Where(t => t.Id == id)
-                .Select(t => t.Drivers)
-                .CountAsync();
-
-            return driversCount < MaxDriversPerTeam;
         }
 
         public async Task EditAsync(EditTeamViewModel model, int id)
@@ -302,6 +307,13 @@
                 .CountAsync();
 
             return teamsCount == MaxTeams;
+        }
+
+        public async Task<bool> IsTeamPriceBiggerThenBudgetAsync(int teamId, decimal budget)
+        {
+            return await this.dbContext.Teams
+                .Where(t => t.Drivers.Count == MaxDriversPerTeam && t.Price > budget)
+                .AnyAsync(t => t.Id == teamId);
         }
 
         public async Task ResetAsync()

@@ -57,7 +57,10 @@ namespace Motorsport1.Web
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                
+                app.UseExceptionHandler("/Home/Error/500");
+                app.UseStatusCodePagesWithRedirects("/Home/Error?statusCode={0}");
+
                 app.UseHsts();
             }
 

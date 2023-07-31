@@ -8,6 +8,12 @@ namespace Mototsport1.Services.Data.Interfaces
 
         public Task<bool> IsUserDrafted(string userId);
 
+        public Task<bool> isThereSelectedDriverAsync(string userId);
+
         public Task SelectDriverAsync(int driverId, string userId);
+
+        public Task SelectTeamAsync(int teamId, string userId);
+
+        public Task<decimal> GetBudgetLeftAsync(string userId);
     }
 }

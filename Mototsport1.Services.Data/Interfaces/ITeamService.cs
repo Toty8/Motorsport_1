@@ -9,8 +9,6 @@ namespace Mototsport1.Services.Data.Interfaces
 
         public Task<bool> ExistByIdAsync(int id);
 
-        public Task<bool> DoesTeamHaveFreeSeat(int id);
-
         public Task<IEnumerable<TeamNamesViewModel>> AllTeamsAvailableAndDriversTeamAsync(int id);
 
         public Task<IEnumerable<AllTeamsViewModel>> AllAsync();
@@ -39,6 +37,10 @@ namespace Mototsport1.Services.Data.Interfaces
 
         public Task<IEnumerable<TeamDraftNamesViewModel>> AllNamesWithPricesAsync();
 
+        public Task<IEnumerable<TeamDraftNamesViewModel>> AllNamesWithPricesInRangeAsync(decimal budget);
+
         public Task EditDraftPriceAsync(decimal price, int id);
+
+        public Task<bool> IsTeamPriceBiggerThenBudgetAsync(int teamId, decimal budget);
     }
 }

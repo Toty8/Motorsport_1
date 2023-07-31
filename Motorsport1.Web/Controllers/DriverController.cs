@@ -109,7 +109,7 @@
                 this.ModelState.AddModelError(nameof(model.TeamId), ErrorMessages.InvalidTeam);
             }
 
-            bool isThereAFreeSeat = await this.teamService.DoesTeamHaveFreeSeat(model.TeamId);
+            bool isThereAFreeSeat = await this.driverService.DoesTeamHaveFreeSeat(model.TeamId);
 
             if (!isThereAFreeSeat)
             {
@@ -217,7 +217,7 @@
                 this.ModelState.AddModelError(nameof(model.TeamId), ErrorMessages.InvalidTeam);
             }
 
-            bool isThereAFreeSeat = await this.teamService.DoesTeamHaveFreeSeat(model.TeamId);
+            bool isThereAFreeSeat = await this.driverService.DoesTeamHaveFreeSeat(model.TeamId);
 
             if (!isThereAFreeSeat)
             {

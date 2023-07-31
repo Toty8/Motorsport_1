@@ -26,6 +26,7 @@
             public const string InactiveTeam = "Team with the provided id is not active!";
             public const string TeamsAreEnough = "There are already enough teams!";
             public const string ExistingTeamByName = "Team with the provided name already exist!";
+            public const string TeamIsTooExpencive = "Team price is too high!";
 
             public const string UnexistingComment = "Comment with the provided id does not exist!";
 
@@ -43,6 +44,8 @@
             public const string InformationUnactivatedTeam = "You succesfully unactivated a team!";
 
             public const string InformationDeletedComment = "Your comment was successfully deleted!";
+
+            public const string SelectedDriverFirst = "You must select a driver before you select a team!";
         }
 
         public static class SuccessMessages
@@ -64,6 +67,7 @@
             public const string SuccessfullyEditedDriverDraftPrice = "Driver draft price is successfully edited!"; 
             public const string SuccessfullyEditedTeamDraftPrice = "Team draft price is successfully edited!"; 
             public const string SuccessfullySelectedDriver = "You successfully chose your driver!"; 
+            public const string SuccessfullySelectedTeam = "You successfully chose your team!"; 
         }
     }
 }

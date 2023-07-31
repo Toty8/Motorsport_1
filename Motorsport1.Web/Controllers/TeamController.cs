@@ -14,10 +14,12 @@
     {
 
         private readonly ITeamService teamService;
+        private readonly IDriverService driverService;
 
-        public TeamController(ITeamService teamService)
+        public TeamController(ITeamService teamService, IDriverService driverService)
         {
             this.teamService = teamService;
+            this.driverService = driverService;
         }
 
         [HttpGet]
@@ -42,7 +44,7 @@
                 return this.RedirectToAction(nameof(All));
             }
 
-            bool isTeamActive = await this.teamService.DoesTeamHaveFreeSeat(id);
+            bool isTeamActive = await this.driverService.DoesTeamHaveFreeSeat(id);
 
             if (isTeamActive == false)
             {
@@ -199,7 +201,7 @@
                 return this.RedirectToAction(nameof(All));
             }
 
-            bool isTeamActive = await this.teamService.DoesTeamHaveFreeSeat(id);
+            bool isTeamActive = await this.driverService.DoesTeamHaveFreeSeat(id);
 
             if (isTeamActive == false)
             {
@@ -232,7 +234,7 @@
                 return this.RedirectToAction(nameof(All));
             }
 
-            bool isTeamActive = await this.teamService.DoesTeamHaveFreeSeat(id);
+            bool isTeamActive = await this.driverService.DoesTeamHaveFreeSeat(id);
 
             if (isTeamActive == false)
             {

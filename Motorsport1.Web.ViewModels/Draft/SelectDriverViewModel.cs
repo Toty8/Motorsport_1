@@ -1,9 +1,9 @@
-﻿using Motorsport1.Web.ViewModels.Driver;
-using System.ComponentModel.DataAnnotations;
-using System.Xml.Linq;
-
-namespace Motorsport1.Web.ViewModels.Draft
+﻿namespace Motorsport1.Web.ViewModels.Draft
 {
+    using System.ComponentModel.DataAnnotations;
+
+    using Motorsport1.Web.ViewModels.Driver;
+
     public class SelectDriverViewModel
     {
         public SelectDriverViewModel()

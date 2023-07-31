@@ -42,5 +42,7 @@ namespace Mototsport1.Services.Data.Interfaces
         public Task<IEnumerable<DriverDraftNamesViewModel>> AllNamesWithPricesAsync();
 
         public Task EditDraftPriceAsync(decimal price, int id);
+
+        public Task<bool> DoesTeamHaveFreeSeat(int id);
     }
 }

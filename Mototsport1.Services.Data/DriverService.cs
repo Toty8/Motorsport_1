@@ -96,11 +96,20 @@
             await this.dbContext.SaveChangesAsync();
         }
 
+        public async Task<bool> DoesTeamHaveFreeSeat(int id)
+        {
+            int driversCount = await this.dbContext.Drivers
+                .Where(d => d.TeamId == id)
+                .CountAsync();
+
+            return driversCount < MaxDriversPerTeam;
+        }
+
         public async Task EditAsync(EditDriverViewModel model, int id)
         {
             Driver driver = await this.dbContext.Drivers
-                .Where (d => d.TeamId != null)
-                .FirstAsync (d => d.Id == id);
+                .Where(d => d.TeamId != null)
+                .FirstAsync(d => d.Id == id);
 
             driver.Number = model.Number;
             driver.TeamId = model.TeamId;
@@ -140,12 +149,12 @@
             switch (model.RacePosition)
             {
                 case 1:
-                    driver.Points+=25;
-                    driver.TotalPoints+=25;
+                    driver.Points += 25;
+                    driver.TotalPoints += 25;
                     driver.Wins++;
                     driver.Podiums++;
                     break;
-                    
+
                 case 2:
                     driver.Points += 18;
                     driver.TotalPoints += 18;
@@ -210,7 +219,7 @@
         public async Task<bool> ExistByIdAsync(int id)
         {
             return await this.dbContext.Drivers
-                .Where(d => d.TeamId != null)
+                .Where(d => d.TeamId != null && d.Team!.Drivers.Count == MaxDriversPerTeam || d.BestResult != null)
                 .AnyAsync(d => d.Id == id);
         }
 
@@ -322,7 +331,7 @@
 
             int lastYearStanding = 1;
 
-            foreach (var driver in activeDrivers) 
+            foreach (var driver in activeDrivers)
             {
                 driver.Points = 0;
                 driver.BestResult = null;

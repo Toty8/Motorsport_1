@@ -20,6 +20,12 @@ namespace Motorsport1.Data.Configurations
                 .HasForeignKey(c => c.ArticleId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            builder
+                .HasOne(a => a.Publisher)
+                .WithMany(p => p.Comments)
+                .HasForeignKey(a => a.PublisherId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             builder.HasData(this.GenerateComments());
         }
 
@@ -35,6 +41,7 @@ namespace Motorsport1.Data.Configurations
                 Content = "Albon really deserve a better car!",
                 ArticleId = 1,
                 IsActive = true,
+                PublisherId = Guid.Parse("56B03886-BCB8-4775-BA5F-ADE84E6B7A4F"),
             };
 
             comments.Add(comment);
@@ -45,6 +52,7 @@ namespace Motorsport1.Data.Configurations
                 Content = "It was a great race!",
                 ArticleId = 2,
                 IsActive = true,
+                PublisherId = Guid.Parse("56B03886-BCB8-4775-BA5F-ADE84E6B7A4F"),
             };
 
             comments.Add(comment);
@@ -55,11 +63,12 @@ namespace Motorsport1.Data.Configurations
                 Content = "Ferrari is back in the game!",
                 ArticleId = 2,
                 IsActive = true,
+                PublisherId = Guid.Parse("56B03886-BCB8-4775-BA5F-ADE84E6B7A4F"),
             };
 
             comments.Add(comment);
 
             return comments.ToArray();
-        }  
+        }
     }
 }

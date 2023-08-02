@@ -1,4 +1,11 @@
-﻿@model AllArticleViewModel
+﻿@using Motorsport1.Web.Infrastructure.Extensions;
+@using Mototsport1.Services.Data.Interfaces;
+@model AllArticleViewModel
+
+@inject IArticleService articleService
+@{
+    bool isUserOwner = await this.articleService.IsUserOwnerOfArticleAsync(Model.Id, this.User.GetId()!);
+}
 <div class="col-md-4">
     <div class="card mb-3">
         <img class="card-img-top" src="@Model.ImageUrl" alt="Article Image">
@@ -9,7 +16,7 @@
             <br />
             <a asp-controller="Article" asp-action="Details" asp-route-id="@Model.Id"
                class="btn btn-outline-success">Read</a>
-            @if (this.User.Identity.IsAuthenticated)
+            @if(isUserOwner)
             {
                 <a asp-controller="Article" asp-action="Edit" asp-route-id="@Model.Id"
                    class="btn btn-warning">Edit</a>

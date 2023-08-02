@@ -21,6 +21,10 @@
 
         public int ArticleId { get; set; }
 
-        public Article Article { get; set; } = null!;
+        public virtual Article Article { get; set; } = null!;
+
+        public Guid PublisherId { get; set; }
+
+        public virtual ApplicationUser Publisher { get; set; } = null!;
     }
 }

@@ -130,6 +130,15 @@
                 return this.RedirectToAction(nameof(All));
             }
 
+            bool isUserOwner = await this.articleService.IsUserOwnerOfArticleAsync(id, GetUserId());
+
+            if (isUserOwner == false)
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.NotYourArticle;
+
+                return this.RedirectToAction(nameof(All));
+            }
+
             try
             {
                 var article = await this.articleService.GetArticleToEditAsync(id);
@@ -187,6 +196,15 @@
             if (exist == false)
             {
                 this.TempData[ErrorMessage] = ErrorMessages.UnexistingArticle;
+
+                return this.RedirectToAction(nameof(All));
+            }
+
+            bool isUserOwner = await this.articleService.IsUserOwnerOfArticleAsync(id, GetUserId());
+
+            if (isUserOwner == false)
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.NotYourArticle;
 
                 return this.RedirectToAction(nameof(All));
             }

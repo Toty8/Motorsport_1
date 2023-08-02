@@ -11,6 +11,7 @@
 
             public const string UnexistingArticle = "Article with the provided id does not exist!";
             public const string AlreadyLikedArticle = "This article has already been liked by you!";
+            public const string NotYourArticle = "This article you are trying to reach is not yours!";
 
             public const string InvalidDriver = "Selected driver is invalid!";
             public const string UnexistingDriver = "Driver with the provided id does not exist!";
@@ -29,6 +30,7 @@
             public const string TeamIsTooExpencive = "Team price is too high!";
 
             public const string UnexistingComment = "Comment with the provided id does not exist!";
+            public const string NotYourComment = "This comment you are trying to reach is not yours!";
 
             public const string AlreadyDraftedUser = "You have already made a draft!";
         }

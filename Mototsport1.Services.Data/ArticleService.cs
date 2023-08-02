@@ -211,6 +211,13 @@ namespace Mototsport1.Services.Data
                 .AnyAsync(la => la.UserId.ToString() == userId && la.ArticleId == id);
         }
 
+        public async Task<bool> IsUserOwnerOfArticleAsync(int articleId, string userId)
+        {
+            return await this.dbContext.Articles
+                .Where(a => a.IsActive == true)
+                .AnyAsync(a => a.Id == articleId && a.PublisherId.ToString() == userId);
+        }
+
         public async Task LikeArticleAsync(int articleId, string userId)
         {
             LikedArticle likedArticle = new LikedArticle

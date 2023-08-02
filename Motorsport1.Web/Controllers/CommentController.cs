@@ -57,7 +57,7 @@
 
             try
             {
-                await this.commentService.AddAsync(model, id);
+                await this.commentService.AddAsync(model, id, GetUserId());
 
                 this.TempData[SuccessMessage] = SuccessMessages.SuccessfullyAddedComment;
 
@@ -82,6 +82,16 @@
 
                 return this.RedirectToAction("All", "Article");
             }
+
+            bool isUserOwner = await this.commentService.IsUserOwnerOfCommentAsync(commentId, GetUserId());
+
+            if (isUserOwner == false)
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.NotYourComment;
+
+                return this.RedirectToAction("All", "Article");
+            }
+
             try
             {
                 var model = await this.commentService.GetCommentForEditByIdAsync(commentId);
@@ -141,6 +151,16 @@
 
                 return this.RedirectToAction("All", "Article");
             }
+
+            bool isUserOwner = await this.commentService.IsUserOwnerOfCommentAsync(commentId, GetUserId());
+
+            if (isUserOwner == false)
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.NotYourComment;
+
+                return this.RedirectToAction("All", "Article");
+            }
+
             try
             {
                 var model = await this.commentService.GetCommentForDeleteByIdAsync(commentId);

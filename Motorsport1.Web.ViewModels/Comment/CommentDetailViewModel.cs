@@ -9,5 +9,7 @@ namespace Motorsport1.Web.ViewModels.Comment
         public string Content { get; set; } = null!;
 
         public string PublishedDateTime { get; set; } = null!;
+
+        public string PublisherId { get; set; } = null!;
     }
 }

@@ -1,4 +1,13 @@
-﻿@model ArticleDetailsViewModel
+﻿@using Motorsport1.Web.Infrastructure.Extensions;
+@using Mototsport1.Services.Data.Interfaces;
+@model ArticleDetailsViewModel
+
+@inject IArticleService articleService
+@inject ICommentService commentService
+@{
+    bool isArticleLikedByThisUser = await this.articleService.IsArticleLikedAsync(Model.Id, this.User.GetId()!);
+    bool isUserOwner = await this.articleService.IsUserOwnerOfArticleAsync(Model.Id, this.User.GetId()!);
+}
 
 <h2 class="text-center">@Model.Title</h2>
 <hr />
@@ -13,11 +22,14 @@
             <p>@Model.Information</p>
             <p>Likes: <b>@Model.Likes</b></p>
             <div class="form-inline">
-            @if (this.User.Identity.IsAuthenticated)
+            @if (!isArticleLikedByThisUser)
             {
-                    <form method="post" asp-action="Like" asp-route-id="@Model.Id">
-                        <input type="submit" value="Like" class="btn btn-outline-info" />
-                    </form>
+                <form method="post" asp-action="Like" asp-route-id="@Model.Id">
+                    <input type="submit" value="Like" class="btn btn-outline-info" />
+                </form>
+            }
+            @if (isUserOwner)
+            {
                     <a class="ml-2 btn btn-warning" asp-controller="Article" asp-action="Edit"
                        asp-route-id="@Model.Id">Edit</a>
                     <a class="ml-2 btn btn-danger" asp-controller="Article" asp-action="Delete"
@@ -33,21 +45,19 @@
             </div>
             <br>
             <div class="form-inline">
-            @if (this.User.Identity.IsAuthenticated)
-            {
-                    <a class="btn btn-primary" asp-controller="Comment" asp-action="Add" asp-route-id="@Model.Id">Add Comment</a>
-            }
+            <a class="btn btn-primary" asp-controller="Comment" asp-action="Add" asp-route-id="@Model.Id">Add Comment</a>
             </div>
             <hr>
             <ul class="list-group">
             @foreach (var comment in Model.Comments)
             {
+                    bool isUserOwnerOfComment = await this.commentService.IsUserOwnerOfCommentAsync(comment.Id, this.User.GetId()!);
                     <li class="list-group-item" style="margin: 10px; background-color:#fcf5f5;">
                         <h4>@comment.Content</h4>
                         <hr />
                         <small>(@comment.PublishedDateTime)</small>
                         <br>
-                        @if (this.User.Identity.IsAuthenticated)
+                        @if (isUserOwnerOfComment)
                         {
                         <a class="ml-2 btn btn-warning" asp-controller="Comment" asp-action="Edit"
                            asp-route-commentId="@comment.Id">Edit</a>

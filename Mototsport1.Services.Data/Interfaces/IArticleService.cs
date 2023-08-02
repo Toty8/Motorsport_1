@@ -30,5 +30,7 @@ namespace Mototsport1.Services.Data.Interfaces
         public Task<bool> IsArticleLikedAsync(int id, string userId);
 
         public Task LikeArticleAsync(int articleId, string userId);
+
+        public Task<bool> IsUserOwnerOfArticleAsync(int articleId, string userId);
     }
 }

@@ -9,9 +9,11 @@
             this.Id = Guid.NewGuid();
             this.Articles = new HashSet<Article>();
             this.LikedArticles = new HashSet<LikedArticle>();
+            this.Comments = new HashSet<Comment>();
         }
 
         public virtual ICollection<Article> Articles { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
 
         public int? DriverId { get; set; }
 

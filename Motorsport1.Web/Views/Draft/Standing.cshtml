@@ -21,10 +21,13 @@
 
 <hr />
 
-<div class="text-center">
-    <a class="btn btn-warning" asp-controller="Draft" asp-action="EditDriver">Edit Driver`s Price!</a>
-    <a class="btn btn-warning" asp-controller="Draft" asp-action="EditTeam">Edit Teams`s Price!</a>
-</div>
+@if (User.Identity?.IsAuthenticated ?? false)
+{
+    <div class="text-center">
+        <a class="btn btn-warning" asp-controller="Draft" asp-action="EditDriver">Edit Driver`s Price!</a>
+        <a class="btn btn-warning" asp-controller="Draft" asp-action="EditTeam">Edit Teams`s Price!</a>
+    </div>
+}
 <br />
 @if (!Model.Any())
 {

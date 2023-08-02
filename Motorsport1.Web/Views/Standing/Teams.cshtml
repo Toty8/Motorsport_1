@@ -10,9 +10,12 @@
     <a class="btn btn-warning" asp-controller="Standing" asp-action="Drivers">Drivers standing</a>
 </div>
 <br />
-<div class="text-center">
-    <a class="btn btn-danger" asp-controller="Standing" asp-action="Reset">Reset (End Championship)</a>
-</div>
+@if (User.Identity?.IsAuthenticated ?? false)
+{
+    <div class="text-center">
+        <a class="btn btn-danger" asp-controller="Standing" asp-action="Reset">Reset (End Championship)</a>
+    </div>
+}
 
 <ul class="list-group">
     @foreach (var driver in Model)

@@ -15,12 +15,13 @@ namespace Mototsport1.Services.Data
             this.dbContext = dbContext;
         }
 
-        public async Task AddAsync(AddEditAndDeleteCommentViewModel model, int id)
+        public async Task AddAsync(AddEditAndDeleteCommentViewModel model, int id, string userId)
         {
             Comment comment = new Comment()
             {
                 Content = model.Content,
                 ArticleId = id,
+                PublisherId = Guid.Parse(userId),
             };
 
             await this.dbContext.Comments.AddAsync(comment);
@@ -86,6 +87,14 @@ namespace Mototsport1.Services.Data
                 .FirstAsync();
 
             return comment;
+        }
+
+        public async Task<bool> IsUserOwnerOfCommentAsync(int commentId, string userId)
+        {
+            return await this.dbContext.Comments
+            .Include(c => c.Article)
+            .Where(c => c.IsActive == true)
+            .AnyAsync(c => c.Id == commentId && c.PublisherId.ToString() == userId);
         }
     }
 }

@@ -8,6 +8,7 @@ namespace Motorsport1.Web
     using Mototsport1.Services.Data;
     using Motorsport1.Web.Infrastructor.Extensions;
     using Motorsport1.Web.Infrastructure.ModelBinders;
+    using Microsoft.AspNetCore.Mvc;
 
     public class Program
     {
@@ -45,6 +46,7 @@ namespace Motorsport1.Web
                 {
                     options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
                     options.ModelBinderProviders.Insert(1, new DoubleModelBinderProvider());
+                    options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
                 });
 
             WebApplication app = builder.Build();

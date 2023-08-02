@@ -44,9 +44,9 @@
                 return this.RedirectToAction(nameof(All));
             }
 
-            bool isTeamActive = await this.driverService.DoesTeamHaveFreeSeat(id);
+            bool isTeamInactive = await this.driverService.DoesTeamHaveFreeSeat(id);
 
-            if (isTeamActive == false)
+            if (isTeamInactive)
             {
                 this.TempData[ErrorMessage] = ErrorMessages.InactiveTeam;
 
@@ -201,9 +201,9 @@
                 return this.RedirectToAction(nameof(All));
             }
 
-            bool isTeamActive = await this.driverService.DoesTeamHaveFreeSeat(id);
+            bool isTeamInactive = await this.driverService.DoesTeamHaveFreeSeat(id);
 
-            if (isTeamActive == false)
+            if (isTeamInactive)
             {
                 this.TempData[ErrorMessage] = ErrorMessages.InactiveTeam;
 
@@ -234,9 +234,9 @@
                 return this.RedirectToAction(nameof(All));
             }
 
-            bool isTeamActive = await this.driverService.DoesTeamHaveFreeSeat(id);
+            bool isTeamInactive = await this.driverService.DoesTeamHaveFreeSeat(id);
 
-            if (isTeamActive == false)
+            if (isTeamInactive)
             {
                 this.TempData[ErrorMessage] = ErrorMessages.InactiveTeam;
 

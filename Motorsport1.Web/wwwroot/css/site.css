@@ -21,3 +21,65 @@ body {
 nav {
     background-color: #FF1801;
 }
+
+#publisherInfoCard{
+    width: 18rem
+}
+
+.commentBox {
+    margin: 10px;
+    background-color: #fcf5f5;
+}
+
+.draftBox {
+    margin: 10px;
+    background-color: #fcf5f5;
+}
+
+#driverDetailsAlingment {
+    display: inline
+}
+
+#driverDetailsPhoto {
+    width: 20rem;
+}
+
+.teamPartialCardBody {
+    position: absolute;
+    bottom: 0;
+    left: 15%;
+    right: 15%
+}
+
+.teamPartialMainDiv {
+    height: 500px;
+    margin-block: 10px;
+}
+
+#teamDetailsAlingment {
+    display: inline
+}
+
+#teamDetailsPhoto {
+    width: 20rem;
+}
+
+.driverStandingPhoto {
+    max-width: 10%;
+    height: auto;
+}
+
+.driverStandingBox {
+    margin: 10px;
+    background-color: #fcf5f5;
+}
+
+.teamStandingPhoto {
+    max-width: 10%;
+    height: auto;
+}
+
+.teamStandingBox {
+    margin: 10px;
+    background-color: #fcf5f5;
+}

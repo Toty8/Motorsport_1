@@ -41,7 +41,7 @@ namespace Motorsport1.Data.Configurations
                 Content = "Albon really deserve a better car!",
                 ArticleId = 1,
                 IsActive = true,
-                PublisherId = Guid.Parse("56B03886-BCB8-4775-BA5F-ADE84E6B7A4F"),
+                PublisherId = Guid.Parse("E15AEA71-C074-4164-BF8A-01B9F3DBB497"),
             };
 
             comments.Add(comment);
@@ -52,7 +52,7 @@ namespace Motorsport1.Data.Configurations
                 Content = "It was a great race!",
                 ArticleId = 2,
                 IsActive = true,
-                PublisherId = Guid.Parse("56B03886-BCB8-4775-BA5F-ADE84E6B7A4F"),
+                PublisherId = Guid.Parse("E15AEA71-C074-4164-BF8A-01B9F3DBB497"),
             };
 
             comments.Add(comment);
@@ -63,7 +63,7 @@ namespace Motorsport1.Data.Configurations
                 Content = "Ferrari is back in the game!",
                 ArticleId = 2,
                 IsActive = true,
-                PublisherId = Guid.Parse("56B03886-BCB8-4775-BA5F-ADE84E6B7A4F"),
+                PublisherId = Guid.Parse("E15AEA71-C074-4164-BF8A-01B9F3DBB497"),
             };
 
             comments.Add(comment);

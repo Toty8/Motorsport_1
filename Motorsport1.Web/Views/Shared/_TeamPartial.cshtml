@@ -1,8 +1,8 @@
 ﻿@model AllTeamsViewModel
-<div class="col-md-5" style="height: 500px; margin-block: 10px;">
+<div class="col-md-5 teamPartialMainDiv">
     <div class="card h-100 d-inline-block">
         <img class="card-img-top" src="@Model.ImageUrl" alt="Team Logo Image">
-        <div class="card-body text-center" style="position: absolute; bottom: 0; left: 15%; right: 15%">
+        <div class="card-body text-center teamPartialCardBody">
             <h2>@Model.Name</h2>
             <h6>Drivers: @String.Join(" and ", Model.Drivers)</h6>
             <br />

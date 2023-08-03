@@ -43,7 +43,7 @@ namespace Motorsport1.Data.Configurations
                 ImageUrl = "https://media.formula1.com/image/upload/f_auto/q_auto/v1688394388/fom-website/2023/Austria/albon-austria-2023-2.png.transform/9col/image.png",
                 CategoryId = 2,
                 IsActive = true,
-                PublisherId = Guid.Parse("56B03886-BCB8-4775-BA5F-ADE84E6B7A4F"),
+                PublisherId = Guid.Parse("E15AEA71-C074-4164-BF8A-01B9F3DBB497"),
 
             };
 
@@ -57,7 +57,7 @@ namespace Motorsport1.Data.Configurations
                 ImageUrl = "https://www.topgear.com/sites/default/files/news-listicle/image/2023/07/0-Austrian-GP.jpg",
                 CategoryId = 3,
                 IsActive = true,
-                PublisherId = Guid.Parse("56B03886-BCB8-4775-BA5F-ADE84E6B7A4F"),
+                PublisherId = Guid.Parse("E15AEA71-C074-4164-BF8A-01B9F3DBB497"),
 
             };
 
@@ -71,7 +71,7 @@ namespace Motorsport1.Data.Configurations
                 ImageUrl = "https://media.formula1.com/image/upload/t_16by9Centre/f_auto/q_auto/v1687120328/trackside-images/2023/F1_Grand_Prix_of_Canada/1499543157.jpg.transform/9col/image.jpg",
                 CategoryId = 4,
                 IsActive = true,
-                PublisherId = Guid.Parse("56B03886-BCB8-4775-BA5F-ADE84E6B7A4F"),
+                PublisherId = Guid.Parse("E15AEA71-C074-4164-BF8A-01B9F3DBB497"),
 
             };
 

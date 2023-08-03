@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Motorsport1.Data;
 
@@ -11,9 +12,10 @@ using Motorsport1.Data;
 namespace Motorsport1.Data.Migrations
 {
     [DbContext(typeof(Motorsport1DbContext))]
-    partial class Motorsport1DbContextModelSnapshot : ModelSnapshot
+    [Migration("20230803221219_SeedUsers")]
+    partial class SeedUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -334,7 +336,7 @@ namespace Motorsport1.Data.Migrations
 
                     b.HasIndex("PublisherId");
 
-                    b.ToTable("Articles", (string)null);
+                    b.ToTable("Articles");
 
                     b.HasData(
                         new
@@ -393,7 +395,7 @@ namespace Motorsport1.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new
@@ -453,7 +455,7 @@ namespace Motorsport1.Data.Migrations
 
                     b.HasIndex("PublisherId");
 
-                    b.ToTable("Comments", (string)null);
+                    b.ToTable("Comments");
 
                     b.HasData(
                         new
@@ -563,7 +565,7 @@ namespace Motorsport1.Data.Migrations
 
                     b.HasIndex("TeamId");
 
-                    b.ToTable("Drivers", (string)null);
+                    b.ToTable("Drivers");
 
                     b.HasData(
                         new
@@ -978,7 +980,7 @@ namespace Motorsport1.Data.Migrations
 
                     b.HasIndex("ArticleId");
 
-                    b.ToTable("LikedArticles", (string)null);
+                    b.ToTable("LikedArticles");
                 });
 
             modelBuilder.Entity("Motorsport1.Data.Models.Team", b =>
@@ -1043,7 +1045,7 @@ namespace Motorsport1.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Teams", (string)null);
+                    b.ToTable("Teams");
 
                     b.HasData(
                         new

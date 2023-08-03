@@ -20,11 +20,11 @@
 <ul class="list-group">
     @foreach (var driver in Model)
     {
-        <li class="list-group-item" style="margin: 10px; background-color:#fcf5f5;">
+        <li class="list-group-item teamStandingBox">
             <h2 class="li">@counter</h2><h5> Place</h5>
             <hr />
             <p class="h2">
-                <img class="img-thumbnail" style="max-width: 10%; height: auto;" src="@driver.ImageUrl" alt="Driver Image">
+                <img class="img-thumbnail teamStandingPhoto" src="@driver.ImageUrl" alt="Driver Image">
                 @driver.Name
             </p>
             <hr />

@@ -13,5 +13,11 @@
         public const int MaxDriversPerTeam = 2;
 
         public const decimal DraftBudget = 100M;
+
+        public const string AdminRoleName = "Administrator";
+        public const string DevelopmentAdminEmail = "Admin@admin.com";
+
+        public const string PublisherRoleName = "Publisher";
+        public const string DevelopmentPublisherEmail = "Publisher@publisher.com";
     }
 }

@@ -13,6 +13,8 @@ namespace Motorsport1.Web
     using Motorsport1.Web.Infrastructure.ModelBinders;
     using Microsoft.AspNetCore.Mvc;
 
+    using static Common.GeneralApplicationConstants;
+
     public class Program
     {
         public static async Task Main(string[] args)
@@ -39,7 +41,8 @@ namespace Motorsport1.Web
                 options.Password.RequiredLength =
                     builder.Configuration.GetValue<int>("Identity:Password:RequiredLength");
             })
-                .AddEntityFrameworkStores<Motorsport1DbContext>();
+            .AddRoles<IdentityRole<Guid>>()
+            .AddEntityFrameworkStores<Motorsport1DbContext>();
 
             builder.Services.AddApplicationServices(typeof(IArticleService));
 
@@ -81,6 +84,8 @@ namespace Motorsport1.Web
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.SeedAdministrator(DevelopmentAdminEmail);
 
             app.MapDefaultControllerRoute();
             app.MapRazorPages();

@@ -1,9 +1,16 @@
 ﻿namespace Motorsport1.Web.Infrastructor.Extensions
 {
+    using System.Reflection;
+    using Microsoft.AspNetCore.Antiforgery.Internal;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.CodeAnalysis.CSharp.Syntax;
     using Microsoft.Extensions.DependencyInjection;
+
+    using Motorsport1.Data.Models;
     using Mototsport1.Services.Data;
     using Mototsport1.Services.Data.Interfaces;
-    using System.Reflection;
+    using static Common.GeneralApplicationConstants;
 
     public static class WebApplicationBuilderExtensions
     {
@@ -33,6 +40,38 @@
                 services.AddScoped(interfaceType, st);
             }
             services.AddScoped<IArticleService, ArticleService>();
+        }
+
+        public static IApplicationBuilder SeedAdministrator(this IApplicationBuilder app, string email)
+        {
+            using IServiceScope scopedServices = app.ApplicationServices.CreateScope();
+
+            IServiceProvider serviceProvider = scopedServices.ServiceProvider;
+
+            UserManager<ApplicationUser> userManger =
+                serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            RoleManager<IdentityRole<Guid>> roleManager =
+                serviceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
+
+            Task.Run(async () =>
+            {
+                if (await roleManager.RoleExistsAsync(AdminRoleName))
+                {
+                    return;
+                }
+
+                IdentityRole<Guid> role = new IdentityRole<Guid>(AdminRoleName);
+
+                await roleManager.CreateAsync(role);
+
+                ApplicationUser adminUser = await userManger.FindByEmailAsync(email);
+
+                await userManger.AddToRoleAsync(adminUser, AdminRoleName);
+            })
+                .GetAwaiter()
+                .GetResult();
+
+            return app;
         }
     }
 }

@@ -1,6 +1,10 @@
 ﻿namespace Motorsport1.Data.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     using Microsoft.AspNetCore.Identity;
+
+    using static Common.EntityValidationConstants.User;
 
     public class ApplicationUser : IdentityUser<Guid>
     {
@@ -14,6 +18,14 @@
 
         public virtual ICollection<Article> Articles { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
+
+        [Required]
+        [MaxLength(FirstNameMaxLength)]
+        public string FirstName { get; set; } = null!;
+
+        [Required]
+        [MaxLength(LastNameMaxLength)]
+        public string LastName { get; set; } = null!;
 
         public int? DriverId { get; set; }
 

@@ -11,7 +11,7 @@ namespace Mototsport1.Services.Data.Interfaces
 
         public Task<DriverDetailsViewModel> GetDetailsByIdAsync(int id);
 
-        public Task<DriverPreDeleteViewModel> GetDriverForDeleteById(int id);
+        public Task<DriverPreDeleteViewModel> GetDriverForDeleteByIdAsync(int id);
 
         public Task DeleteAsync(int id);
 
@@ -21,17 +21,17 @@ namespace Mototsport1.Services.Data.Interfaces
 
         public Task AddNewAsync(AddNewDriverViewModel model);
 
-        public Task<bool> IsThisNumberTaken(int number);
+        public Task<bool> IsThisNumberTakenAsync(int number);
 
-        public Task<EditDriverViewModel> GetDriverForEditById(int id, int teamId);
+        public Task<EditDriverViewModel> GetDriverForEditByIdAsync(int id, int teamId);
 
-        public Task<int> GetTeamIdByDriverId(int id);
+        public Task<int> GetTeamIdByDriverIdAsync(int id);
 
         public Task EditAsync(EditDriverViewModel model, int id);
 
         public Task<int> GetNumberByIdAsync(int driverId);
 
-        public Task<bool> IsDriverCurrentChampion(int id);
+        public Task<bool> IsDriverCurrentChampionAsync(int id);
 
         public Task<IEnumerable<DriversStandingViewModel>> StandingAsync();
 
@@ -43,6 +43,6 @@ namespace Mototsport1.Services.Data.Interfaces
 
         public Task EditDraftPriceAsync(decimal price, int id);
 
-        public Task<bool> DoesTeamHaveFreeSeat(int id);
+        public Task<bool> DoesTeamHaveFreeSeatAsync(int id);
     }
 }

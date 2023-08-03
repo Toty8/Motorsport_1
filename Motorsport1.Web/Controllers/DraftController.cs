@@ -139,7 +139,7 @@
         [HttpGet]
         public async Task<IActionResult> Driver()
         {
-            var isUserDrafted = await this.draftService.IsUserDrafted(GetUserId());
+            var isUserDrafted = await this.draftService.IsUserDraftedAsync(GetUserId());
 
             if (isUserDrafted)
             {
@@ -198,7 +198,7 @@
         [HttpGet]
         public async Task<IActionResult> Team()
         {
-            var isUserDrafted = await this.draftService.IsUserDrafted(GetUserId());
+            var isUserDrafted = await this.draftService.IsUserDraftedAsync(GetUserId());
 
             if (isUserDrafted)
             {
@@ -244,7 +244,7 @@
                 this.ModelState.AddModelError(nameof(model.Id), ErrorMessages.InvalidTeam);
             }
 
-            bool isTeamInactive = await this.driverService.DoesTeamHaveFreeSeat(model.Id);
+            bool isTeamInactive = await this.driverService.DoesTeamHaveFreeSeatAsync(model.Id);
 
             if (isTeamInactive)
             {
@@ -295,7 +295,7 @@
         [HttpPost]
         public async Task<IActionResult> Reset()
         {
-            var isUserDrafted = await this.draftService.IsUserDrafted(GetUserId());
+            var isUserDrafted = await this.draftService.IsUserDraftedAsync(GetUserId());
 
             if (isUserDrafted)
             {

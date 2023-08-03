@@ -15,11 +15,11 @@ namespace Mototsport1.Services.Data.Interfaces
 
         public Task<TeamDetailsViewModel> GetDetailsByIdAsync(int id);
 
-        public Task<TeamPreDeleteViewModel> GetForDeleteById(int id);
+        public Task<TeamPreDeleteViewModel> GetForDeleteByIdAsync(int id);
 
         public Task DeleteAsync(int id);
 
-        public Task<bool> IsGridOfTeamsFull();
+        public Task<bool> IsGridOfTeamsFullAsync();
 
         public Task<bool> ExistByNameAsync(string name);
 
@@ -27,7 +27,7 @@ namespace Mototsport1.Services.Data.Interfaces
 
         public Task<IEnumerable<TeamStandingViewModel>> StandingAsync();
 
-        public Task<EditTeamViewModel> GetTeamForEditById(int id);
+        public Task<EditTeamViewModel> GetTeamForEditByIdAsync(int id);
 
         public Task EditAsync(EditTeamViewModel model, int id);
 

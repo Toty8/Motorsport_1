@@ -6,7 +6,7 @@ namespace Mototsport1.Services.Data.Interfaces
     {
         public Task<IEnumerable<DraftAllViewModel>> StandingAsync();
 
-        public Task<bool> IsUserDrafted(string userId);
+        public Task<bool> IsUserDraftedAsync(string userId);
 
         public Task<bool> isThereSelectedDriverAsync(string userId);
 

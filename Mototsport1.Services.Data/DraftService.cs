@@ -37,7 +37,7 @@
                 .AnyAsync(u => u.Id.ToString() == userId);
         }
 
-        public async Task<bool> IsUserDrafted(string userId)
+        public async Task<bool> IsUserDraftedAsync(string userId)
         {
             return await this.dbContext.Users
                 .Where(u => u.TeamId != null)

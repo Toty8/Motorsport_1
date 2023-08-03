@@ -56,7 +56,7 @@
         [HttpGet]
         public async Task<IActionResult> AddOld()
         {
-            bool isGridOfTeamsFull = await this.teamService.IsGridOfTeamsFull();
+            bool isGridOfTeamsFull = await this.teamService.IsGridOfTeamsFullAsync();
 
             if (isGridOfTeamsFull)
             {
@@ -82,7 +82,7 @@
         [HttpPost]
         public async Task<IActionResult> AddOld(AddOldDriverViewModel model)
         {
-            bool isGridOfTeamsFull = await this.teamService.IsGridOfTeamsFull();
+            bool isGridOfTeamsFull = await this.teamService.IsGridOfTeamsFullAsync();
 
             if (isGridOfTeamsFull)
             {
@@ -109,7 +109,7 @@
                 this.ModelState.AddModelError(nameof(model.TeamId), ErrorMessages.InvalidTeam);
             }
 
-            bool isThereAFreeSeat = await this.driverService.DoesTeamHaveFreeSeat(model.TeamId);
+            bool isThereAFreeSeat = await this.driverService.DoesTeamHaveFreeSeatAsync(model.TeamId);
 
             if (!isThereAFreeSeat)
             {
@@ -145,7 +145,7 @@
         [HttpGet]
         public async Task<IActionResult> AddNew()
         {
-            bool isGridOfTeamsFull = await this.teamService.IsGridOfTeamsFull();
+            bool isGridOfTeamsFull = await this.teamService.IsGridOfTeamsFullAsync();
 
             if (isGridOfTeamsFull)
             {
@@ -170,7 +170,7 @@
         [HttpPost]
         public async Task<IActionResult> AddNew(AddNewDriverViewModel model)
         {
-            bool isGridOfTeamsFull = await this.teamService.IsGridOfTeamsFull();
+            bool isGridOfTeamsFull = await this.teamService.IsGridOfTeamsFullAsync();
 
             if (isGridOfTeamsFull)
             {
@@ -190,7 +190,7 @@
                 return this.View(model);
             }
 
-            bool driverNumberTaken = await this.driverService.IsThisNumberTaken(model.Number);
+            bool driverNumberTaken = await this.driverService.IsThisNumberTakenAsync(model.Number);
 
             if (driverNumberTaken)
             {
@@ -217,7 +217,7 @@
                 this.ModelState.AddModelError(nameof(model.TeamId), ErrorMessages.InvalidTeam);
             }
 
-            bool isThereAFreeSeat = await this.driverService.DoesTeamHaveFreeSeat(model.TeamId);
+            bool isThereAFreeSeat = await this.driverService.DoesTeamHaveFreeSeatAsync(model.TeamId);
 
             if (!isThereAFreeSeat)
             {
@@ -262,9 +262,9 @@
             }
             try
             {
-                var teamId = await this.driverService.GetTeamIdByDriverId(id);
+                var teamId = await this.driverService.GetTeamIdByDriverIdAsync(id);
 
-                var model = await this.driverService.GetDriverForEditById(id, teamId);
+                var model = await this.driverService.GetDriverForEditByIdAsync(id, teamId);
 
                 model.Teams = await this.teamService.AllTeamsAvailableAndDriversTeamAsync(teamId);
 
@@ -281,26 +281,26 @@
         {
             var currentDriverNumber = await this.driverService.GetNumberByIdAsync(id);
 
-            bool driverNumberTaken = await this.driverService.IsThisNumberTaken(model.Number);
+            bool driverNumberTaken = await this.driverService.IsThisNumberTakenAsync(model.Number);
 
             if (driverNumberTaken && model.Number != currentDriverNumber)
             {
                 this.TempData[ErrorMessage] = ErrorMessages.DriverNumberTaken;
 
-                var teamId = await this.driverService.GetTeamIdByDriverId(id);
+                var teamId = await this.driverService.GetTeamIdByDriverIdAsync(id);
 
                 model.Teams = await this.teamService.AllTeamsAvailableAndDriversTeamAsync(teamId);
 
                 return this.View(model);
             }
 
-            bool isDriverCurrentChamion = await this.driverService.IsDriverCurrentChampion(id);
+            bool isDriverCurrentChamion = await this.driverService.IsDriverCurrentChampionAsync(id);
 
             if (isDriverCurrentChamion != true && model.Number == 1)
             {
                 this.TempData[ErrorMessage] = ErrorMessages.DriverIsnotCurrentChampion;
 
-                var teamId = await this.driverService.GetTeamIdByDriverId(id);
+                var teamId = await this.driverService.GetTeamIdByDriverIdAsync(id);
 
                 model.Teams = await this.teamService.AllTeamsAvailableAndDriversTeamAsync(teamId);
 
@@ -317,7 +317,7 @@
             if (!this.ModelState.IsValid)
             {
 
-                var teamId = await this.driverService.GetTeamIdByDriverId(id);
+                var teamId = await this.driverService.GetTeamIdByDriverIdAsync(id);
 
                 model.Teams = await this.teamService.AllTeamsAvailableAndDriversTeamAsync(teamId);
 
@@ -355,7 +355,7 @@
 
             try
             {
-                var driver = await this.driverService.GetDriverForDeleteById(id);
+                var driver = await this.driverService.GetDriverForDeleteByIdAsync(id);
 
                 return this.View(driver);
             }

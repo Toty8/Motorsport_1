@@ -4,6 +4,15 @@ namespace Motorsport1.Common
 {
     public static class EntityValidationConstants
     {
+        public static class User
+        {
+            public const int FirstNameMinLength = 1;
+            public const int FirstNameMaxLength = 20;
+
+            public const int LastNameMinLength = 1;
+            public const int LastNameMaxLength = 20;
+        }
+
         public static class Category
         {
             public const int NameMinLength = 2;

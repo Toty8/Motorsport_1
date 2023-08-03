@@ -96,7 +96,7 @@
             await this.dbContext.SaveChangesAsync();
         }
 
-        public async Task<bool> DoesTeamHaveFreeSeat(int id)
+        public async Task<bool> DoesTeamHaveFreeSeatAsync(int id)
         {
             int driversCount = await this.dbContext.Drivers
                 .Where(d => d.TeamId == id)
@@ -254,7 +254,7 @@
             };
         }
 
-        public async Task<DriverPreDeleteViewModel> GetDriverForDeleteById(int id)
+        public async Task<DriverPreDeleteViewModel> GetDriverForDeleteByIdAsync(int id)
         {
             Driver driver = await this.dbContext.Drivers
                 .Where(d => d.TeamId != null)
@@ -267,7 +267,7 @@
             };
         }
 
-        public async Task<EditDriverViewModel> GetDriverForEditById(int id, int teamId)
+        public async Task<EditDriverViewModel> GetDriverForEditByIdAsync(int id, int teamId)
         {
             EditDriverViewModel model = await this.dbContext.Drivers
                 .Where(d => d.TeamId != null && d.Id == id)
@@ -289,7 +289,7 @@
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<int> GetTeamIdByDriverId(int id)
+        public async Task<int> GetTeamIdByDriverIdAsync(int id)
         {
             return await this.dbContext.Drivers
                 .Where(d => d.Id == id)
@@ -297,7 +297,7 @@
                 .FirstAsync();
         }
 
-        public async Task<bool> IsDriverCurrentChampion(int id)
+        public async Task<bool> IsDriverCurrentChampionAsync(int id)
         {
             bool isChamopion = await this.dbContext.Drivers
                 .Where(d => d.TeamId != null && d.Id == id)
@@ -307,7 +307,7 @@
             return isChamopion;
         }
 
-        public async Task<bool> IsThisNumberTaken(int number)
+        public async Task<bool> IsThisNumberTakenAsync(int number)
         {
             return await this.dbContext.Drivers
                 .AnyAsync(d => d.Number == number);

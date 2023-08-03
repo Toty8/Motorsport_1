@@ -44,7 +44,7 @@
                 return this.RedirectToAction(nameof(All));
             }
 
-            bool isTeamInactive = await this.driverService.DoesTeamHaveFreeSeat(id);
+            bool isTeamInactive = await this.driverService.DoesTeamHaveFreeSeatAsync(id);
 
             if (isTeamInactive)
             {
@@ -68,7 +68,7 @@
         [HttpGet]
         public async Task<IActionResult> Add()
         {
-            bool isGridOfTeamsFull = await this.teamService.IsGridOfTeamsFull();
+            bool isGridOfTeamsFull = await this.teamService.IsGridOfTeamsFullAsync();
 
             if (isGridOfTeamsFull)
             {
@@ -91,7 +91,7 @@
         [HttpPost]
         public async Task<IActionResult> Add(AddTeamViewModel model)
         {
-            bool isGridOfTeamsFull = await this.teamService.IsGridOfTeamsFull();
+            bool isGridOfTeamsFull = await this.teamService.IsGridOfTeamsFullAsync();
 
             if (isGridOfTeamsFull)
             {
@@ -145,7 +145,7 @@
             }
             try
             {
-                var model = await this.teamService.GetTeamForEditById(id);
+                var model = await this.teamService.GetTeamForEditByIdAsync(id);
 
                 return View(model);
             }
@@ -201,7 +201,7 @@
                 return this.RedirectToAction(nameof(All));
             }
 
-            bool isTeamInactive = await this.driverService.DoesTeamHaveFreeSeat(id);
+            bool isTeamInactive = await this.driverService.DoesTeamHaveFreeSeatAsync(id);
 
             if (isTeamInactive)
             {
@@ -212,7 +212,7 @@
 
             try
             {
-                TeamPreDeleteViewModel viewmodel = await this.teamService.GetForDeleteById(id);
+                TeamPreDeleteViewModel viewmodel = await this.teamService.GetForDeleteByIdAsync(id);
 
                 return View(viewmodel);
             }
@@ -234,7 +234,7 @@
                 return this.RedirectToAction(nameof(All));
             }
 
-            bool isTeamInactive = await this.driverService.DoesTeamHaveFreeSeat(id);
+            bool isTeamInactive = await this.driverService.DoesTeamHaveFreeSeatAsync(id);
 
             if (isTeamInactive)
             {

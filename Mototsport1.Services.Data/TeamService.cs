@@ -270,7 +270,7 @@
             };
         }
 
-        public async Task<TeamPreDeleteViewModel> GetForDeleteById(int id)
+        public async Task<TeamPreDeleteViewModel> GetForDeleteByIdAsync(int id)
         {
             Team team = await this.dbContext.Teams
                 .Include(t => t.Drivers)
@@ -287,7 +287,7 @@
             };
         }
 
-        public async Task<EditTeamViewModel> GetTeamForEditById(int id)
+        public async Task<EditTeamViewModel> GetTeamForEditByIdAsync(int id)
         {
             EditTeamViewModel team = await this.dbContext.Teams
                 .Where(t => t.Drivers.Count == MaxDriversPerTeam && t.Id == id)
@@ -300,7 +300,7 @@
             return team;
         }
 
-        public async Task<bool> IsGridOfTeamsFull()
+        public async Task<bool> IsGridOfTeamsFullAsync()
         {
             int teamsCount = await this.dbContext.Teams
                 .Where(t => t.Drivers.Count == MaxDriversPerTeam)

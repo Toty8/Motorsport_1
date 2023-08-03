@@ -43,6 +43,11 @@ namespace Motorsport1.Web
 
             builder.Services.AddApplicationServices(typeof(IArticleService));
 
+            builder.Services.ConfigureApplicationCookie(cfg =>
+            {
+                cfg.LoginPath = "/User/Login";
+            });
+
             builder.Services
                 .AddControllersWithViews()
                 .AddMvcOptions(options =>

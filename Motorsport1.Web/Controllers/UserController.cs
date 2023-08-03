@@ -1,11 +1,13 @@
 ﻿namespace Motorsport1.Web.Controllers
 {
-
+    using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.ModelBinding;
-    using Motorsport1.Data.Models;
-    using Motorsport1.Web.ViewModels.User;
+
+    using Data.Models;
+    using ViewModels.User;
+    using static Common.NotificationMessageConstants;
+    using static Common.UIMessages;
 
     public class UserController : Controller
     {
@@ -58,6 +60,39 @@
             await this.signInManager.SignInAsync(user, false);
 
             return this.RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Login(string? returnUrl = null)
+        {
+            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+
+            LoginFormModel model = new LoginFormModel()
+            {
+                ReturnUrl = returnUrl,
+            };
+
+            return this.View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginFormModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+            var result = await this.signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+        
+            if (!result.Succeeded)
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.UnexpectedError;
+
+                return this.View(model);
+            }
+
+            return this.RedirectToAction(model.ReturnUrl ?? "Index", "Home");
         }
     }
 }

@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Motorsport1.Data;
 namespace Motorsport1.Web
 {
     using Microsoft.EntityFrameworkCore;

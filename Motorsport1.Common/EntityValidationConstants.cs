@@ -11,6 +11,9 @@ namespace Motorsport1.Common
 
             public const int LastNameMinLength = 1;
             public const int LastNameMaxLength = 20;
+
+            public const int PasswordMinLength = 6;
+            public const int PasswordMaxLength = 100;
         }
 
         public static class Category

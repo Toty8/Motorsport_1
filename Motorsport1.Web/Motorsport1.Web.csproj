@@ -29,4 +29,8 @@
     <ProjectReference Include="..\Mototsport1.Services.Data\Mototsport1.Services.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Identity\Pages\Account\" />
+  </ItemGroup>
+
 </Project>

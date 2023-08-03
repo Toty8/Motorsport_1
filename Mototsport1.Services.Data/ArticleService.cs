@@ -182,6 +182,7 @@ namespace Mototsport1.Services.Data
                 Publisher = new PublisherDetailsViewModel
                 {
                     Email = article.Publisher.Email,
+                    FullName = $"{article.Publisher.FirstName} {article.Publisher.LastName}"
                 },
                 Comments = comments.OrderBy(c => c.PublishedDateTime).ToArray(),
                 

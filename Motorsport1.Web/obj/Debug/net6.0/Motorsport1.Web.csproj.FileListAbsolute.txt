@@ -50,7 +50,6 @@ C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\obj\Debug\net6.0\Motors
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\obj\Debug\net6.0\Motorsport1.Web.AssemblyInfoInputs.cache
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\obj\Debug\net6.0\Motorsport1.Web.AssemblyInfo.cs
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\obj\Debug\net6.0\Motorsport1.Web.csproj.CoreCompileInputs.cache
-C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\obj\Debug\net6.0\Motorsport1.Web.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\obj\Debug\net6.0\Motorsport1.Web.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\obj\Debug\net6.0\Motorsport1.Web.RazorAssemblyInfo.cache
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\obj\Debug\net6.0\Motorsport1.Web.RazorAssemblyInfo.cs
@@ -276,3 +275,7 @@ C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\runtim
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\Motorsport1.Services.Mapping.dll
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\Motorsport1.Services.Mapping.pdb
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\obj\Debug\net6.0\Motorsport1.Web.MvcApplicationPartsAssemblyInfo.cs

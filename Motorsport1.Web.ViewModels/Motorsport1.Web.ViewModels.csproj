@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Motorsport1.Common\Motorsport1.Common.csproj" />
+    <ProjectReference Include="..\Motorsport1.Data.Models\Motorsport1.Data.Models.csproj" />
+    <ProjectReference Include="..\Motorsport1.Service.Mapping\Motorsport1.Services.Mapping.csproj" />
   </ItemGroup>
 
 </Project>

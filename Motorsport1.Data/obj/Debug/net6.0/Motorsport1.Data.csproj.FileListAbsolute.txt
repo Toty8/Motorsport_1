@@ -17,3 +17,5 @@ C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Data\bin\Debug\net6.0\Motor
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Data\bin\Debug\net6.0\Motorsport1.Common.pdb
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Data\bin\Debug\net6.0\Motorsport1.Data.Models.pdb
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Data\obj\Debug\net6.0\Motorsport1.Data.csproj.CopyComplete
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Data\bin\Debug\net6.0\Motorsport1.Services.Mapping.dll
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Data\bin\Debug\net6.0\Motorsport1.Services.Mapping.pdb

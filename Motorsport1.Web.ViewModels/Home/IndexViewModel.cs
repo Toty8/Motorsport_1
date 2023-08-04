@@ -1,6 +1,11 @@
 ﻿namespace Motorsport1.Web.ViewModels.Home
 {
-    public class IndexViewModel
+
+    using Services.Mapping;
+
+    using Data.Models;
+
+    public class IndexViewModel : IMapFrom<Article>
     {
 
         public int Id { get; set; }

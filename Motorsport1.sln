@@ -25,6 +25,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Motorsport1.Web.Infrastruct
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Motorsport1.Services.Data.Models", "Motorsport1.Services.Data.Models\Motorsport1.Services.Data.Models.csproj", "{8FC35429-0F24-47A3-8A64-7FCE75DA3C3A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Motorsport1.Services.Mapping", "Motorsport1.Service.Mapping\Motorsport1.Services.Mapping.csproj", "{C9073FE8-E30F-4C4D-9C4C-A56C1959ED51}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{8FC35429-0F24-47A3-8A64-7FCE75DA3C3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FC35429-0F24-47A3-8A64-7FCE75DA3C3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FC35429-0F24-47A3-8A64-7FCE75DA3C3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9073FE8-E30F-4C4D-9C4C-A56C1959ED51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9073FE8-E30F-4C4D-9C4C-A56C1959ED51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9073FE8-E30F-4C4D-9C4C-A56C1959ED51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9073FE8-E30F-4C4D-9C4C-A56C1959ED51}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +81,7 @@ Global
 		{048672E4-BEC6-43D3-8BF3-EA478F6788AF} = {7C81087F-38B3-41F8-8C72-948B2AF883CC}
 		{3F935944-ED8A-4577-A195-8C0A8DBE542A} = {F120B107-0B4E-48DF-8860-3782A9D3AC8C}
 		{8FC35429-0F24-47A3-8A64-7FCE75DA3C3A} = {7C81087F-38B3-41F8-8C72-948B2AF883CC}
+		{C9073FE8-E30F-4C4D-9C4C-A56C1959ED51} = {7C81087F-38B3-41F8-8C72-948B2AF883CC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8BAAEE36-A420-421B-A2E2-534A098B720E}

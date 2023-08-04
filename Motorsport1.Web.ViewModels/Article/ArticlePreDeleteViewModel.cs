@@ -1,8 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Motorsport1.Web.ViewModels.Article
+﻿namespace Motorsport1.Web.ViewModels.Article
 {
-    public class ArticlePreDeleteViewModel
+    using System.ComponentModel.DataAnnotations;
+
+    using Motorsport1.Services.Mapping;
+    using Data.Models;
+
+    public class ArticlePreDeleteViewModel : IMapFrom<Article>
     {
         public string Title { get; set; } = null!;
 

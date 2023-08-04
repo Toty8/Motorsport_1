@@ -1,11 +1,15 @@
 ﻿namespace Motorsport1.Web.ViewModels.Article
 {
-    using Motorsport1.Web.ViewModels.Category;
     using System.ComponentModel.DataAnnotations;
 
-    using static Common.EntityValidationConstants.Article;
+    using Motorsport1.Services.Mapping;
+    using Motorsport1.Web.ViewModels.Category;
 
-    public class AddAndEditArticleViewModel
+    using Motorsport1.Data.Models;
+    using static Common.EntityValidationConstants.Article;
+    using AutoMapper;
+
+    public class AddAndEditArticleViewModel : IMapTo<Article>, IHaveCustomMappings
     {
 
         public AddAndEditArticleViewModel()
@@ -29,5 +33,11 @@
         public int CategoryId { get; set; }
 
         public IEnumerable<ArticleCategoryViewModel> Categories { get; set; }
+
+        public void CreateMappings(IProfileExpression configuration)
+        {
+            configuration.CreateMap<AddAndEditArticleViewModel, Article>()
+                .ForMember(a => a.PublisherId, opt => opt.Ignore());
+        }
     }
 }

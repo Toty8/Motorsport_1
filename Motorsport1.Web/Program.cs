@@ -14,6 +14,9 @@ namespace Motorsport1.Web
     using Microsoft.AspNetCore.Mvc;
 
     using static Common.GeneralApplicationConstants;
+    using Motorsport1.Services.Mapping;
+    using Motorsport1.Web.ViewModels.Home;
+    using System.Reflection;
 
     public class Program
     {
@@ -61,6 +64,8 @@ namespace Motorsport1.Web
                 });
 
             WebApplication app = builder.Build();
+
+            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

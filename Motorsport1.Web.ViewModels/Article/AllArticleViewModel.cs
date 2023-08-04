@@ -1,8 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Motorsport1.Web.ViewModels.Article
+﻿namespace Motorsport1.Web.ViewModels.Article
 {
-    public class AllArticleViewModel
+    using System.ComponentModel.DataAnnotations;
+
+    using Services.Mapping;
+    using Data.Models;
+
+    public class AllArticleViewModel : IMapFrom<Article>
     {
         public int Id { get; set; }
 

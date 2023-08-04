@@ -15,3 +15,7 @@ C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Services.Data.Models\obj\De
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Services.Data.Models\obj\Debug\net6.0\refint\Motorsport1.Services.Data.Models.dll
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Services.Data.Models\obj\Debug\net6.0\Motorsport1.Services.Data.Models.pdb
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Services.Data.Models\obj\Debug\net6.0\ref\Motorsport1.Services.Data.Models.dll
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Services.Data.Models\bin\Debug\net6.0\Motorsport1.Data.Models.dll
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Services.Data.Models\bin\Debug\net6.0\Motorsport1.Services.Mapping.dll
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Services.Data.Models\bin\Debug\net6.0\Motorsport1.Data.Models.pdb
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Services.Data.Models\bin\Debug\net6.0\Motorsport1.Services.Mapping.pdb

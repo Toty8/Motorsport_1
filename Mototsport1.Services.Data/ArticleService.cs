@@ -1,17 +1,20 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Motorsport1.Data;
-using Motorsport1.Data.Models;
-using Motorsport1.Services.Data.Models.Article;
-using Motorsport1.Web.ViewModels.Article;
-using Motorsport1.Web.ViewModels.Publisher;
-using Motorsport1.Web.ViewModels.Home;
-using Mototsport1.Services.Data.Interfaces;
-using System.ComponentModel;
-using Motorsport1.Web.ViewModels.Comment;
-using System.Globalization;
-
-namespace Mototsport1.Services.Data
+﻿namespace Mototsport1.Services.Data
 {
+    using System.Globalization;
+
+    using Microsoft.EntityFrameworkCore;
+
+    using Motorsport1.Data;
+    using Motorsport1.Data.Models;
+    using Motorsport1.Services.Data.Models.Article;
+    using Motorsport1.Web.ViewModels.Article;
+    using Motorsport1.Web.ViewModels.Publisher;
+    using Motorsport1.Web.ViewModels.Home;
+    using Mototsport1.Services.Data.Interfaces;
+    using Motorsport1.Web.ViewModels.Comment;
+    using Motorsport1.Services.Mapping;
+    using AutoMapper;
+
     public class ArticleService : IArticleService
     {
         private readonly Motorsport1DbContext dbContext;
@@ -23,14 +26,8 @@ namespace Mototsport1.Services.Data
 
         public async Task<int> AddArticleAsync(AddAndEditArticleViewModel model, string publisherId)
         {
-            Article article = new Article()
-            {
-                Title = model.Title,
-                Information = model.Information,
-                ImageUrl = model.ImageUrl,
-                CategoryId = model.CategoryId,
-                PublisherId = Guid.Parse(publisherId)
-            };
+            Article article = AutoMapperConfig.MapperInstance.Map<Article>(model);
+            article.PublisherId = Guid.Parse(publisherId);
 
             await this.dbContext.Articles.AddAsync(article);
             await this.dbContext.SaveChangesAsync();
@@ -63,14 +60,7 @@ namespace Mototsport1.Services.Data
             ICollection<AllArticleViewModel> allArticles = await articleQuery
                 .Skip((queryModel.CurrentPage - 1) * queryModel.ArticlesPerPage)
                 .Take(queryModel.ArticlesPerPage)
-                .Select(a => new AllArticleViewModel
-                {
-                    Id = a.Id,
-                    Title = a.Title,
-                    ImageUrl = a.ImageUrl,
-                    Likes = a.Likes,
-                    ReadCount = a.ReadCount,
-                })
+                .To<AllArticleViewModel>()
                 .ToArrayAsync();
 
             int totalArticles = articleQuery.Count();
@@ -99,10 +89,7 @@ namespace Mototsport1.Services.Data
                 .Where(a => a.IsActive == true)
                 .FirstAsync(a => a.Id == articleId);
 
-            currArticle.Title = article.Title;
-            currArticle.Information = article.Information;
-            currArticle.CategoryId = article.CategoryId;
-            currArticle.ImageUrl = article.ImageUrl;
+            AutoMapperConfig.MapperInstance.Map(article, currArticle);
 
             await this.dbContext.SaveChangesAsync();
         }
@@ -117,14 +104,12 @@ namespace Mototsport1.Services.Data
         public async Task<ArticlePreDeleteViewModel> GetArticleForDeleteByIdAsync(int id)
         {
             Article article = await this.dbContext.Articles
-                .Where (a => a.IsActive == true)
-                .FirstAsync (a => a.Id == id);
+                .Where(a => a.IsActive == true)
+                .FirstAsync(a => a.Id == id);
 
-            return new ArticlePreDeleteViewModel
-            {
-                Title = article.Title,
-                ImageUrl = article.ImageUrl,
-            };
+            ArticlePreDeleteViewModel preDeleteArticle = AutoMapperConfig.MapperInstance.Map<ArticlePreDeleteViewModel>(article);
+
+            return preDeleteArticle;
         }
 
         public async Task<AddAndEditArticleViewModel> GetArticleToEditAsync(int id)
@@ -185,7 +170,7 @@ namespace Mototsport1.Services.Data
                     FullName = $"{article.Publisher.FirstName} {article.Publisher.LastName}"
                 },
                 Comments = comments.OrderBy(c => c.PublishedDateTime).ToArray(),
-                
+
             };
         }
 
@@ -195,12 +180,7 @@ namespace Mototsport1.Services.Data
                 .Where(a => a.IsActive == true)
                 .OrderByDescending(a => a.PublishedDateTime)
                 .Take(5)
-                .Select(a => new IndexViewModel
-                {
-                    Id = a.Id,
-                    Title = a.Title,
-                    ImageUrl = a.ImageUrl
-                })
+                .To<IndexViewModel>()
                 .ToArrayAsync();
 
             return articles;
@@ -241,14 +221,7 @@ namespace Mototsport1.Services.Data
         {
             IEnumerable<AllArticleViewModel> articles = await this.dbContext.Articles
                 .Where(a => a.IsActive == true && a.PublisherId.ToString() == publisherId)
-                .Select(a => new AllArticleViewModel
-                {
-                    Id = a.Id,
-                    Title = a.Title,
-                    ImageUrl = a.ImageUrl,
-                    Likes = a.Likes,
-                    ReadCount = a.ReadCount,
-                })
+                .To<AllArticleViewModel>()
                 .ToArrayAsync();
 
             return articles;

@@ -21,3 +21,5 @@ C:\Users\MSuser\source\repos\Motorsport1\Mototsport1.Services.Data\obj\Debug\net
 C:\Users\MSuser\source\repos\Motorsport1\Mototsport1.Services.Data\obj\Debug\net6.0\ref\Mototsport1.Services.Data.dll
 C:\Users\MSuser\source\repos\Motorsport1\Mototsport1.Services.Data\bin\Debug\net6.0\Motorsport1.Services.Data.Models.dll
 C:\Users\MSuser\source\repos\Motorsport1\Mototsport1.Services.Data\bin\Debug\net6.0\Motorsport1.Services.Data.Models.pdb
+C:\Users\MSuser\source\repos\Motorsport1\Mototsport1.Services.Data\bin\Debug\net6.0\Motorsport1.Services.Mapping.dll
+C:\Users\MSuser\source\repos\Motorsport1\Mototsport1.Services.Data\bin\Debug\net6.0\Motorsport1.Services.Mapping.pdb

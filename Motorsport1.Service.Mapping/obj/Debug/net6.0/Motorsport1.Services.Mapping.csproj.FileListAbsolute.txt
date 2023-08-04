@@ -1,0 +1,12 @@
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Service.Mapping\obj\Debug\net6.0\Motorsport1.Services.Mapping.csproj.AssemblyReference.cache
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Service.Mapping\obj\Debug\net6.0\Motorsport1.Services.Mapping.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Service.Mapping\obj\Debug\net6.0\Motorsport1.Services.Mapping.AssemblyInfoInputs.cache
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Service.Mapping\obj\Debug\net6.0\Motorsport1.Services.Mapping.AssemblyInfo.cs
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Service.Mapping\obj\Debug\net6.0\Motorsport1.Services.Mapping.csproj.CoreCompileInputs.cache
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Service.Mapping\bin\Debug\net6.0\Motorsport1.Services.Mapping.deps.json
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Service.Mapping\bin\Debug\net6.0\Motorsport1.Services.Mapping.dll
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Service.Mapping\bin\Debug\net6.0\Motorsport1.Services.Mapping.pdb
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Service.Mapping\obj\Debug\net6.0\Motorsport1.Services.Mapping.dll
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Service.Mapping\obj\Debug\net6.0\refint\Motorsport1.Services.Mapping.dll
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Service.Mapping\obj\Debug\net6.0\Motorsport1.Services.Mapping.pdb
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Service.Mapping\obj\Debug\net6.0\ref\Motorsport1.Services.Mapping.dll

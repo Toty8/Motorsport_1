@@ -13,3 +13,7 @@ C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web.ViewModels\obj\Debug\ne
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web.ViewModels\obj\Debug\net6.0\refint\Motorsport1.Web.ViewModels.dll
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web.ViewModels\obj\Debug\net6.0\Motorsport1.Web.ViewModels.pdb
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web.ViewModels\obj\Debug\net6.0\ref\Motorsport1.Web.ViewModels.dll
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web.ViewModels\bin\Debug\net6.0\Motorsport1.Data.Models.dll
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web.ViewModels\bin\Debug\net6.0\Motorsport1.Services.Mapping.dll
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web.ViewModels\bin\Debug\net6.0\Motorsport1.Data.Models.pdb
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web.ViewModels\bin\Debug\net6.0\Motorsport1.Services.Mapping.pdb

@@ -2,6 +2,22 @@
   "version": 3,
   "targets": {
     "net6.0": {
+      "AutoMapper/12.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0"
+        },
+        "compile": {
+          "lib/netstandard2.1/AutoMapper.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/AutoMapper.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.AspNetCore.Cryptography.Internal/6.0.15": {
         "type": "package",
         "compile": {
@@ -48,7 +64,7 @@
           }
         }
       },
-      "Microsoft.CSharp/4.5.0": {
+      "Microsoft.CSharp/4.7.0": {
         "type": "package",
         "compile": {
           "ref/netcoreapp2.0/_._": {}
@@ -837,7 +853,8 @@
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.15",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.15",
           "Motorsport1.Common": "1.0.0",
-          "Motorsport1.Data.Models": "1.0.0"
+          "Motorsport1.Data.Models": "1.0.0",
+          "Motorsport1.Services.Mapping": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Motorsport1.Data.dll": {}
@@ -873,11 +890,26 @@
           "bin/placeholder/Motorsport1.Services.Data.Models.dll": {}
         }
       },
+      "Motorsport1.Services.Mapping/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "AutoMapper": "12.0.1"
+        },
+        "compile": {
+          "bin/placeholder/Motorsport1.Services.Mapping.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Motorsport1.Services.Mapping.dll": {}
+        }
+      },
       "Motorsport1.Web.ViewModels/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "Motorsport1.Common": "1.0.0"
+          "Motorsport1.Common": "1.0.0",
+          "Motorsport1.Data.Models": "1.0.0",
+          "Motorsport1.Services.Mapping": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Motorsport1.Web.ViewModels.dll": {}
@@ -889,6 +921,21 @@
     }
   },
   "libraries": {
+    "AutoMapper/12.0.1": {
+      "sha512": "hvV62vl6Hp/WfQ24yzo3Co9+OPl8wH8hApwVtgWpiAynVJkUcs7xvehnSftawL8Pe8FrPffBRM3hwzLQqWDNjA==",
+      "type": "package",
+      "path": "automapper/12.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "automapper.12.0.1.nupkg.sha512",
+        "automapper.nuspec",
+        "icon.png",
+        "lib/netstandard2.1/AutoMapper.dll",
+        "lib/netstandard2.1/AutoMapper.xml"
+      ]
+    },
     "Microsoft.AspNetCore.Cryptography.Internal/6.0.15": {
       "sha512": "Vbz5FvG1T5i4Y/gdHRmrWxtrLNNGkQvbs+tq1yivdwI1idXAX1JmVrwX0m060OClOTcjgwEzE5ljWz9grkMtHQ==",
       "type": "package",
@@ -942,10 +989,10 @@
         "microsoft.aspnetcore.identity.entityframeworkcore.nuspec"
       ]
     },
-    "Microsoft.CSharp/4.5.0": {
-      "sha512": "kaj6Wb4qoMuH3HySFJhxwQfe8R/sJsNJnANrvv8WdFPMoNbKY5htfNscv+LHCu5ipz+49m2e+WQXpLXr9XYemQ==",
+    "Microsoft.CSharp/4.7.0": {
+      "sha512": "pTj+D3uJWyN3My70i2Hqo+OXixq3Os2D1nJ2x92FFo6sk8fYS1m1WLNTs0Dc1uPaViH0YvEEwvzddQ7y4rhXmA==",
       "type": "package",
-      "path": "microsoft.csharp/4.5.0",
+      "path": "microsoft.csharp/4.7.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -958,6 +1005,7 @@
         "lib/netcoreapp2.0/_._",
         "lib/netstandard1.3/Microsoft.CSharp.dll",
         "lib/netstandard2.0/Microsoft.CSharp.dll",
+        "lib/netstandard2.0/Microsoft.CSharp.xml",
         "lib/portable-net45+win8+wp8+wpa81/_._",
         "lib/uap10.0.16299/_._",
         "lib/win8/_._",
@@ -967,7 +1015,7 @@
         "lib/xamarinmac20/_._",
         "lib/xamarintvos10/_._",
         "lib/xamarinwatchos10/_._",
-        "microsoft.csharp.4.5.0.nupkg.sha512",
+        "microsoft.csharp.4.7.0.nupkg.sha512",
         "microsoft.csharp.nuspec",
         "ref/MonoAndroid10/_._",
         "ref/MonoTouch10/_._",
@@ -2162,6 +2210,11 @@
       "path": "../Motorsport1.Services.Data.Models/Motorsport1.Services.Data.Models.csproj",
       "msbuildProject": "../Motorsport1.Services.Data.Models/Motorsport1.Services.Data.Models.csproj"
     },
+    "Motorsport1.Services.Mapping/1.0.0": {
+      "type": "project",
+      "path": "../Motorsport1.Service.Mapping/Motorsport1.Services.Mapping.csproj",
+      "msbuildProject": "../Motorsport1.Service.Mapping/Motorsport1.Services.Mapping.csproj"
+    },
     "Motorsport1.Web.ViewModels/1.0.0": {
       "type": "project",
       "path": "../Motorsport1.Web.ViewModels/Motorsport1.Web.ViewModels.csproj",
@@ -2174,6 +2227,7 @@
       "Motorsport1.Data >= 1.0.0",
       "Motorsport1.Data.Models >= 1.0.0",
       "Motorsport1.Services.Data.Models >= 1.0.0",
+      "Motorsport1.Services.Mapping >= 1.0.0",
       "Motorsport1.Web.ViewModels >= 1.0.0"
     ]
   },
@@ -2218,6 +2272,9 @@
             },
             "C:\\Users\\MSuser\\source\\repos\\Motorsport1\\Motorsport1.Data\\Motorsport1.Data.csproj": {
               "projectPath": "C:\\Users\\MSuser\\source\\repos\\Motorsport1\\Motorsport1.Data\\Motorsport1.Data.csproj"
+            },
+            "C:\\Users\\MSuser\\source\\repos\\Motorsport1\\Motorsport1.Service.Mapping\\Motorsport1.Services.Mapping.csproj": {
+              "projectPath": "C:\\Users\\MSuser\\source\\repos\\Motorsport1\\Motorsport1.Service.Mapping\\Motorsport1.Services.Mapping.csproj"
             },
             "C:\\Users\\MSuser\\source\\repos\\Motorsport1\\Motorsport1.Services.Data.Models\\Motorsport1.Services.Data.Models.csproj": {
               "projectPath": "C:\\Users\\MSuser\\source\\repos\\Motorsport1\\Motorsport1.Services.Data.Models\\Motorsport1.Services.Data.Models.csproj"

@@ -1,8 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Motorsport1.Web.ViewModels.Driver
+﻿namespace Motorsport1.Web.ViewModels.Driver
 {
-    public class DriverPreDeleteViewModel
+    using System.ComponentModel.DataAnnotations;
+
+    using Motorsport1.Data.Models;
+    using Motorsport1.Services.Mapping;
+
+    public class DriverPreDeleteViewModel : IMapFrom<Driver>
     {
         public string Name { get; set; } = null!;
 

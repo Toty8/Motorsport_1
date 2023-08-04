@@ -5,10 +5,12 @@
 
     using Motorsport1.Data;
     using Motorsport1.Data.Models;
+    using Motorsport1.Services.Mapping;
     using Motorsport1.Web.ViewModels.Driver;
     using Motorsport1.Web.ViewModels.Standing;
     using Mototsport1.Services.Data.Interfaces;
     using System.Globalization;
+    using static Motorsport1.Common.EntityValidationConstants.Driver;
     using static Motorsport1.Common.GeneralApplicationConstants;
 
     public class DriverService : IDriverService
@@ -22,15 +24,7 @@
 
         public async Task AddNewAsync(AddNewDriverViewModel model)
         {
-            Driver driver = new Driver()
-            {
-                Name = model.Name,
-                ImageUrl = model.ImageUrl,
-                Number = model.Number,
-                TeamId = model.TeamId,
-                Price = model.Price,
-                BirthDate = DateTime.ParseExact(model.BirthDate, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture),
-            };
+            Driver driver = AutoMapperConfig.MapperInstance.Map<Driver>(model);
 
             await this.dbContext.Drivers.AddAsync(driver);
             await this.dbContext.SaveChangesAsync();
@@ -39,11 +33,9 @@
         public async Task AddOldAsync(AddOldDriverViewModel model)
         {
             Driver driver = await this.dbContext.Drivers
-                .FirstAsync(d => d.Name == model.Name);
+            .FirstAsync(d => d.Name == model.Name);
 
-            driver.ImageUrl = model.ImageUrl;
-
-            driver.TeamId = model.TeamId;
+            AutoMapperConfig.MapperInstance.Map(model, driver);
 
             await this.dbContext.SaveChangesAsync();
         }
@@ -56,14 +48,7 @@
                 .ThenBy(d => d.Team!.LastYearStanding)
                 .ThenByDescending(d => d.LastYearStanding.HasValue)
                 .ThenBy(d => d.LastYearStanding)
-                .Select(d => new AllDriverViewModel
-                {
-                    Id = d.Id,
-                    Name = d.Name,
-                    ImageUrl = d.ImageUrl,
-                    Number = d.Number,
-                    TeamName = d.Team!.Name
-                })
+                .To<AllDriverViewModel>()
                 .ToArrayAsync();
 
             return drivers;
@@ -74,11 +59,7 @@
             IEnumerable<DriverDraftNamesViewModel> driversNames = await this.dbContext.Drivers
                 .Where(d => d.TeamId != null && d.Team!.Drivers.Count == MaxDriversPerTeam || d.BestResult != null)
                 .OrderByDescending(d => d.Price)
-                .Select(d => new DriverDraftNamesViewModel
-                {
-                    Id = d.Id,
-                    Name = $"{d.Name} - {d.Price:f2}$",
-                })
+                .To<DriverDraftNamesViewModel>()
                 .ToArrayAsync();
 
             return driversNames;
@@ -111,9 +92,7 @@
                 .Where(d => d.TeamId != null)
                 .FirstAsync(d => d.Id == id);
 
-            driver.Number = model.Number;
-            driver.TeamId = model.TeamId;
-            driver.ImageUrl = model.ImageUrl;
+            AutoMapperConfig.MapperInstance.Map(model, driver);
 
             await this.dbContext.SaveChangesAsync();
         }
@@ -237,21 +216,9 @@
                 .Where(d => d.TeamId != null)
                 .FirstAsync(d => d.Id == id);
 
-            return new DriverDetailsViewModel
-            {
-                Id = model.Id,
-                Name = model.Name,
-                BirthDate = model.BirthDate.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture),
-                ImageUrl = model.ImageUrl,
-                Number = model.Number,
-                Championships = model.Championships,
-                Wins = model.Wins,
-                PolePositions = model.PolePositions,
-                Podiums = model.Podiums,
-                Points = model.Points,
-                TotalPoints = model.TotalPoints,
-                TeamName = model.Team!.Name
-            };
+            DriverDetailsViewModel driverDetails = AutoMapperConfig.MapperInstance.Map<DriverDetailsViewModel>(model);
+
+            return driverDetails;
         }
 
         public async Task<DriverPreDeleteViewModel> GetDriverForDeleteByIdAsync(int id)
@@ -260,23 +227,19 @@
                 .Where(d => d.TeamId != null)
                 .FirstAsync(d => d.Id == id);
 
-            return new DriverPreDeleteViewModel
-            {
-                Name = driver.Name,
-                ImageUrl = driver.ImageUrl,
-            };
+            DriverPreDeleteViewModel driverPreDelete = AutoMapperConfig.MapperInstance.Map<DriverPreDeleteViewModel>(driver);
+            
+            return driverPreDelete;
         }
 
         public async Task<EditDriverViewModel> GetDriverForEditByIdAsync(int id, int teamId)
         {
             EditDriverViewModel model = await this.dbContext.Drivers
                 .Where(d => d.TeamId != null && d.Id == id)
-                .Select(d => new EditDriverViewModel
-                {
-                    Number = d.Number,
-                    ImageUrl = d.ImageUrl,
-                    TeamId = teamId
-                }).FirstAsync();
+                .To<EditDriverViewModel>()
+                .FirstAsync();
+
+            model.TeamId = teamId;
 
             return model;
         }
@@ -357,14 +320,8 @@
                 .ThenBy(d => d.BestResult)
                 .ThenByDescending(d => d.BestResultCount.HasValue)
                 .ThenBy(d => d.BestResultCount)
-                .Select(d => new DriversStandingViewModel
-                {
-                    Id = d.Id,
-                    Name = d.Name,
-                    ImageUrl = d.ImageUrl,
-                    Points = d.Points,
-                    TeamName = d.Team!.Name
-                }).ToArrayAsync();
+                .To<DriversStandingViewModel>()
+                .ToArrayAsync();
 
             return drivers;
         }

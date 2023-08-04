@@ -1,10 +1,12 @@
 ﻿namespace Motorsport1.Web.ViewModels.Driver
 {
+    using Motorsport1.Data.Models;
+    using Motorsport1.Services.Mapping;
     using Motorsport1.Web.ViewModels.Team;
     using System.ComponentModel.DataAnnotations;
 
     using static Common.EntityValidationConstants.Driver;
-    public class AddOldDriverViewModel
+    public class AddOldDriverViewModel : IMapTo<Driver>
     {
         public AddOldDriverViewModel()
         {

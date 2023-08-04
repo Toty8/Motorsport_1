@@ -1,9 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Xml.Linq;
-
-namespace Motorsport1.Web.ViewModels.Standing
+﻿namespace Motorsport1.Web.ViewModels.Standing
 {
-    public class DriversStandingViewModel
+    using System.ComponentModel.DataAnnotations;
+
+    using AutoMapper;
+    using Motorsport1.Data.Models;
+    using Motorsport1.Services.Mapping;
+
+    public class DriversStandingViewModel : IMapFrom<Driver>, IHaveCustomMappings
     {
         public int Id { get; set; }
 
@@ -15,5 +18,12 @@ namespace Motorsport1.Web.ViewModels.Standing
         public string TeamName { get; set; } = null!;
 
         public double Points { get; set; }
+
+        public void CreateMappings(IProfileExpression configuration)
+        {
+            configuration.CreateMap<Driver, DriversStandingViewModel>()
+                .ForMember(d => d.TeamName, 
+                    opt => opt.MapFrom(src => src.Team!.Name));
+        }
     }
 }

@@ -1,8 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Motorsport1.Web.ViewModels.Driver
+﻿namespace Motorsport1.Web.ViewModels.Driver
 {
-    public class DriverDetailsViewModel : AllDriverViewModel
+    using AutoMapper;
+    using Motorsport1.Data.Models;
+    using Motorsport1.Services.Mapping;
+    using System.Globalization;
+
+    public class DriverDetailsViewModel : AllDriverViewModel, IMapFrom<Driver>, IHaveCustomMappings
     {
 
         public string BirthDate { get; set; } = null!;
@@ -18,5 +21,14 @@ namespace Motorsport1.Web.ViewModels.Driver
         public int PolePositions { get; set; }
 
         public double TotalPoints { get; set; }
+
+        public override void CreateMappings(IProfileExpression configuration)
+        {
+            configuration.CreateMap<Driver, DriverDetailsViewModel>()
+                .ForMember(d => d.TeamName,
+                    opt => opt.MapFrom(src => src.Team!.Name))
+                .ForMember(d => d.BirthDate,
+                    opt => opt.MapFrom(src => src.BirthDate.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)));
+        }
     }
 }

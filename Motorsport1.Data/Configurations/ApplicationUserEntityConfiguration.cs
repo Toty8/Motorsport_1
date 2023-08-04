@@ -51,6 +51,7 @@
                 UserName = DevelopmentAdminEmail,
                 NormalizedUserName = DevelopmentAdminEmail.ToUpper(),
                 LockoutEnabled = true,
+                SecurityStamp = Guid.NewGuid().ToString("D"),
                 FirstName = "Admin",
                 LastName = "Admin"
             };
@@ -67,6 +68,7 @@
                 UserName = DevelopmentPublisherEmail,
                 NormalizedUserName = DevelopmentPublisherEmail.ToUpper(),
                 LockoutEnabled = true,
+                SecurityStamp = Guid.NewGuid().ToString("D"),
                 FirstName = "Publisher",
                 LastName = "Publisher"
             };

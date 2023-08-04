@@ -71,6 +71,38 @@
                 .GetAwaiter()
                 .GetResult();
 
+            CreatePublisher(app, email);
+
+            return app;
+        }
+
+        public static IApplicationBuilder CreatePublisher(this IApplicationBuilder app, string email)
+        {
+            using IServiceScope scopedServices = app.ApplicationServices.CreateScope();
+
+            IServiceProvider serviceProvider = scopedServices.ServiceProvider;
+
+            UserManager<ApplicationUser> userManger =
+                serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            RoleManager<IdentityRole<Guid>> roleManager =
+                serviceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
+
+            Task.Run(async () =>
+            {
+                if (!await roleManager.RoleExistsAsync(PublisherRoleName))
+                {
+                    IdentityRole<Guid> role = new IdentityRole<Guid>(PublisherRoleName);
+
+                    await roleManager.CreateAsync(role);
+                }
+
+                ApplicationUser publisherUser = await userManger.FindByEmailAsync(email);
+
+                await userManger.AddToRoleAsync(publisherUser, PublisherRoleName);
+            })
+                .GetAwaiter()
+                .GetResult();
+
             return app;
         }
     }

@@ -86,6 +86,7 @@ namespace Motorsport1.Web
             app.UseAuthorization();
 
             app.SeedAdministrator(DevelopmentAdminEmail);
+            app.CreatePublisher(DevelopmentPublisherEmail);
 
             app.MapDefaultControllerRoute();
             app.MapRazorPages();

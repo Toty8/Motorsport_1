@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Motorsport1.Data;
+using Motorsport1.Services.Mapping;
 using Motorsport1.Web.ViewModels.Category;
 using Mototsport1.Services.Data.Interfaces;
 
@@ -19,11 +20,8 @@ namespace Mototsport1.Services.Data
             IEnumerable<ArticleCategoryViewModel> categories =
                 await dbContext.Categories
                 .AsNoTracking()
-                .Select(c => new ArticleCategoryViewModel
-                {
-                    Id = c.Id,
-                    Name = c.Name,
-                }).ToArrayAsync();
+                .To<ArticleCategoryViewModel>()
+                .ToArrayAsync();
 
             return categories;
         }

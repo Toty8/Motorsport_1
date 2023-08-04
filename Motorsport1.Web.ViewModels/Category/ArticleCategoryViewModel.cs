@@ -1,8 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Motorsport1.Web.ViewModels.Category
+﻿namespace Motorsport1.Web.ViewModels.Category
 {
-    public class ArticleCategoryViewModel
+
+    using Motorsport1.Services.Mapping;
+    using Data.Models;
+
+    public class ArticleCategoryViewModel : IMapFrom<Category>
     {
         public int Id { get; set; }
 

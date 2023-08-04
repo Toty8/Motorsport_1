@@ -7,7 +7,7 @@
     using Mototsport1.Services.Data.Interfaces;
     using static Motorsport1.Common.UIMessages;
     using static Motorsport1.Common.NotificationMessageConstants;
-    using Motorsport1.Web.ViewModels.Driver;
+    using Motorsport1.Web.Infrastructure.Extensions;
 
     public class CommentController : BaseController
     {
@@ -32,6 +32,7 @@
 
                 return this.RedirectToAction("All", "Article");
             }
+
             try
             {
                 AddEditAndDeleteCommentViewModel model = new AddEditAndDeleteCommentViewModel();
@@ -85,7 +86,7 @@
 
             bool isUserOwner = await this.commentService.IsUserOwnerOfCommentAsync(commentId, GetUserId());
 
-            if (isUserOwner == false)
+            if (!this.User.IsAdmin() && !isUserOwner)
             {
                 this.TempData[ErrorMessage] = ErrorMessages.NotYourComment;
 
@@ -154,7 +155,7 @@
 
             bool isUserOwner = await this.commentService.IsUserOwnerOfCommentAsync(commentId, GetUserId());
 
-            if (isUserOwner == false)
+            if (!this.User.IsAdmin() && !isUserOwner)
             {
                 this.TempData[ErrorMessage] = ErrorMessages.NotYourComment;
 

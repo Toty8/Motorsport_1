@@ -19,7 +19,7 @@
             <p>Total points: <b>@Model.TotalPoints</b></p>
             <p>Racing for <b>@Model.TeamName</b></p>
             <div class="form-inline">
-                @if (this.User.Identity.IsAuthenticated)
+                @if (this.User.IsAdmin())
                 {
                     <a class="btn btn-warning" asp-controller="Driver" asp-action="Edit"
                        asp-route-id="@Model.Id">Edit</a>

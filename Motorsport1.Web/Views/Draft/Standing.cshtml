@@ -1,15 +1,22 @@
 ﻿@model IEnumerable<DraftAllViewModel>
+@using Mototsport1.Services.Data.Interfaces;
+
+@inject IDraftService draftService;
 @{
     ViewBag.Title = "Draft Standing";
     int counter = 1;
+    var isUserDrafted = await this.draftService.IsUserDraftedAsync(this.User.GetId()!);
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
 
-<div class="text-center">
-    <a class="btn btn-warning" asp-controller="Draft" asp-action="Driver">Play!</a>
-</div>
+@if (!isUserDrafted)
+{
+    <div class="text-center">
+        <a class="btn btn-warning" asp-controller="Draft" asp-action="Driver">Play!</a>
+    </div>
+}
 
 <br />
 
@@ -21,7 +28,7 @@
 
 <hr />
 
-@if (User.Identity?.IsAuthenticated ?? false)
+@if (this.User.IsAdmin())
 {
     <div class="text-center">
         <a class="btn btn-warning" asp-controller="Draft" asp-action="EditDriver">Edit Driver`s Price!</a>

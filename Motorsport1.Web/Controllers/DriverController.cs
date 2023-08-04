@@ -7,6 +7,7 @@
     using Mototsport1.Services.Data.Interfaces;
     using static Motorsport1.Common.UIMessages;
     using static Motorsport1.Common.NotificationMessageConstants;
+    using Motorsport1.Web.Infrastructure.Extensions;
 
     public class DriverController : BaseController
     {
@@ -64,6 +65,14 @@
 
                 return this.RedirectToAction(nameof(All));
             }
+
+            if (!this.User.IsAdmin())
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.AccessDenied;
+
+                return this.RedirectToAction(nameof(All));
+            }
+
             try
             {
                 AddOldDriverViewModel model = new AddOldDriverViewModel();
@@ -153,6 +162,14 @@
 
                 return this.RedirectToAction(nameof(All));
             }
+
+            if (!this.User.IsAdmin())
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.AccessDenied;
+
+                return this.RedirectToAction(nameof(All));
+            }
+
             try
             {
                 AddNewDriverViewModel model = new AddNewDriverViewModel();
@@ -260,6 +277,14 @@
 
                 return this.RedirectToAction(nameof(All));
             }
+
+            if (!this.User.IsAdmin())
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.AccessDenied;
+
+                return this.RedirectToAction(nameof(All));
+            }
+
             try
             {
                 var teamId = await this.driverService.GetTeamIdByDriverIdAsync(id);
@@ -349,6 +374,13 @@
             if (exist == false)
             {
                 this.TempData[ErrorMessage] = ErrorMessages.UnexistingDriver;
+
+                return this.RedirectToAction(nameof(All));
+            }
+
+            if (!this.User.IsAdmin())
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.AccessDenied;
 
                 return this.RedirectToAction(nameof(All));
             }

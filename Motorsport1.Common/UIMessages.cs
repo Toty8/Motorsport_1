@@ -8,6 +8,7 @@
 
             public const string InvalidModelState = "Please enter valid data!";
             public const string UnexpectedError = "Unexpected error occured! Please try again or contact administrator!";
+            public const string AccessDenied = "You do not have access to do that!";
 
             public const string UnexistingArticle = "Article with the provided id does not exist!";
             public const string AlreadyLikedArticle = "This article has already been liked by you!";

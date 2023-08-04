@@ -4,6 +4,7 @@ using Motorsport1.Web.ViewModels.Standing;
 using Mototsport1.Services.Data.Interfaces;
 using static Motorsport1.Common.UIMessages;
 using static Motorsport1.Common.NotificationMessageConstants;
+using Motorsport1.Web.Infrastructure.Extensions;
 
 namespace Motorsport1.Web.Controllers
 {
@@ -53,6 +54,12 @@ namespace Motorsport1.Web.Controllers
         [HttpGet]
         public IActionResult Reset()
         {
+            if (!this.User.IsAdmin())
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.AccessDenied;
+
+                return this.RedirectToAction(nameof(Drivers));
+            }
             return this.View();
         }
 
@@ -85,6 +92,14 @@ namespace Motorsport1.Web.Controllers
 
                 return this.RedirectToAction(nameof(Drivers));
             }
+
+            if (!this.User.IsAdmin())
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.AccessDenied;
+
+                return this.RedirectToAction(nameof(Drivers));
+            }
+
             try
             {
                 EditDriverStatisticsViewModel model = new EditDriverStatisticsViewModel();

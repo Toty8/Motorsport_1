@@ -8,6 +8,7 @@
     using Mototsport1.Services.Data.Interfaces;
     using static Common.UIMessages;
     using static Common.NotificationMessageConstants;
+    using Motorsport1.Web.Infrastructure.Extensions;
 
     public class ArticleController : BaseController
     {
@@ -37,6 +38,13 @@
         [HttpGet]
         public async Task<IActionResult> Add()
         {
+            if (!this.User.IsAdmin() && !this.User.IsPublisher())
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.AccessDenied;
+
+                return this.RedirectToAction(nameof(All));
+            }
+
             try
             {
                 AddAndEditArticleViewModel model = new AddAndEditArticleViewModel();
@@ -76,7 +84,7 @@
 
                 this.TempData[SuccessMessage] = SuccessMessages.SuccessfullyAddedArticle;
 
-                return RedirectToAction(nameof(Details), new { articleId });
+                return RedirectToAction(nameof(All));
             }
             catch (Exception e)
             {
@@ -88,6 +96,13 @@
 
         public async Task<IActionResult> Mine()
         {
+            if (!this.User.IsAdmin() && !this.User.IsPublisher())
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.AccessDenied;
+
+                return this.RedirectToAction(nameof(All));
+            }
+
             IEnumerable<AllArticleViewModel> model = await this.articleService.MineAsync(GetUserId());
 
             return this.View(model);
@@ -123,7 +138,7 @@
         {
             bool exist = await this.articleService.ExistByIdAsync(id);
 
-            if (exist == false)
+            if (!exist)
             {
                 this.TempData[ErrorMessage] = ErrorMessages.UnexistingArticle;
 
@@ -132,7 +147,7 @@
 
             bool isUserOwner = await this.articleService.IsUserOwnerOfArticleAsync(id, GetUserId());
 
-            if (isUserOwner == false)
+            if (!this.User.IsAdmin() && !isUserOwner)
             {
                 this.TempData[ErrorMessage] = ErrorMessages.NotYourArticle;
 
@@ -156,6 +171,14 @@
         [HttpPost]
         public async Task<IActionResult> Edit(AddAndEditArticleViewModel model, int id)
         {
+
+            bool exists = await categoryService.ExistByIdAsync(model.CategoryId);
+
+            if (!exists)
+            {
+                this.ModelState.AddModelError(nameof(model.CategoryId), ErrorMessages.InvalidCategory);
+            }
+
             if (!this.ModelState.IsValid)
             {
                 model.Categories = await this.categoryService.AllCategoriesAsync();
@@ -163,13 +186,6 @@
                 this.TempData[ErrorMessage] = ErrorMessages.InvalidModelState;
 
                 return this.View(model);
-            }
-
-            bool exists = await categoryService.ExistByIdAsync(model.CategoryId);
-
-            if (!exists)
-            {
-                this.ModelState.AddModelError(nameof(model.CategoryId), ErrorMessages.InvalidCategory);
             }
 
             try
@@ -202,7 +218,7 @@
 
             bool isUserOwner = await this.articleService.IsUserOwnerOfArticleAsync(id, GetUserId());
 
-            if (isUserOwner == false)
+            if (!this.User.IsAdmin() && !isUserOwner)
             {
                 this.TempData[ErrorMessage] = ErrorMessages.NotYourArticle;
 

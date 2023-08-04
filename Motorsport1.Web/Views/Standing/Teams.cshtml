@@ -10,7 +10,7 @@
     <a class="btn btn-warning" asp-controller="Standing" asp-action="Drivers">Drivers standing</a>
 </div>
 <br />
-@if (User.Identity?.IsAuthenticated ?? false)
+@if (this.User.IsAdmin())
 {
     <div class="text-center">
         <a class="btn btn-danger" asp-controller="Standing" asp-action="Reset">Reset (End Championship)</a>

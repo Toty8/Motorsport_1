@@ -8,8 +8,7 @@
     using Mototsport1.Services.Data.Interfaces;
     using static Motorsport1.Common.UIMessages;
     using static Motorsport1.Common.NotificationMessageConstants;
-    using Motorsport1.Web.ViewModels.Team;
-    using Motorsport1.Web.ViewModels.Driver;
+    using Motorsport1.Web.Infrastructure.Extensions;
 
     public class DraftController : BaseController
     {
@@ -37,6 +36,13 @@
         [HttpGet]
         public async Task<IActionResult> EditDriver()
         {
+            if (!this.User.IsAdmin())
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.AccessDenied;
+
+                return this.RedirectToAction(nameof(Standing));
+            }
+
             try
             {
                 DraftEditDriverViewModel model = new DraftEditDriverViewModel();
@@ -88,6 +94,12 @@
         [HttpGet]
         public async Task<IActionResult> EditTeam()
         {
+            if (!this.User.IsAdmin())
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.AccessDenied;
+
+                return this.RedirectToAction(nameof(Standing));
+            }
             try
             {
                 DraftEditTeamViewModel model = new DraftEditTeamViewModel();

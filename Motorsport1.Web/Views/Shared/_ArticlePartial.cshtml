@@ -1,5 +1,4 @@
-﻿@using Motorsport1.Web.Infrastructure.Extensions;
-@using Mototsport1.Services.Data.Interfaces;
+﻿@using Mototsport1.Services.Data.Interfaces;
 @model AllArticleViewModel
 
 @inject IArticleService articleService
@@ -16,7 +15,7 @@
             <br />
             <a asp-controller="Article" asp-action="Details" asp-route-id="@Model.Id"
                class="btn btn-outline-success">Read</a>
-            @if(isUserOwner)
+            @if (isUserOwner || this.User.IsAdmin())
             {
                 <a asp-controller="Article" asp-action="Edit" asp-route-id="@Model.Id"
                    class="btn btn-warning">Edit</a>

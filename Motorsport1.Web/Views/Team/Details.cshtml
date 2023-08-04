@@ -17,7 +17,7 @@
             <p>Wins: <b>@Model.Wins</b></p>
             <p>Drivers: <b>@String.Join(" and ", Model.Drivers)</b></p>
             <div class="form-inline">
-                @if (this.User.Identity.IsAuthenticated)
+                @if (this.User.IsAdmin())
                 {
                     <a class="btn btn-warning" asp-controller="Driver" asp-action="Edit"
                        asp-route-id="@Model.Id">Edit</a>

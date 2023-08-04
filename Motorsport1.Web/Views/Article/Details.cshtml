@@ -1,5 +1,4 @@
-﻿@using Motorsport1.Web.Infrastructure.Extensions;
-@using Mototsport1.Services.Data.Interfaces;
+﻿@using Mototsport1.Services.Data.Interfaces;
 @model ArticleDetailsViewModel
 
 @inject IArticleService articleService
@@ -28,7 +27,7 @@
                     <input type="submit" value="Like" class="btn btn-outline-info" />
                 </form>
             }
-            @if (isUserOwner)
+            @if (isUserOwner || this.User.IsAdmin())
             {
                     <a class="ml-2 btn btn-warning" asp-controller="Article" asp-action="Edit"
                        asp-route-id="@Model.Id">Edit</a>
@@ -58,7 +57,7 @@
                         <hr />
                         <small>(@comment.PublishedDateTime)</small>
                         <br>
-                        @if (isUserOwnerOfComment)
+                        @if (isUserOwnerOfComment || this.User.IsAdmin())
                         {
                         <a class="ml-2 btn btn-warning" asp-controller="Comment" asp-action="Edit"
                            asp-route-commentId="@comment.Id">Edit</a>

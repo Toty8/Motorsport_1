@@ -9,6 +9,7 @@
     using Mototsport1.Services.Data.Interfaces;
     using static Motorsport1.Common.UIMessages;
     using static Motorsport1.Common.NotificationMessageConstants;
+    using Motorsport1.Web.Infrastructure.Extensions;
 
     public class TeamController : BaseController
     {
@@ -76,6 +77,14 @@
 
                 return this.RedirectToAction(nameof(All));
             }
+
+            if (!this.User.IsAdmin())
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.AccessDenied;
+
+                return this.RedirectToAction(nameof(All));
+            }
+
             try
             {
                 AddTeamViewModel model = new AddTeamViewModel();
@@ -143,6 +152,14 @@
 
                 return this.RedirectToAction(nameof(All));
             }
+
+            if (!this.User.IsAdmin())
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.AccessDenied;
+
+                return this.RedirectToAction(nameof(All));
+            }
+
             try
             {
                 var model = await this.teamService.GetTeamForEditByIdAsync(id);
@@ -206,6 +223,13 @@
             if (isTeamInactive)
             {
                 this.TempData[ErrorMessage] = ErrorMessages.InactiveTeam;
+
+                return this.RedirectToAction(nameof(All));
+            }
+
+            if (!this.User.IsAdmin())
+            {
+                this.TempData[ErrorMessage] = ErrorMessages.AccessDenied;
 
                 return this.RedirectToAction(nameof(All));
             }

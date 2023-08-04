@@ -83,13 +83,13 @@
             await this.dbContext.SaveChangesAsync();
         }
 
-        public async Task EditAsync(AddAndEditArticleViewModel article, int articleId)
+        public async Task EditAsync(AddAndEditArticleViewModel model, int articleId)
         {
-            Article currArticle = await this.dbContext.Articles
+            Article article = await this.dbContext.Articles
                 .Where(a => a.IsActive == true)
                 .FirstAsync(a => a.Id == articleId);
 
-            AutoMapperConfig.MapperInstance.Map(article, currArticle);
+            AutoMapperConfig.MapperInstance.Map(model, article);
 
             await this.dbContext.SaveChangesAsync();
         }
@@ -116,13 +116,8 @@
         {
             var article = await this.dbContext.Articles
                 .Where(a => a.IsActive == true && a.Id == id)
-                .Select(a => new AddAndEditArticleViewModel
-                {
-                    Title = a.Title,
-                    Information = a.Information,
-                    ImageUrl = a.ImageUrl,
-                    CategoryId = a.CategoryId
-                }).FirstAsync();
+                .To<AddAndEditArticleViewModel>()
+                .FirstAsync();
 
             return article;
         }
@@ -145,33 +140,17 @@
 
             foreach (Comment comment in article.Comments.Where(c => c.IsActive == true))
             {
-                currentComment = new CommentDetailViewModel
-                {
-                    Id = comment.Id,
-                    Content = comment.Content,
-                    PublishedDateTime = comment.PublishedDateTime.ToString("HH:mm dd/MM/yyyy", CultureInfo.InvariantCulture)
-                };
+                currentComment = AutoMapperConfig.MapperInstance.Map<CommentDetailViewModel>(comment);
 
                 comments.Add(currentComment);
             }
 
-            return new ArticleDetailsViewModel
-            {
-                Id = article.Id,
-                Title = article.Title,
-                ImageUrl = article.ImageUrl,
-                Likes = article.Likes,
-                ReadCount = article.ReadCount,
-                Information = article.Information,
-                PublishedDateTime = article.PublishedDateTime.ToString("HH:mm dd/MM/yyyy", CultureInfo.InvariantCulture),
-                Publisher = new PublisherDetailsViewModel
-                {
-                    Email = article.Publisher.Email,
-                    FullName = $"{article.Publisher.FirstName} {article.Publisher.LastName}"
-                },
-                Comments = comments.OrderBy(c => c.PublishedDateTime).ToArray(),
+            ArticleDetailsViewModel articleDetails = AutoMapperConfig.MapperInstance.Map<ArticleDetailsViewModel>(article);
 
-            };
+            articleDetails.Publisher = AutoMapperConfig.MapperInstance.Map<PublisherDetailsViewModel>(article.Publisher);
+            articleDetails.Comments = comments.OrderBy(c => c.PublishedDateTime).ToArray();
+
+            return articleDetails;
         }
 
         public async Task<IEnumerable<IndexViewModel>> GetLastFiveArticlesAsync()

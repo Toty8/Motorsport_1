@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Motorsport1.Data;
 using Motorsport1.Data.Models;
+using Motorsport1.Services.Mapping;
 using Motorsport1.Web.ViewModels.Comment;
 using Mototsport1.Services.Data.Interfaces;
 
@@ -17,12 +18,9 @@ namespace Mototsport1.Services.Data
 
         public async Task AddAsync(AddEditAndDeleteCommentViewModel model, int id, string userId)
         {
-            Comment comment = new Comment()
-            {
-                Content = model.Content,
-                ArticleId = id,
-                PublisherId = Guid.Parse(userId),
-            };
+            Comment comment = AutoMapperConfig.MapperInstance.Map<Comment>(model);
+            comment.ArticleId = id;
+            comment.PublisherId = Guid.Parse(userId);
 
             await this.dbContext.Comments.AddAsync(comment);
             await this.dbContext.SaveChangesAsync();
@@ -44,10 +42,11 @@ namespace Mototsport1.Services.Data
         public async Task<int> EditAsync(AddEditAndDeleteCommentViewModel model, int commentId)
         {
             Comment comment = await this.dbContext.Comments
-                .Where(c => c.IsActive == true)
+            .Where(c => c.IsActive == true)
                 .FirstAsync(c => c.Id == commentId);
 
-            comment.Content = model.Content;
+            AutoMapperConfig.MapperInstance.Map(model, comment);
+
 
             await this.dbContext.SaveChangesAsync();
 
@@ -68,10 +67,7 @@ namespace Mototsport1.Services.Data
                 .Select(c => c.Content)
                 .FirstAsync();
 
-            AddEditAndDeleteCommentViewModel viewModel = new AddEditAndDeleteCommentViewModel()
-            {
-                Content = content,
-            };
+            AddEditAndDeleteCommentViewModel viewModel = AutoMapperConfig.MapperInstance.Map<AddEditAndDeleteCommentViewModel>(content);
 
             return viewModel;
         }
@@ -80,10 +76,7 @@ namespace Mototsport1.Services.Data
         {
             AddEditAndDeleteCommentViewModel comment = await this.dbContext.Comments
                 .Where(c => c.Id == commentId && c.IsActive == true)
-                .Select(c => new AddEditAndDeleteCommentViewModel
-                {
-                    Content = c.Content,
-                })
+                .To<AddEditAndDeleteCommentViewModel>()
                 .FirstAsync();
 
             return comment;

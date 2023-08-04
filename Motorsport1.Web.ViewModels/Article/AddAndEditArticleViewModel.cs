@@ -9,7 +9,7 @@
     using static Common.EntityValidationConstants.Article;
     using AutoMapper;
 
-    public class AddAndEditArticleViewModel : IMapTo<Article>, IHaveCustomMappings
+    public class AddAndEditArticleViewModel : IMapFrom<Article>, IMapTo<Article>, IHaveCustomMappings
     {
 
         public AddAndEditArticleViewModel()

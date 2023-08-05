@@ -18,6 +18,25 @@
           }
         }
       },
+      "Griesoft.AspNetCore.ReCaptcha/2.2.0": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.1"
+        },
+        "compile": {
+          "lib/net6.0/Griesoft.AspNetCore.ReCaptcha.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Griesoft.AspNetCore.ReCaptcha.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "Humanizer/2.14.1": {
         "type": "package",
         "dependencies": {
@@ -5005,6 +5024,26 @@
         "icon.png",
         "lib/netstandard2.1/AutoMapper.dll",
         "lib/netstandard2.1/AutoMapper.xml"
+      ]
+    },
+    "Griesoft.AspNetCore.ReCaptcha/2.2.0": {
+      "sha512": "6tLg4/0Pap5K8ZJ8tmYv4UsfVVpWscwOITpfBS3dBrDSLJx6xoVAEXlypMYhnPlqiYsgAP8EWTuIaKWkTPanjQ==",
+      "type": "package",
+      "path": "griesoft.aspnetcore.recaptcha/2.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "griesoft.aspnetcore.recaptcha.2.2.0.nupkg.sha512",
+        "griesoft.aspnetcore.recaptcha.nuspec",
+        "lib/net461/Griesoft.AspNetCore.ReCaptcha.dll",
+        "lib/net461/Griesoft.AspNetCore.ReCaptcha.xml",
+        "lib/net5.0/Griesoft.AspNetCore.ReCaptcha.dll",
+        "lib/net5.0/Griesoft.AspNetCore.ReCaptcha.xml",
+        "lib/net6.0/Griesoft.AspNetCore.ReCaptcha.dll",
+        "lib/net6.0/Griesoft.AspNetCore.ReCaptcha.xml",
+        "lib/netcoreapp3.1/Griesoft.AspNetCore.ReCaptcha.dll",
+        "lib/netcoreapp3.1/Griesoft.AspNetCore.ReCaptcha.xml"
       ]
     },
     "Humanizer/2.14.1": {
@@ -13157,6 +13196,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "Griesoft.AspNetCore.ReCaptcha >= 2.2.0",
       "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 6.0.15",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 6.0.20",
       "Microsoft.AspNetCore.Identity.UI >= 6.0.20",
@@ -13244,6 +13284,10 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
+          "Griesoft.AspNetCore.ReCaptcha": {
+            "target": "Package",
+            "version": "[2.2.0, )"
+          },
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
             "target": "Package",
             "version": "[6.0.15, )"

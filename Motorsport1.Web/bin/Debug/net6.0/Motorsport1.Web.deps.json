@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "Motorsport1.Web/1.0.0": {
         "dependencies": {
+          "Griesoft.AspNetCore.ReCaptcha": "2.2.0",
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "6.0.15",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.20",
           "Microsoft.AspNetCore.Identity.UI": "6.0.20",
@@ -35,6 +36,17 @@
           "lib/netstandard2.1/AutoMapper.dll": {
             "assemblyVersion": "12.0.0.0",
             "fileVersion": "12.0.1.0"
+          }
+        }
+      },
+      "Griesoft.AspNetCore.ReCaptcha/2.2.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.1"
+        },
+        "runtime": {
+          "lib/net6.0/Griesoft.AspNetCore.ReCaptcha.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
           }
         }
       },
@@ -3066,6 +3078,13 @@
       "sha512": "sha512-hvV62vl6Hp/WfQ24yzo3Co9+OPl8wH8hApwVtgWpiAynVJkUcs7xvehnSftawL8Pe8FrPffBRM3hwzLQqWDNjA==",
       "path": "automapper/12.0.1",
       "hashPath": "automapper.12.0.1.nupkg.sha512"
+    },
+    "Griesoft.AspNetCore.ReCaptcha/2.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6tLg4/0Pap5K8ZJ8tmYv4UsfVVpWscwOITpfBS3dBrDSLJx6xoVAEXlypMYhnPlqiYsgAP8EWTuIaKWkTPanjQ==",
+      "path": "griesoft.aspnetcore.recaptcha/2.2.0",
+      "hashPath": "griesoft.aspnetcore.recaptcha.2.2.0.nupkg.sha512"
     },
     "Humanizer/2.14.1": {
       "type": "package",

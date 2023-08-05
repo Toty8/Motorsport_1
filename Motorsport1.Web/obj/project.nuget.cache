@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "oUT3944k/tEnhEOAfoMXGoMUAiaTaFOmctFJwqE3zmy2Ck1IjVhY3Nd09fLUfF7aN7BpQ/7NJW0VfQ1+UdMRyQ==",
+  "dgSpecHash": "U5RxeS2IBpQZs4BFDeLzr/bfHeu9xKh40eNn78kFc0fAK3Yo4Az+jCT6hEN1fWFxFnnoEXw3BttlIPxwNEwj0g==",
   "success": true,
   "projectFilePath": "C:\\Users\\MSuser\\source\\repos\\Motorsport1\\Motorsport1.Web\\Motorsport1.Web.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\MSuser\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\MSuser\\.nuget\\packages\\griesoft.aspnetcore.recaptcha\\2.2.0\\griesoft.aspnetcore.recaptcha.2.2.0.nupkg.sha512",
     "C:\\Users\\MSuser\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
     "C:\\Users\\MSuser\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\MSuser\\.nuget\\packages\\humanizer.core.af\\2.14.1\\humanizer.core.af.2.14.1.nupkg.sha512",

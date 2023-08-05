@@ -8,7 +8,7 @@
     using AutoMapper;
     using System.Globalization;
 
-    public class ArticleDetailsViewModel : AllArticleViewModel, IMapFrom<Article>, IHaveCustomMappings
+    public class ArticleDetailsViewModel : AllArticleViewModel, IHaveCustomMappings
     {
         public ArticleDetailsViewModel()
         {

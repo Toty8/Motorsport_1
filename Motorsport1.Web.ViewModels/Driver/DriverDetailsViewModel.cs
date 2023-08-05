@@ -5,7 +5,7 @@
     using Motorsport1.Services.Mapping;
     using System.Globalization;
 
-    public class DriverDetailsViewModel : AllDriverViewModel, IMapFrom<Driver>, IHaveCustomMappings
+    public class DriverDetailsViewModel : AllDriverViewModel
     {
 
         public string BirthDate { get; set; } = null!;

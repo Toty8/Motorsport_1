@@ -6,7 +6,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.Globalization;
     using static Common.EntityValidationConstants.Driver;
-    public class AddNewDriverViewModel : AddOldDriverViewModel, IMapTo<Driver>, IHaveCustomMappings
+    public class AddNewDriverViewModel : AddOldDriverViewModel, IHaveCustomMappings
     {
         [Required]
         [Display(Name = "Birth Date")]

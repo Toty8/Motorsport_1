@@ -3,6 +3,7 @@
     using Microsoft.EntityFrameworkCore;
     using Motorsport1.Data;
     using Motorsport1.Data.Models;
+    using Motorsport1.Services.Mapping;
     using Motorsport1.Web.ViewModels.Driver;
     using Motorsport1.Web.ViewModels.Standing;
     using Motorsport1.Web.ViewModels.Team;
@@ -20,12 +21,7 @@
 
         public async Task AddAsync(AddTeamViewModel model)
         {
-            Team team = new Team()
-            {
-                Name = model.Name,
-                ImageUrl = model.ImageUrl,
-                Price = model.Price,
-            };
+            Team team = AutoMapperConfig.MapperInstance.Map<Team>(model);
 
             await this.dbContext.Teams.AddAsync(team);
             await this.dbContext.SaveChangesAsync();
@@ -37,13 +33,7 @@
                 .Where(t => t.Drivers.Count == MaxDriversPerTeam)
                 .OrderByDescending(t => t.LastYearStanding.HasValue)
                 .ThenBy(t => t.LastYearStanding)
-                .Select(t => new AllTeamsViewModel
-                {
-                    Id = t.Id,
-                    Name = t.Name,
-                    ImageUrl = t.ImageUrl,
-                    Drivers = t.Drivers.Select(d => d.Name).ToArray(),
-                })
+                .To<AllTeamsViewModel>()
                 .ToListAsync();
 
             return teams;
@@ -54,11 +44,7 @@
             IEnumerable<TeamDraftNamesViewModel> teamsNames = await this.dbContext.Teams
                 .Where(t => t.Drivers.Count == MaxDriversPerTeam)
                 .OrderByDescending(d => d.Price)
-                .Select(d => new TeamDraftNamesViewModel
-                {
-                    Id = d.Id,
-                    Name = $"{d.Name} - {d.Price:f2}$",
-                })
+                .To<TeamDraftNamesViewModel>()
                 .ToArrayAsync();
 
             return teamsNames;
@@ -69,11 +55,7 @@
             IEnumerable<TeamDraftNamesViewModel> teamsNames = await this.dbContext.Teams
                 .Where(t => t.Drivers.Count == MaxDriversPerTeam && t.Price <= budget)
                 .OrderByDescending(d => d.Price)
-                .Select(d => new TeamDraftNamesViewModel
-                {
-                    Id = d.Id,
-                    Name = $"{d.Name} - {d.Price:f2}$",
-                    })
+                .To<TeamDraftNamesViewModel>()
                 .ToArrayAsync();
 
             return teamsNames;
@@ -83,11 +65,7 @@
         {
             IEnumerable<TeamNamesViewModel> teams = await this.dbContext.Teams
                  .Where(t => t.Drivers.Count < MaxDriversPerTeam || t.Id == id)
-                 .Select(t => new TeamNamesViewModel
-                 {
-                     Id = t.Id,
-                     Name = t.Name,
-                 })
+                 .To<TeamNamesViewModel>()
                  .ToArrayAsync();
 
             return teams;
@@ -97,11 +75,7 @@
         {
             IEnumerable<TeamNamesViewModel> teams = await this.dbContext.Teams
                 .Where(t => t.Drivers.Count < MaxDriversPerTeam)
-                .Select(t => new TeamNamesViewModel
-                {
-                    Id = t.Id,
-                    Name = t.Name,
-                })
+                .To<TeamNamesViewModel>()
                 .ToArrayAsync();
 
             return teams;
@@ -129,8 +103,7 @@
                 .Where(t => t.Drivers.Count == MaxDriversPerTeam)
                 .FirstAsync(t => t.Id == id);
 
-            team.Name = model.Name;
-            team.ImageUrl = model.ImageUrl;
+            AutoMapperConfig.MapperInstance.Map(model, team);
 
             await this.dbContext.SaveChangesAsync();
         }
@@ -155,8 +128,6 @@
             if (model.WasDriverOnPolePosition)
             {
                 team.PolePositions++;
-                team.Points++;
-                team.TotalPoints++;
             }
 
             if (model.DriverHaveFastestLap)
@@ -255,19 +226,9 @@
                 .Where(t => t.Drivers.Count == MaxDriversPerTeam)
                 .FirstAsync(t => t.Id == id);
 
-            return new TeamDetailsViewModel
-            {
-                Id = team.Id,
-                Name = team.Name,
-                ImageUrl = team.ImageUrl,
-                Championships = team.Championships,
-                Wins = team.Wins,
-                PolePositions = team.PolePositions,
-                Podiums = team.Podiums,
-                Points = team.Points,
-                TotalPoints = team.TotalPoints,
-                Drivers = team.Drivers.Select(d => d.Name).ToArray()
-            };
+            TeamDetailsViewModel teamDetails = AutoMapperConfig.MapperInstance.Map<TeamDetailsViewModel>(team);
+
+            return teamDetails;
         }
 
         public async Task<TeamPreDeleteViewModel> GetForDeleteByIdAsync(int id)
@@ -277,25 +238,17 @@
                 .Where(t => t.Drivers.Count == MaxDriversPerTeam)
                 .FirstAsync(t => t.Id == id);
 
-            string[] driverNames = team.Drivers.Select(d => d.Name).ToArray();
-
-            return new TeamPreDeleteViewModel
-            {
-                Name = team.Name,
-                ImageUrl = team.ImageUrl,
-                Drivers = String.Join(" and ", driverNames)
-            };
+            TeamPreDeleteViewModel teamPreDelete = AutoMapperConfig.MapperInstance.Map<TeamPreDeleteViewModel>(team);
+            
+            return teamPreDelete;
         }
 
         public async Task<EditTeamViewModel> GetTeamForEditByIdAsync(int id)
         {
             EditTeamViewModel team = await this.dbContext.Teams
                 .Where(t => t.Drivers.Count == MaxDriversPerTeam && t.Id == id)
-                .Select(t => new EditTeamViewModel
-                {
-                    Name = t.Name,
-                    ImageUrl = t.ImageUrl,
-                }).FirstAsync();
+                .To<EditTeamViewModel>()
+                .FirstAsync();
 
             return team;
         }
@@ -359,14 +312,8 @@
                 .ThenBy(t => t.BestResult)
                 .ThenByDescending(t => t.BestResultCount.HasValue)
                 .ThenBy(t => t.BestResultCount)
-                .Select(t => new TeamStandingViewModel
-                {
-                    Id = t.Id,
-                    Name = t.Name,
-                    ImageUrl = t.ImageUrl,
-                    Points = t.Points,
-                    TeamDrivers = String.Join(" and ", t.Drivers.Select(d => d.Name).ToArray())
-                }).ToArrayAsync();
+                .To<TeamStandingViewModel>()
+                .ToArrayAsync();
 
             return teams;
         }

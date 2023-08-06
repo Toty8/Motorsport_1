@@ -2238,9 +2238,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\MSuser\\source\\repos\\Motorsport1\\Mototsport1.Services.Data\\Mototsport1.Services.Data.csproj",
-      "projectName": "Mototsport1.Services.Data",
-      "projectPath": "C:\\Users\\MSuser\\source\\repos\\Motorsport1\\Mototsport1.Services.Data\\Mototsport1.Services.Data.csproj",
+      "projectUniqueName": "C:\\Users\\MSuser\\source\\repos\\Motorsport1\\Mototsport1.Services.Data\\Motorsport1.Services.Data.csproj",
+      "projectName": "Motorsport1.Services.Data",
+      "projectPath": "C:\\Users\\MSuser\\source\\repos\\Motorsport1\\Mototsport1.Services.Data\\Motorsport1.Services.Data.csproj",
       "packagesPath": "C:\\Users\\MSuser\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\MSuser\\source\\repos\\Motorsport1\\Mototsport1.Services.Data\\obj\\",
       "projectStyle": "PackageReference",

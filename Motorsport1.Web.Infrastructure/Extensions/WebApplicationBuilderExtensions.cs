@@ -8,8 +8,8 @@
     using Microsoft.Extensions.DependencyInjection;
 
     using Motorsport1.Data.Models;
-    using Mototsport1.Services.Data;
-    using Mototsport1.Services.Data.Interfaces;
+    using Motorsport1.Services.Data;
+    using Motorsport1.Services.Data.Interfaces;
     using static Common.GeneralApplicationConstants;
 
     public static class WebApplicationBuilderExtensions

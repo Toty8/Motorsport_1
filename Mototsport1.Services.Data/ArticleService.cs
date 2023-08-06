@@ -1,4 +1,4 @@
-﻿namespace Mototsport1.Services.Data
+﻿namespace Motorsport1.Services.Data
 {
     using System.Globalization;
 
@@ -10,7 +10,7 @@
     using Motorsport1.Web.ViewModels.Article;
     using Motorsport1.Web.ViewModels.Publisher;
     using Motorsport1.Web.ViewModels.Home;
-    using Mototsport1.Services.Data.Interfaces;
+    using Motorsport1.Services.Data.Interfaces;
     using Motorsport1.Web.ViewModels.Comment;
     using Motorsport1.Services.Mapping;
     using AutoMapper;

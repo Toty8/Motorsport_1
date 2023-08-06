@@ -1,4 +1,4 @@
-﻿namespace Mototsport1.Services.Data
+﻿namespace Motorsport1.Services.Data
 {
     using Microsoft.EntityFrameworkCore;
     using Motorsport1.Data;
@@ -7,7 +7,7 @@
     using Motorsport1.Web.ViewModels.Driver;
     using Motorsport1.Web.ViewModels.Standing;
     using Motorsport1.Web.ViewModels.Team;
-    using Mototsport1.Services.Data.Interfaces;
+    using Motorsport1.Services.Data.Interfaces;
     using static Motorsport1.Common.GeneralApplicationConstants;
 
     public class TeamService : ITeamService

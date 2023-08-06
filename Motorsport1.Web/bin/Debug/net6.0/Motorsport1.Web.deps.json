@@ -18,11 +18,11 @@
           "Motorsport1.Common": "1.0.0",
           "Motorsport1.Data": "1.0.0",
           "Motorsport1.Data.Models": "1.0.0",
+          "Motorsport1.Services.Data": "1.0.0",
           "Motorsport1.Services.Data.Models": "1.0.0",
           "Motorsport1.Services.Mapping": "1.0.0",
           "Motorsport1.Web.Infrastructure": "1.0.0",
-          "Motorsport1.Web.ViewModels": "1.0.0",
-          "Mototsport1.Services.Data": "1.0.0"
+          "Motorsport1.Web.ViewModels": "1.0.0"
         },
         "runtime": {
           "Motorsport1.Web.dll": {}
@@ -3015,6 +3015,19 @@
           "Motorsport1.Data.Models.dll": {}
         }
       },
+      "Motorsport1.Services.Data/1.0.0": {
+        "dependencies": {
+          "Motorsport1.Common": "1.0.0",
+          "Motorsport1.Data": "1.0.0",
+          "Motorsport1.Data.Models": "1.0.0",
+          "Motorsport1.Services.Data.Models": "1.0.0",
+          "Motorsport1.Services.Mapping": "1.0.0",
+          "Motorsport1.Web.ViewModels": "1.0.0"
+        },
+        "runtime": {
+          "Motorsport1.Services.Data.dll": {}
+        }
+      },
       "Motorsport1.Services.Data.Models/1.0.0": {
         "dependencies": {
           "Motorsport1.Web.ViewModels": "1.0.0"
@@ -3035,7 +3048,7 @@
         "dependencies": {
           "Microsoft.AspNetCore.Mvc": "2.2.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0",
-          "Mototsport1.Services.Data": "1.0.0"
+          "Motorsport1.Services.Data": "1.0.0"
         },
         "runtime": {
           "Motorsport1.Web.Infrastructure.dll": {}
@@ -3049,19 +3062,6 @@
         },
         "runtime": {
           "Motorsport1.Web.ViewModels.dll": {}
-        }
-      },
-      "Mototsport1.Services.Data/1.0.0": {
-        "dependencies": {
-          "Motorsport1.Common": "1.0.0",
-          "Motorsport1.Data": "1.0.0",
-          "Motorsport1.Data.Models": "1.0.0",
-          "Motorsport1.Services.Data.Models": "1.0.0",
-          "Motorsport1.Services.Mapping": "1.0.0",
-          "Motorsport1.Web.ViewModels": "1.0.0"
-        },
-        "runtime": {
-          "Mototsport1.Services.Data.dll": {}
         }
       }
     }
@@ -5040,6 +5040,11 @@
       "serviceable": false,
       "sha512": ""
     },
+    "Motorsport1.Services.Data/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
     "Motorsport1.Services.Data.Models/1.0.0": {
       "type": "project",
       "serviceable": false,
@@ -5056,11 +5061,6 @@
       "sha512": ""
     },
     "Motorsport1.Web.ViewModels/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Mototsport1.Services.Data/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

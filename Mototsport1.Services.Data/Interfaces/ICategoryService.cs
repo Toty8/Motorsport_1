@@ -1,7 +1,7 @@
 ﻿using Motorsport1.Web.ViewModels.Article;
 using Motorsport1.Web.ViewModels.Category;
 
-namespace Mototsport1.Services.Data.Interfaces
+namespace Motorsport1.Services.Data.Interfaces
 {
     public interface ICategoryService
     {

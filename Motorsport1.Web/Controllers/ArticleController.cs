@@ -5,7 +5,7 @@
     using Microsoft.AspNetCore.Mvc.ModelBinding;
     using Motorsport1.Services.Data.Models.Article;
     using Motorsport1.Web.ViewModels.Article;
-    using Mototsport1.Services.Data.Interfaces;
+    using Motorsport1.Services.Data.Interfaces;
     using static Common.UIMessages;
     using static Common.NotificationMessageConstants;
     using Motorsport1.Web.Infrastructure.Extensions;
@@ -38,7 +38,7 @@
         [HttpGet]
         public async Task<IActionResult> Add()
         {
-            if (!this.User.IsAdmin() && !this.User.IsPublisher())
+            if (!this.User.IsPublisher())
             {
                 this.TempData[ErrorMessage] = ErrorMessages.AccessDenied;
 
@@ -96,7 +96,7 @@
 
         public async Task<IActionResult> Mine()
         {
-            if (!this.User.IsAdmin() && !this.User.IsPublisher())
+            if (!this.User.IsPublisher())
             {
                 this.TempData[ErrorMessage] = ErrorMessages.AccessDenied;
 

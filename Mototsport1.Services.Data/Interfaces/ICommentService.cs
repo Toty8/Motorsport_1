@@ -1,6 +1,6 @@
 ﻿using Motorsport1.Web.ViewModels.Comment;
 
-namespace Mototsport1.Services.Data.Interfaces
+namespace Motorsport1.Services.Data.Interfaces
 {
     public interface ICommentService
     {

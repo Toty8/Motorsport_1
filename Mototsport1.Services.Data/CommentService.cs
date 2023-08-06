@@ -3,9 +3,9 @@ using Motorsport1.Data;
 using Motorsport1.Data.Models;
 using Motorsport1.Services.Mapping;
 using Motorsport1.Web.ViewModels.Comment;
-using Mototsport1.Services.Data.Interfaces;
+using Motorsport1.Services.Data.Interfaces;
 
-namespace Mototsport1.Services.Data
+namespace Motorsport1.Services.Data
 {
     public class CommentService : ICommentService
     {

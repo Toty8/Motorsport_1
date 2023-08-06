@@ -1,7 +1,7 @@
 ﻿using Motorsport1.Web.ViewModels.Driver;
 using Motorsport1.Web.ViewModels.Standing;
 
-namespace Mototsport1.Services.Data.Interfaces
+namespace Motorsport1.Services.Data.Interfaces
 {
     public interface IDriverService
     {

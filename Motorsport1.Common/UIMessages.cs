@@ -34,6 +34,9 @@
             public const string NotYourComment = "This comment you are trying to reach is not yours!";
 
             public const string AlreadyDraftedUser = "You have already made a draft!";
+
+            public const string UnexistingUserByEmail = "User with the provided email does not exist!";
+
         }
 
         public static class WarningMessages { }
@@ -70,7 +73,9 @@
             public const string SuccessfullyEditedDriverDraftPrice = "Driver draft price is successfully edited!"; 
             public const string SuccessfullyEditedTeamDraftPrice = "Team draft price is successfully edited!"; 
             public const string SuccessfullySelectedDriver = "You successfully chose your driver!"; 
-            public const string SuccessfullySelectedTeam = "You successfully chose your team!"; 
+            public const string SuccessfullySelectedTeam = "You successfully chose your team!";
+
+            public const string SuccessfullyAddedPublisher = "User is successfully autorized as publisher!";
         }
     }
 }

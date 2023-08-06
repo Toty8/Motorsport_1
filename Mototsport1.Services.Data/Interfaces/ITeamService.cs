@@ -1,7 +1,7 @@
 ﻿using Motorsport1.Web.ViewModels.Standing;
 using Motorsport1.Web.ViewModels.Team;
 
-namespace Mototsport1.Services.Data.Interfaces
+namespace Motorsport1.Services.Data.Interfaces
 {
     public interface ITeamService
     {

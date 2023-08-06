@@ -5,8 +5,6 @@ C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web.Infrastructure\bin\Debu
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web.Infrastructure\bin\Debug\net6.0\Motorsport1.Data.dll
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web.Infrastructure\bin\Debug\net6.0\Motorsport1.Data.Models.dll
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web.Infrastructure\bin\Debug\net6.0\Motorsport1.Web.ViewModels.dll
-C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web.Infrastructure\bin\Debug\net6.0\Mototsport1.Services.Data.dll
-C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web.Infrastructure\bin\Debug\net6.0\Mototsport1.Services.Data.pdb
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web.Infrastructure\bin\Debug\net6.0\Motorsport1.Common.pdb
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web.Infrastructure\bin\Debug\net6.0\Motorsport1.Data.pdb
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web.Infrastructure\bin\Debug\net6.0\Motorsport1.Data.Models.pdb
@@ -25,3 +23,5 @@ C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web.Infrastructure\bin\Debu
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web.Infrastructure\bin\Debug\net6.0\Motorsport1.Services.Data.Models.pdb
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web.Infrastructure\bin\Debug\net6.0\Motorsport1.Services.Mapping.dll
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web.Infrastructure\bin\Debug\net6.0\Motorsport1.Services.Mapping.pdb
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web.Infrastructure\bin\Debug\net6.0\Motorsport1.Services.Data.dll
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web.Infrastructure\bin\Debug\net6.0\Motorsport1.Services.Data.pdb

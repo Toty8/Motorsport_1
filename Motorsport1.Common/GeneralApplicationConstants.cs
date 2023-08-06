@@ -15,6 +15,7 @@
         public const decimal DraftBudget = 100M;
 
         public const string AdminRoleName = "Administrator";
+        public const string AdminAreaName = "Admin";
         public const string DevelopmentAdminEmail = "Admin@admin.com";
 
         public const string PublisherRoleName = "Publisher";

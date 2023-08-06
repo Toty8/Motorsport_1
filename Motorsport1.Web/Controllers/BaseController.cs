@@ -23,11 +23,15 @@
             return id;
         }
 
-        protected IActionResult GeneralError(string redirection)
+        protected IActionResult GeneralError(string? redirection)
         {
             this.ModelState.AddModelError(string.Empty, ErrorMessages.UnexpectedError);
 
-            return this.RedirectToAction(nameof(redirection));
+            if (redirection != null)
+            {
+                return this.RedirectToAction(nameof(redirection));
+            }
+            return this.RedirectToAction("Index", "Home");
         }
     }
 }

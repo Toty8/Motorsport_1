@@ -4,9 +4,10 @@
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Mototsport1.Services.Data.Interfaces;
+    using Motorsport1.Services.Data.Interfaces;
+    using Motorsport1.Web.Infrastructure.Extensions;
     using ViewModels.Home;
-
+    using static Common.GeneralApplicationConstants;
 
     public class HomeController : BaseController
     {
@@ -20,6 +21,12 @@
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
+
+            if (this.User.IsAdmin())
+            {
+                return this.RedirectToAction("Index", "Home", new { Area = AdminAreaName});
+            }
+
             IEnumerable<IndexViewModel> viewModel = await articleService.GetLastFiveArticlesAsync();
              
             return View(viewModel);

@@ -1,4 +1,4 @@
-﻿namespace Mototsport1.Services.Data
+﻿namespace Motorsport1.Services.Data
 {
 
     using Microsoft.EntityFrameworkCore;
@@ -8,7 +8,7 @@
     using Motorsport1.Services.Mapping;
     using Motorsport1.Web.ViewModels.Driver;
     using Motorsport1.Web.ViewModels.Standing;
-    using Mototsport1.Services.Data.Interfaces;
+    using Motorsport1.Services.Data.Interfaces;
     using System.Globalization;
     using static Motorsport1.Common.EntityValidationConstants.Driver;
     using static Motorsport1.Common.GeneralApplicationConstants;

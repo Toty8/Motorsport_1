@@ -78,8 +78,6 @@ C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\Motors
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\Motorsport1.Data.Models.pdb
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\Motorsport1.Web.ViewModels.pdb
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\appsettings.Production.json
-C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\Mototsport1.Services.Data.dll
-C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\Mototsport1.Services.Data.pdb
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\Motorsport1.Web.Infrastructure.dll
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\Motorsport1.Web.Infrastructure.pdb
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
@@ -280,3 +278,5 @@ C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\Motors
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\Motorsport1.Services.Mapping.pdb
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\obj\Debug\net6.0\Motorsport1.Web.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\Griesoft.AspNetCore.ReCaptcha.dll
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\Motorsport1.Services.Data.dll
+C:\Users\MSuser\source\repos\Motorsport1\Motorsport1.Web\bin\Debug\net6.0\Motorsport1.Services.Data.pdb

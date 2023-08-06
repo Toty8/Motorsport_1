@@ -1,9 +1,8 @@
 ﻿using Motorsport1.Services.Data.Models.Article;
 using Motorsport1.Web.ViewModels.Article;
 using Motorsport1.Web.ViewModels.Home;
-using Motorsport1.Web.ViewModels.Publisher;
 
-namespace Mototsport1.Services.Data.Interfaces
+namespace Motorsport1.Services.Data.Interfaces
 {
     public interface IArticleService
     {

@@ -7,8 +7,8 @@ namespace Motorsport1.Web
 
     using Data;
     using Data.Models;
-    using Mototsport1.Services.Data.Interfaces;
-    using Mototsport1.Services.Data;
+    using Motorsport1.Services.Data.Interfaces;
+    using Motorsport1.Services.Data;
     using Motorsport1.Web.Infrastructor.Extensions;
     using Motorsport1.Web.Infrastructure.ModelBinders;
     using Microsoft.AspNetCore.Mvc;
@@ -95,8 +95,15 @@ namespace Motorsport1.Web
             app.SeedAdministrator(DevelopmentAdminEmail);
             app.CreatePublisher(DevelopmentPublisherEmail);
 
-            app.MapDefaultControllerRoute();
-            app.MapRazorPages();
+            app.UseEndpoints(config =>
+            {
+                config.MapControllerRoute(
+                    name: "areas",
+                    pattern: "/{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
+                app.MapDefaultControllerRoute();
+                app.MapRazorPages();
+            });
 
             await app.RunAsync();
         }

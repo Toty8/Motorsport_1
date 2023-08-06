@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Motorsport1.Web.ViewModels.Standing;
-using Mototsport1.Services.Data.Interfaces;
+using Motorsport1.Services.Data.Interfaces;
 using static Motorsport1.Common.UIMessages;
 using static Motorsport1.Common.NotificationMessageConstants;
 using Motorsport1.Web.Infrastructure.Extensions;

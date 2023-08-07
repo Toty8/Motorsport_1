@@ -7,13 +7,13 @@
 <hr />
 
 <div class="text-center">
-    <a class="btn btn-warning" asp-controller="Standing" asp-action="Teams">Teams standing</a>
+    <a class="btn btn-warning" asp-area="" asp-controller="Standing" asp-action="Teams">Teams standing</a>
 </div>
 <br />
     @if (this.User.IsAdmin())
     {
         <div class="text-center">
-            <a class="btn btn-danger" asp-controller="Standing" asp-action="Reset">Reset (End Championship)</a>
+        <a class="btn btn-danger" asp-area="" asp-controller="Standing" asp-action="Reset">Reset (End Championship)</a>
         </div>
     }
 
@@ -23,7 +23,7 @@
         <li class="list-group-item driverStandingBox">
             @if (this.User.IsAdmin())
             {
-                <a class="btn btn-warning" style="float:right;" asp-controller="Standing" asp-action="AddResult" asp-route-id="@driver.Id">Add results</a>
+                <a class="btn btn-warning" style="float:right;" asp-area="" asp-controller="Standing" asp-action="AddResult" asp-route-id="@driver.Id">Add results</a>
             }
             <h2 class="li">@counter</h2><h5> Place</h5>
             <hr />

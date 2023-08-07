@@ -7,13 +7,13 @@
             <h6>Racing Number: @(Model.Number)</h6>
             <h6>Racing for @(Model.TeamName)</h6>
             <br />
-            <a asp-controller="Driver" asp-action="Details" asp-route-id="@Model.Id"
+            <a asp-area="" asp-controller="Driver" asp-action="Details" asp-route-id="@Model.Id"
                class="btn btn-outline-success">Details</a>
             @if (this.User.IsAdmin())
             {
-                <a asp-controller="Driver" asp-action="Edit" asp-route-id="@Model.Id"
+                <a asp-area="" asp-controller="Driver" asp-action="Edit" asp-route-id="@Model.Id"
                    class="btn btn-warning">Edit</a>
-                <a asp-controller="Driver" asp-action="Delete" asp-route-id="@Model.Id"
+                <a asp-area="" asp-controller="Driver" asp-action="Delete" asp-route-id="@Model.Id"
                    class="btn btn-danger">Unactivate</a>
             }
         </div>

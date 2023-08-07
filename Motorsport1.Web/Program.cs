@@ -9,7 +9,7 @@ namespace Motorsport1.Web
     using Data.Models;
     using Motorsport1.Services.Data.Interfaces;
     using Motorsport1.Services.Data;
-    using Motorsport1.Web.Infrastructor.Extensions;
+    using Motorsport1.Web.Infrastructure.Extensions;
     using Motorsport1.Web.Infrastructure.ModelBinders;
     using Microsoft.AspNetCore.Mvc;
 
@@ -91,6 +91,8 @@ namespace Motorsport1.Web
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.EnableOnlineUsersCheck();
 
             app.SeedAdministrator(DevelopmentAdminEmail);
             app.CreatePublisher(DevelopmentPublisherEmail);

@@ -20,5 +20,8 @@
 
         public const string PublisherRoleName = "Publisher";
         public const string DevelopmentPublisherEmail = "Publisher@publisher.com";
+
+        public const string OnlineUserCookieName = "IsOnline";
+        public const int LastActivityBeforeOfflineMinutes = 10;
     }
 }

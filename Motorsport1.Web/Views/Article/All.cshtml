@@ -50,6 +50,7 @@
     <div class="col-md-6 d-grid gap-2 d-md-flex justify-content-md-start">
         <a class="btn btn-primary @(Model.CurrentPage == 1 ? "disabled" :
 string.Empty)"
+           asp-area=""
            asp-controller="Article"
            asp-action="All"
            asp-route-currentPage="@previousPage"
@@ -63,6 +64,7 @@ string.Empty)"
     <div class="col-md-6 d-grid gap-2 d-md-flex justify-content-md-end">
         <a class="btn btn-primary
  @(shouldButtonBeDisabled ? "disabled" : string.Empty)"
+           asp-area=""
            asp-controller="Article"
            asp-action="All"
            asp-route-currentPage="@(Model.CurrentPage + 1)"

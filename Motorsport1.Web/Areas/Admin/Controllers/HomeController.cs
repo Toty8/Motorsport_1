@@ -10,7 +10,7 @@ namespace Motorsport1.Web.Areas.Admin.Controllers
     using static Motorsport1.Common.NotificationMessageConstants;
     using Motorsport1.Web.ViewModels.Admin;
     using Motorsport1.Services.Data.Interfaces;
-    using static Motorsport1.Web.Infrastructor.Extensions.WebApplicationBuilderExtensions;
+    using static Motorsport1.Web.Infrastructure.Extensions.WebApplicationBuilderExtensions;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
 
@@ -30,6 +30,7 @@ namespace Motorsport1.Web.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        [Route("AddPublisher")]
         public IActionResult AddPublisher()
         {
             if (!User.IsAdmin())

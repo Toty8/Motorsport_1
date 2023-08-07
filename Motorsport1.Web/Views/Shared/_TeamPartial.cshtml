@@ -6,13 +6,13 @@
             <h2>@Model.Name</h2>
             <h6>Drivers: @String.Join(" and ", Model.Drivers)</h6>
             <br />
-            <a asp-controller="Team" asp-action="Details" asp-route-id="@Model.Id"
+            <a asp-area="" asp-controller="Team" asp-action="Details" asp-route-id="@Model.Id"
                class="btn btn-outline-success">Details</a>
             @if (this.User.IsAdmin())
             {
-                <a asp-controller="Team" asp-action="Edit" asp-route-id="@Model.Id"
+                <a asp-area="" asp-controller="Team" asp-action="Edit" asp-route-id="@Model.Id"
                    class="btn btn-warning">Edit</a>
-                <a asp-controller="Team" asp-action="Delete" asp-route-id="@Model.Id"
+                <a asp-area="" asp-controller="Team" asp-action="Delete" asp-route-id="@Model.Id"
                    class="btn btn-danger">Unactivate</a>
             }
         </div>

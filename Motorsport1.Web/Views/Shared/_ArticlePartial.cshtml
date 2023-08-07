@@ -13,11 +13,11 @@
             <h6>Likes: @(Model.Likes)</h6>
             <h6>Read @(Model.ReadCount) times</h6>
             <br />
-            <a asp-controller="Article" asp-action="Details" asp-route-id="@Model.Id"
+            <a asp-area="" asp-controller="Article" asp-action="Details" asp-route-id="@Model.Id"
                class="btn btn-outline-success">Read</a>
             @if (isUserOwner || this.User.IsAdmin())
             {
-                <a asp-controller="Article" asp-action="Edit" asp-route-id="@Model.Id"
+                <a asp-area="" asp-controller="Article" asp-action="Edit" asp-route-id="@Model.Id"
                    class="btn btn-warning">Edit</a>
                 <a asp-controller="Article" asp-action="Delete" asp-route-id="@Model.Id"
                    class="btn btn-danger">Delete</a>

@@ -1,4 +1,4 @@
-﻿namespace Motorsport1.Web.Infrastructor.Extensions
+﻿namespace Motorsport1.Web.Infrastructure.Extensions
 {
     using System.Reflection;
     using Microsoft.AspNetCore.Antiforgery.Internal;
@@ -10,6 +10,7 @@
     using Motorsport1.Data.Models;
     using Motorsport1.Services.Data;
     using Motorsport1.Services.Data.Interfaces;
+    using Motorsport1.Web.Infrastructure.Middlewares;
     using static Common.GeneralApplicationConstants;
 
     public static class WebApplicationBuilderExtensions
@@ -104,6 +105,11 @@
                 .GetResult();
 
             return app;
+        }
+
+        public static IApplicationBuilder EnableOnlineUsersCheck(this IApplicationBuilder app)
+        {
+            return app.UseMiddleware<OnlineUsersMiddleware>();
         }
     }
 }

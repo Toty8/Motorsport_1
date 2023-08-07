@@ -29,9 +29,9 @@
             }
             @if (isUserOwner || this.User.IsAdmin())
             {
-                    <a class="ml-2 btn btn-warning" asp-controller="Article" asp-action="Edit"
+                    <a class="ml-2 btn btn-warning" asp-area="" asp-controller="Article" asp-action="Edit"
                        asp-route-id="@Model.Id">Edit</a>
-                    <a class="ml-2 btn btn-danger" asp-controller="Article" asp-action="Delete"
+                    <a class="ml-2 btn btn-danger" asp-area="" asp-controller="Article" asp-action="Delete"
                        asp-route-id="@Model.Id">Delete</a>
             }
             </div>
@@ -45,7 +45,7 @@
             </div>
             <br>
             <div class="form-inline">
-            <a class="btn btn-primary" asp-controller="Comment" asp-action="Add" asp-route-id="@Model.Id">Add Comment</a>
+                <a class="btn btn-primary" asp-area="" asp-controller="Comment" asp-action="Add" asp-route-id="@Model.Id">Add Comment</a>
             </div>
             <hr>
             <ul class="list-group">
@@ -59,9 +59,9 @@
                         <br>
                         @if (isUserOwnerOfComment || this.User.IsAdmin())
                         {
-                        <a class="ml-2 btn btn-warning" asp-controller="Comment" asp-action="Edit"
+                            <a class="ml-2 btn btn-warning" asp-area="" asp-controller="Comment" asp-action="Edit"
                            asp-route-commentId="@comment.Id">Edit</a>
-                        <a class="ml-2 btn btn-danger" asp-controller="Comment" asp-action="Delete"
+                            <a class="ml-2 btn btn-danger" asp-area="" asp-controller="Comment" asp-action="Delete"
                            asp-route-commentId="@comment.Id">Delete</a>
                         }
                     </li>

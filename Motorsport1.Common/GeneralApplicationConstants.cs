@@ -21,6 +21,9 @@
         public const string PublisherRoleName = "Publisher";
         public const string DevelopmentPublisherEmail = "Publisher@publisher.com";
 
+        public const string UsersCacheKey = "UsersCache";
+        public const int UsersCacheDurationMinutes = 5;
+
         public const string OnlineUserCookieName = "IsOnline";
         public const int LastActivityBeforeOfflineMinutes = 10;
     }

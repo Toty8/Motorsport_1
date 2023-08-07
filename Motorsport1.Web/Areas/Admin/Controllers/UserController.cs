@@ -2,26 +2,41 @@
 {
 
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Caching.Memory;
 
     using Motorsport1.Services.Data.Interfaces;
     using Motorsport1.Web.ViewModels.User;
+    using static Common.GeneralApplicationConstants;
 
     public class UserController : BaseAdminController
     {
 
         private readonly IUserService userService;
+        private readonly IMemoryCache memoryCache;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, IMemoryCache memoryCache)
         {
             this.userService = userService;
+            this.memoryCache = memoryCache;
         }
 
         [Route("User/All")]
+        [ResponseCache(Duration = 30)]
         public async Task<IActionResult> All()
         {
-            IEnumerable<UserViewModel> viewModel = await this.userService.AllAsync();
+            IEnumerable<UserViewModel> users = this.memoryCache.Get<IEnumerable<UserViewModel>>(UsersCacheKey);
+                
+            if (users == null)
+            {
+                users = await this.userService.AllAsync();
 
-            return this.View(viewModel);
+                MemoryCacheEntryOptions cacheOptions = new MemoryCacheEntryOptions()
+                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(UsersCacheDurationMinutes));
+
+                this.memoryCache.Set(UsersCacheKey, users, cacheOptions);
+            }
+
+            return this.View(users);
         }
     }
 }

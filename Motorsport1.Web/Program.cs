@@ -51,6 +51,8 @@ namespace Motorsport1.Web
 
             builder.Services.AddRecaptchaService();
 
+            builder.Services.AddMemoryCache();
+
             builder.Services.ConfigureApplicationCookie(cfg =>
             {
                 cfg.LoginPath = "/User/Login";

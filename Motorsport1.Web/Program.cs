@@ -101,7 +101,7 @@ namespace Motorsport1.Web
             {
                 config.MapControllerRoute(
                     name: "areas",
-                    pattern: "/{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                    pattern: "/{area:exists}/{controller=Home}/{action=Index}/{Id?}"
                 );
                 app.MapDefaultControllerRoute();
                 app.MapRazorPages();

@@ -33,13 +33,6 @@ namespace Motorsport1.Web.Areas.Admin.Controllers
         [Route("AddPublisher")]
         public IActionResult AddPublisher()
         {
-            if (!User.IsAdmin())
-            {
-                TempData[ErrorMessage] = ErrorMessages.AccessDenied;
-
-                return RedirectToAction("All", "Article");
-            }
-
             try
             {
                 AddPublisherViewModel model = new AddPublisherViewModel();
@@ -51,7 +44,9 @@ namespace Motorsport1.Web.Areas.Admin.Controllers
                 return GeneralError(null);
             }
         }
+
         [HttpPost]
+        [Route("AddPublisher")]
         public async Task<IActionResult> AddPublisher(AddPublisherViewModel model)
         {
             bool userExist = await userService.ExistByEmailAsync(model.Email);

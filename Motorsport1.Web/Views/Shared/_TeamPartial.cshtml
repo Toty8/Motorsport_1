@@ -10,9 +10,9 @@
                class="btn btn-outline-success">Details</a>
             @if (this.User.IsAdmin())
             {
-                <a asp-area="" asp-controller="Team" asp-action="Edit" asp-route-id="@Model.Id"
+                <a asp-area="Admin" asp-controller="Team" asp-action="Edit" asp-route-id="@Model.Id"
                    class="btn btn-warning">Edit</a>
-                <a asp-area="" asp-controller="Team" asp-action="Delete" asp-route-id="@Model.Id"
+                <a asp-area="Admin" asp-controller="Team" asp-action="Delete" asp-route-id="@Model.Id"
                    class="btn btn-danger">Unactivate</a>
             }
         </div>

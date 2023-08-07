@@ -9,7 +9,7 @@
 
         public const int MaxDrivers = 20;
 
-        public const int MaxTeams = 20;
+        public const int MaxTeams = 10;
         public const int MaxDriversPerTeam = 2;
 
         public const decimal DraftBudget = 100M;

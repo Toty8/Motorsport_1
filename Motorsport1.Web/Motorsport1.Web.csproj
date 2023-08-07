@@ -32,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Admin\Views\Draft\" />
     <Folder Include="Areas\Identity\Pages\Account\" />
   </ItemGroup>
 

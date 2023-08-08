@@ -49,6 +49,7 @@
         }
 
         [HttpPost]
+        [Route("Driver/AddOld")]
         public async Task<IActionResult> AddOld(AddOldDriverViewModel model)
         {
             bool driverExist = await this.driverService.ExistByNameAsync(model.Name);
@@ -130,6 +131,7 @@
         }
 
         [HttpPost]
+        [Route("Driver/AddNew")]
         public async Task<IActionResult> AddNew(AddNewDriverViewModel model)
         {
 

@@ -5,7 +5,7 @@
     using static Common.EntityValidationConstants.Comment;
     using Data.Models;
 
-    public class AddEditAndDeleteCommentViewModel : IMapTo<Comment>
+    public class AddEditAndDeleteCommentViewModel : IMapFrom<Comment>, IMapTo<Comment>
     {
         [Required]
         [StringLength(ContentMaxLength, MinimumLength = ContentMinLength)]

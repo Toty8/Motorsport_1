@@ -70,7 +70,6 @@
         public async Task<IEnumerable<DraftAllViewModel>> StandingAsync()
         {
             IEnumerable<DraftAllViewModel> drafts = await this.dbContext.Users
-                .AsQueryable()
                 .Where(u => u.DriverId != null && u.TeamId != null)
                 .To<DraftAllViewModel>()
                 .ToArrayAsync();

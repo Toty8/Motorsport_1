@@ -272,6 +272,7 @@
         public async Task ResetAsync()
         {
             var activeTeams = await this.dbContext.Teams
+                .Include(t => t.DraftUsers)
                 .Where(t => t.Drivers.Count == MaxDriversPerTeam)
                 .OrderByDescending(t => t.Points)
                 .ThenByDescending(t => t.BestResult.HasValue)

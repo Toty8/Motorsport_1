@@ -5,7 +5,6 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    using static Common.NotificationMessageConstants;
     using static Common.UIMessages;
 
     [Authorize]

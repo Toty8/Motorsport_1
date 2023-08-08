@@ -52,6 +52,8 @@
             public const string InformationDeletedComment = "Your comment was successfully deleted!";
 
             public const string SelectedDriverFirst = "You must select a driver before you select a team!";
+
+            public const string UserIsPublisher = "The user you entered into the system is already a publisher!";
         }
 
         public static class SuccessMessages

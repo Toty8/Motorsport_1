@@ -53,9 +53,20 @@ namespace Motorsport1.Web.Areas.Admin.Controllers
 
             if (!userExist)
             {
-                TempData[ErrorMessage] = ErrorMessages.UnexistingDriverByName;
+                TempData[ErrorMessage] = ErrorMessages.UnexistingUserByEmail;
 
                 return View(model);
+            }
+
+            string userId = await this.userService.GetUserIdByEmailAsync(model.Email);
+
+            bool isUserPublisher = await userService.IsUserPublisher(userId);
+
+            if (isUserPublisher)
+            {
+                TempData[InformationMessage] = InformationMessages.UserIsPublisher;
+
+                return RedirectToAction("All", "User");
             }
 
             if (!ModelState.IsValid)
@@ -69,13 +80,11 @@ namespace Motorsport1.Web.Areas.Admin.Controllers
             {
                 string publisherRoleId = await userService.GetPublisherRoleIdAsync();
 
-                string userId = await userService.GetUserIdByEmailAsync(model.Email);
-
                 await userService.AddUserToRolePublisherAsync(userId, publisherRoleId);
 
                 TempData[SuccessMessage] = SuccessMessages.SuccessfullyAddedPublisher;
 
-                return RedirectToAction("All", "Article");
+                return RedirectToAction("All", "User");
             }
             catch (Exception e)
             {

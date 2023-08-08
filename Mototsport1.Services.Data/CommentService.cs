@@ -62,14 +62,12 @@ namespace Motorsport1.Services.Data
 
         public async Task<AddEditAndDeleteCommentViewModel> GetCommentForDeleteByIdAsync(int commentId)
         {
-            string content = await this.dbContext.Comments
+            AddEditAndDeleteCommentViewModel comment = await this.dbContext.Comments
                 .Where(c => c.Id == commentId && c.IsActive == true)
-                .Select(c => c.Content)
+                .To<AddEditAndDeleteCommentViewModel>()
                 .FirstAsync();
 
-            AddEditAndDeleteCommentViewModel viewModel = AutoMapperConfig.MapperInstance.Map<AddEditAndDeleteCommentViewModel>(content);
-
-            return viewModel;
+                return comment;
         }
 
         public async Task<AddEditAndDeleteCommentViewModel> GetCommentForEditByIdAsync(int commentId)

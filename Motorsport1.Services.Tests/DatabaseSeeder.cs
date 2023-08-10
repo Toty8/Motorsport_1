@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Motorsport1.Data;
-using Motorsport1.Data.Models;
-
-namespace Motorsport1.Services.Tests
+﻿namespace Motorsport1.Services.Tests
 {
+
+    using Microsoft.AspNetCore.Identity;
+
+    using Motorsport1.Data;
+    using Motorsport1.Data.Models;
+    using static Common.GeneralApplicationConstants;
+
     public static class DatabaseSeeder
     {
 
@@ -11,6 +14,8 @@ namespace Motorsport1.Services.Tests
         public static ApplicationUser TestUser;
         public static Comment TestActiveComment;
         public static Comment TestInactiveComment;
+        public static IdentityRole<Guid> TestPublisherRole;
+        public static IdentityRole<Guid> TestAdminRole;
 
 
         public static void SeedDatabase(Motorsport1DbContext dbContext)
@@ -67,6 +72,25 @@ namespace Motorsport1.Services.Tests
 
             dbContext.Comments.Add(TestActiveComment);
             dbContext.Comments.Add(TestInactiveComment);
+
+            TestPublisherRole = new IdentityRole<Guid>()
+            {
+                Id = Guid.Parse("880E11C2-2254-4018-70E7-08DB94E017A9"),
+                Name = PublisherRoleName,
+                NormalizedName = PublisherRoleName.ToUpper(),
+                ConcurrencyStamp = Guid.NewGuid().ToString("D")
+            };
+
+            TestAdminRole = new IdentityRole<Guid>()
+            {
+                Id = Guid.Parse("990E11C2-2254-4018-70E7-08DB94E017A9"),
+                Name = AdminRoleName,
+                NormalizedName = AdminRoleName.ToUpper(),
+                ConcurrencyStamp = Guid.NewGuid().ToString("D")
+            };
+
+            dbContext.Roles.Add(TestPublisherRole);
+            dbContext.Roles.Add(TestAdminRole);
 
             dbContext.SaveChanges();
         }

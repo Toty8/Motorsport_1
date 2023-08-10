@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Griesoft.AspNetCore.ReCaptcha" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.15" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.20" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.20" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.20" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.20" />
@@ -26,6 +26,7 @@
     <ProjectReference Include="..\Motorsport1.Data\Motorsport1.Data.csproj" />
     <ProjectReference Include="..\Motorsport1.Service.Mapping\Motorsport1.Services.Mapping.csproj" />
     <ProjectReference Include="..\Motorsport1.Services.Data.Models\Motorsport1.Services.Data.Models.csproj" />
+    <ProjectReference Include="..\Motorsport1.Services.Tests\Motorsport1.Services.Tests.csproj" />
     <ProjectReference Include="..\Motorsport1.Web.Infrastructure\Motorsport1.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\Motorsport1.Web.ViewModels\Motorsport1.Web.ViewModels.csproj" />
     <ProjectReference Include="..\Mototsport1.Services.Data\Motorsport1.Services.Data.csproj" />

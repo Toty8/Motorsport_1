@@ -22,6 +22,7 @@
         [Display(Name = "Image Link")]
         public string ImageUrl { get; set; } = null!;
 
+        [Required]
         [Display(Name = "Team")]
         public int TeamId { get; set; }
 

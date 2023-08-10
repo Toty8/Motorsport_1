@@ -9,8 +9,6 @@
     using Motorsport1.Web.ViewModels.Driver;
     using Motorsport1.Web.ViewModels.Standing;
     using Motorsport1.Services.Data.Interfaces;
-    using System.Globalization;
-    using static Motorsport1.Common.EntityValidationConstants.Driver;
     using static Motorsport1.Common.GeneralApplicationConstants;
 
     public class DriverService : IDriverService
@@ -20,6 +18,15 @@
         public DriverService(Motorsport1DbContext dbContext)
         {
             this.dbContext = dbContext;
+        }
+
+        public async Task<bool> DoesTeamHaveFreeSeatAsync(int id)
+        {
+            var driversCount = await this.dbContext.Drivers
+                .Where(d => d.TeamId == id)
+                .ToArrayAsync();
+
+            return driversCount.Count() < MaxDriversPerTeam;
         }
 
         public async Task AddNewAsync(AddNewDriverViewModel model)
@@ -42,7 +49,7 @@
 
         public async Task<IEnumerable<AllDriverViewModel>> AllAsync()
         {
-            ICollection<AllDriverViewModel> drivers = await this.dbContext.Drivers
+            IEnumerable<AllDriverViewModel> drivers = await this.dbContext.Drivers
                 .Where(d => d.TeamId != null && d.Team!.Drivers.Count == MaxDriversPerTeam)
                 .OrderByDescending(d => d.Team!.LastYearStanding.HasValue)
                 .ThenBy(d => d.Team!.LastYearStanding)
@@ -75,15 +82,6 @@
             driver.Team = null;
 
             await this.dbContext.SaveChangesAsync();
-        }
-
-        public async Task<bool> DoesTeamHaveFreeSeatAsync(int id)
-        {
-            int driversCount = await this.dbContext.Drivers
-                .Where(d => d.TeamId == id)
-                .CountAsync();
-
-            return driversCount < MaxDriversPerTeam;
         }
 
         public async Task EditAsync(EditDriverViewModel model, int id)

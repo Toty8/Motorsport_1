@@ -81,22 +81,6 @@
             return teams;
         }
 
-        public async Task DeleteAsync(int id)
-        {
-            Team team = await this.dbContext.Teams
-                .Include(t => t.Drivers)
-                .Where(t => t.Drivers.Count == MaxDriversPerTeam)
-                .FirstAsync(t => t.Id == id);
-
-            foreach (var d in team.Drivers)
-            {
-                d.TeamId = null;
-                d.Team = null;
-            }
-
-            await this.dbContext.SaveChangesAsync();
-        }
-
         public async Task EditAsync(EditTeamViewModel model, int id)
         {
             Team team = await this.dbContext.Teams
@@ -255,11 +239,11 @@
 
         public async Task<bool> IsGridOfTeamsFullAsync()
         {
-            int teamsCount = await this.dbContext.Teams
+            var teamsCount = await this.dbContext.Teams
                 .Where(t => t.Drivers.Count == MaxDriversPerTeam)
-                .CountAsync();
+                .ToArrayAsync();
 
-            return teamsCount == MaxTeams;
+            return teamsCount.Count() == MaxTeams;
         }
 
         public async Task<bool> IsTeamPriceBiggerThenBudgetAsync(int teamId, decimal budget)
@@ -317,6 +301,22 @@
                 .ToArrayAsync();
 
             return teams;
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            Team team = await this.dbContext.Teams
+                .Include(t => t.Drivers)
+                .Where(t => t.Drivers.Count == MaxDriversPerTeam)
+                .FirstAsync(t => t.Id == id);
+
+            foreach (var d in team.Drivers)
+            {
+                d.TeamId = null;
+                d.Team = null;
+            }
+
+            await this.dbContext.SaveChangesAsync();
         }
     }
 }

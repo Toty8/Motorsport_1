@@ -27,6 +27,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Motorsport1.Services.Data.M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Motorsport1.Services.Mapping", "Motorsport1.Service.Mapping\Motorsport1.Services.Mapping.csproj", "{C9073FE8-E30F-4C4D-9C4C-A56C1959ED51}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3ECB283F-3CAB-4D56-92B8-CBBDCE10D342}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Motorsport1.Services.Tests", "Motorsport1.Services.Tests\Motorsport1.Services.Tests.csproj", "{7B721AC5-65D0-41E8-A35C-6C76F77D3248}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +73,10 @@ Global
 		{C9073FE8-E30F-4C4D-9C4C-A56C1959ED51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9073FE8-E30F-4C4D-9C4C-A56C1959ED51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9073FE8-E30F-4C4D-9C4C-A56C1959ED51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B721AC5-65D0-41E8-A35C-6C76F77D3248}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B721AC5-65D0-41E8-A35C-6C76F77D3248}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B721AC5-65D0-41E8-A35C-6C76F77D3248}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B721AC5-65D0-41E8-A35C-6C76F77D3248}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,6 +90,7 @@ Global
 		{3F935944-ED8A-4577-A195-8C0A8DBE542A} = {F120B107-0B4E-48DF-8860-3782A9D3AC8C}
 		{8FC35429-0F24-47A3-8A64-7FCE75DA3C3A} = {7C81087F-38B3-41F8-8C72-948B2AF883CC}
 		{C9073FE8-E30F-4C4D-9C4C-A56C1959ED51} = {7C81087F-38B3-41F8-8C72-948B2AF883CC}
+		{7B721AC5-65D0-41E8-A35C-6C76F77D3248} = {3ECB283F-3CAB-4D56-92B8-CBBDCE10D342}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8BAAEE36-A420-421B-A2E2-534A098B720E}

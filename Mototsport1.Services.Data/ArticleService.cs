@@ -13,7 +13,6 @@
     using Motorsport1.Services.Data.Interfaces;
     using Motorsport1.Web.ViewModels.Comment;
     using Motorsport1.Services.Mapping;
-    using AutoMapper;
 
     public class ArticleService : IArticleService
     {

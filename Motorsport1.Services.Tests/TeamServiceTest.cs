@@ -203,7 +203,7 @@
         }
 
         [Test]
-        public async Task EditTeamStatisticsAsyncHavPodiumFinish()
+        public async Task EditTeamStatisticsAsyncHavePodiumFinish()
         {
             var driverId = this.context.Drivers
                 .Where(d => d.TeamId != null && d.Team!.Drivers.Count == MaxDriversPerTeam)
@@ -234,7 +234,7 @@
         }
 
         [Test]
-        public async Task EditTeamStatisticsAsyncHavWinFinish()
+        public async Task EditTeamStatisticsAsyncHaveWinFinish()
         {
 
             var driverId = this.context.Drivers
@@ -330,20 +330,25 @@
         [Test]
         public async Task EditTeamStatisticsAsyncHaveBestResult()
         {
+            var team = this.context.Teams
+                .Where(t => t.Drivers.Count == MaxDriversPerTeam && t.BestResult != 1)
+                .OrderBy(t => t.BestResult)
+                .Select(t => new 
+                { 
+                    t.BestResult,
+                    t.Id
+                })
+                .First();
+
             var driverId = this.context.Drivers
-                .Where(d => (d.TeamId != null && d.Team!.Drivers.Count == MaxDriversPerTeam) && d.BestResult != 1)
+                .Where(d => d.TeamId == team.Id)
                 .OrderByDescending(d => d.Name)
                 .Select(d => d.Id)
                 .First();
 
-            var bestResultBefore = this.context.Teams
-                .Where(t => t.Drivers.Any(d => d.Id == driverId))
-                .Select(t => t.BestResult)
-                .First();
-
             EditDriverStatisticsViewModel stats = new EditDriverStatisticsViewModel()
             {
-                RacePosition = bestResultBefore == null ? 1 : (int)bestResultBefore - 1,
+                RacePosition = team.BestResult == null ? 1 : (int)team.BestResult - 1,
                 WasDriverOnPolePosition = false,
                 DriverHaveFastestLap = false
             };
@@ -351,11 +356,11 @@
             await this.teamService.EditTeamStatisticsAsync(stats, driverId);
 
             var bestResultAfter = this.context.Teams
-                .Where(t => t.Drivers.Any(d => d.Id == driverId))
+                .Where(t => t.Id == team.Id)
                 .Select(t => t.BestResult)
                 .First();
 
-            Assert.That(bestResultAfter, Is.Not.EqualTo(bestResultBefore));
+            Assert.That(bestResultAfter, Is.Not.EqualTo(team.BestResult));
         }
 
         [Test]

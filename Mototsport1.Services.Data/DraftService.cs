@@ -31,7 +31,7 @@
             return budget -= user.Driver!.Price;
         }
 
-        public async Task<bool> isThereSelectedDriverAsync(string userId)
+        public async Task<bool> IsThereSelectedDriverAsync(string userId)
         {
             return await this.dbContext.Users
                 .Where(u => u.DriverId != null)

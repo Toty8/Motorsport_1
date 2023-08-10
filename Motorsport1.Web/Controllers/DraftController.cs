@@ -104,7 +104,7 @@
                 return RedirectToAction(nameof(Standing));
             }
 
-            var isThereSelectedDriver = await this.draftService.isThereSelectedDriverAsync(GetUserId());
+            var isThereSelectedDriver = await this.draftService.IsThereSelectedDriverAsync(GetUserId());
 
             if (!isThereSelectedDriver)
             {

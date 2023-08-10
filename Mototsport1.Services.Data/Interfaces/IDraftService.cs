@@ -8,7 +8,7 @@ namespace Motorsport1.Services.Data.Interfaces
 
         public Task<bool> IsUserDraftedAsync(string userId);
 
-        public Task<bool> isThereSelectedDriverAsync(string userId);
+        public Task<bool> IsThereSelectedDriverAsync(string userId);
 
         public Task SelectDriverAsync(int driverId, string userId);
 

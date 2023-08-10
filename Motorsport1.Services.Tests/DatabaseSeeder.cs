@@ -47,7 +47,7 @@
                 ImageUrl = "https://media.formula1.com/image/upload/f_auto/q_auto/v1688394388/fom-website/2023/Austria/albon-austria-2023-2.png.transform/9col/image.png",
                 CategoryId = 2,
                 IsActive = true,
-                PublisherId = Guid.Parse("0DE4C685-3EA5-4F74-B54B-8464457A7E02"),
+                PublisherId = Guid.Parse("A15AEA71-C074-4164-BF8A-01B9F3DBB497"),
             };
 
             dbContext.Articles.Add(TestArticle);

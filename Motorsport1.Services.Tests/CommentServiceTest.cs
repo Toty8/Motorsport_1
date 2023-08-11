@@ -7,7 +7,6 @@
     using Motorsport1.Services.Data.Interfaces;
     using Motorsport1.Services.Data;
     using static DatabaseSeeder;
-    using NUnit.Framework.Internal.Commands;
 
     public class CommentServiceTest
     {

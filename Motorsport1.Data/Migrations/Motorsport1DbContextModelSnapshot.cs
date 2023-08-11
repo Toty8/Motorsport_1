@@ -336,7 +336,7 @@ namespace Motorsport1.Data.Migrations
 
                     b.HasIndex("PublisherId");
 
-                    b.ToTable("Articles");
+                    b.ToTable("Articles", (string)null);
 
                     b.HasData(
                         new
@@ -395,7 +395,7 @@ namespace Motorsport1.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
 
                     b.HasData(
                         new
@@ -455,7 +455,7 @@ namespace Motorsport1.Data.Migrations
 
                     b.HasIndex("PublisherId");
 
-                    b.ToTable("Comments");
+                    b.ToTable("Comments", (string)null);
 
                     b.HasData(
                         new
@@ -565,7 +565,7 @@ namespace Motorsport1.Data.Migrations
 
                     b.HasIndex("TeamId");
 
-                    b.ToTable("Drivers");
+                    b.ToTable("Drivers", (string)null);
 
                     b.HasData(
                         new
@@ -980,7 +980,7 @@ namespace Motorsport1.Data.Migrations
 
                     b.HasIndex("ArticleId");
 
-                    b.ToTable("LikedArticles");
+                    b.ToTable("LikedArticles", (string)null);
                 });
 
             modelBuilder.Entity("Motorsport1.Data.Models.Team", b =>
@@ -1045,7 +1045,7 @@ namespace Motorsport1.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Teams");
+                    b.ToTable("Teams", (string)null);
 
                     b.HasData(
                         new

@@ -177,6 +177,8 @@ As you start the project there will already be seeded two users with roles:
 * "Admin@admin.com" - admin role
 
 * "Publisher@publisher.com" - publisher role
+  
+* Both have password: 123456 
 
 ## Learn More About ASP.NET Core MVC
 

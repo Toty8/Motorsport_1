@@ -133,13 +133,13 @@ The same as before, but you will have access to "Edit" and "Unactivate" buttons,
   The other button is "Reset (End Championship)" which is going to reset both driver and team standing(seting all drivers and teams point to 0) and add one more championship to both the first driver and the first team in there championships. Also it is going to delete every draft made in the draft standing.
   
 * Draft page-> 
-The same as the publisher one.
+The same as user one, but this time there two new buttons: "Edit teams price" and "Edit drivers price". These two buttons are going to redirect you to pages where you can edit both drivers and teams draft price and as you do that the difference is going to be applied to the points of the drafts.
 
 * My Articles page-> 
 The same as the publisher one.
 
 * Add Article page-> 
-The same as user one, but this time there two new buttons: "Edit team`s price" and "Edit team`s price". These two buttons are going to redirect you to pages where you can edit both drivers and teams draft price and as you do that the difference is going to be applied to the points of the drafts.
+The same as the publisher one.
 
 * Profile page->
 The same as the user one.
